@@ -5,7 +5,8 @@ import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {Background, Spacer, TicketCardColumn} from 'src/components/ui';
+import {Background, Spacer, Text, TicketCardColumn} from 'src/components/ui';
+import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
 import {TicketInfo} from 'src/types';
 
@@ -19,7 +20,7 @@ interface HomeMarketProps {
 
 export function HomeMarket({onPressCard}: HomeMarketProps) {
   const insets = useSafeAreaInsets();
-
+  const {styles} = useThematicStyles(rawStyles);
   return (
     <Background
       style={{
@@ -27,7 +28,13 @@ export function HomeMarket({onPressCard}: HomeMarketProps) {
         paddingBottom: insets.bottom,
       }}>
       <View style={styles.rowContainer}>
-        <Logo width={38} height={38} style={styles.logo} />
+        <View style={styles.logoContainer}>
+          <Logo width={38} height={38} />
+          <Spacer width={12} />
+          <Text t3 color={Color.textBase1}>
+            DAO 999 NFT
+          </Text>
+        </View>
         <TouchableOpacity>
           <MaterialCommunityIcons name="line-scan" style={styles.icon} />
         </TouchableOpacity>
@@ -86,7 +93,7 @@ function Separator() {
   return <Spacer width={12.5} />;
 }
 
-const styles = StyleSheet.create({
+const rawStyles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 10,
@@ -100,6 +107,9 @@ const styles = StyleSheet.create({
     marginTop: 23,
     marginBottom: 10,
   },
+  logoContainer: {
+    flexDirection: 'row',
+  },
   flatListContainer: {
     width: '100%',
     alignItems: 'center',
@@ -108,9 +118,6 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 24,
     color: Color.textBlue1,
-  },
-  logo: {
-    marginLeft: 5,
   },
   contentContainer: {
     paddingHorizontal: 20,
