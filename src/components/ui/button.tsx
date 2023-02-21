@@ -19,7 +19,9 @@ export function Button({children, style, onPress}: ButtonT) {
       onPress={onPress}
       activeOpacity={0.7}
       style={[styles.container, style]}>
-      <Text t6>{children}</Text>
+      <Text t6 color={Color.textBase3}>
+        {children}
+      </Text>
     </TouchableOpacity>
   );
 }

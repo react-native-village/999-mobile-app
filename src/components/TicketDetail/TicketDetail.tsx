@@ -127,7 +127,9 @@ export function TicketDetail({
               <Text t9>0x0cd46a783f8cxv45x6z5cxhxv13782</Text>
             </View>
           </View>
-          <Button onPress={() => setShowBuy(true)}>Buy Ticket</Button>
+          <Button style={styles.button} onPress={() => setShowBuy(true)}>
+            Buy Ticket
+          </Button>
         </View>
         <Spacer height={insets.bottom} />
       </ScrollView>
@@ -146,14 +148,7 @@ const rawStyles = StyleSheet.create({
     flex: 1,
   },
   button: {
-    backgroundColor: Color.primary,
-    borderRadius: 100,
-    width: '100%',
-    height: 55,
-    marginHorizontal: 1,
     marginVertical: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   image: {
     aspectRatio: 1 / 1,
