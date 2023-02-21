@@ -1,44 +1,36 @@
 import React from 'react';
 
-import {ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {Background, Spacer, Text, TicketCardColumn} from 'src/components/ui';
+import {Background, Spacer, TicketCardColumn} from 'src/components/ui';
 import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
 import {TicketInfo} from 'src/types';
 
-import Logo from '../../../assets/images/logo.svg';
+import {HomeMarketHeader} from './HomeMarketHeader';
+
 import {Categories} from '../ui/categories';
 import {HeaderList} from '../ui/headerList';
 
 interface HomeMarketProps {
   onPressCard: (item: TicketInfo) => void;
+  onPressProfile: () => void;
+  onPressSettings: () => void;
 }
 
-export function HomeMarket({onPressCard}: HomeMarketProps) {
-  const insets = useSafeAreaInsets();
+export function HomeMarket({
+  onPressCard,
+  onPressProfile,
+  onPressSettings,
+}: HomeMarketProps) {
   const {styles} = useThematicStyles(rawStyles);
+
   return (
-    <Background
-      style={{
-        paddingTop: insets.top,
-        paddingBottom: insets.bottom,
-      }}>
-      <View style={styles.rowContainer}>
-        <View style={styles.logoContainer}>
-          <Logo width={38} height={38} />
-          <Spacer width={12} />
-          <Text t3 color={Color.textBase1}>
-            DAO 999 NFT
-          </Text>
-        </View>
-        <TouchableOpacity>
-          <MaterialCommunityIcons name="line-scan" style={styles.icon} />
-        </TouchableOpacity>
-      </View>
+    <Background>
+      <HomeMarketHeader
+        onPressSettings={onPressSettings}
+        onPressProfile={onPressProfile}
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <Categories />
@@ -98,26 +90,10 @@ const rawStyles = StyleSheet.create({
     flex: 1,
     paddingTop: 10,
   },
-  rowContainer: {
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    marginTop: 23,
-    marginBottom: 10,
-  },
-  logoContainer: {
-    flexDirection: 'row',
-  },
   flatListContainer: {
     width: '100%',
     alignItems: 'center',
     marginBottom: 25,
-  },
-  icon: {
-    fontSize: 24,
-    color: Color.textBlue1,
   },
   contentContainer: {
     paddingHorizontal: 20,

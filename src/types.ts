@@ -3,16 +3,16 @@ import {NavigatorScreenParams} from '@react-navigation/native';
 // NAVIGATION
 
 export type TabParamList = {
-  homeOwnTickets: undefined;
-  homeProfile: undefined;
-  homeMarket: undefined;
-  homeSearch: undefined;
+  homeStaking: undefined;
+  homeGovernance: undefined;
+  homeTicketsMarket: undefined;
 };
 export type RootStackParamList = {
   home?: NavigatorScreenParams<TabParamList>;
   welcome: undefined;
   settings: undefined;
   ticketDetail: TicketInfo;
+  profile: undefined;
 };
 
 // INTERFACES

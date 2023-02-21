@@ -9,6 +9,7 @@ import {TicketDetailScreen} from 'src/screens/TicketDetail';
 import {WelcomeScreen} from 'src/screens/Welcome';
 import {RootStackParamList} from 'src/types';
 
+import {ProfileScreen} from './screens/Profile';
 import {SettingsScreen} from './screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -30,12 +31,12 @@ export function App() {
         screenOptions={basicScreenOptions}>
         <Stack.Screen name="welcome" component={WelcomeScreen} />
         <Stack.Screen name="home" component={Home} />
-        <Stack.Screen name="settings" component={SettingsScreen} />
-        <Stack.Screen
-          options={gestureEnabled}
-          name="ticketDetail"
-          component={TicketDetailScreen}
-        />
+
+        <Stack.Group screenOptions={gestureEnabled}>
+          <Stack.Screen name="settings" component={SettingsScreen} />
+          <Stack.Screen name="ticketDetail" component={TicketDetailScreen} />
+          <Stack.Screen name="profile" component={ProfileScreen} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );

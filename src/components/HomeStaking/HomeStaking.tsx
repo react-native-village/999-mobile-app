@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {Background} from 'src/components/ui';
+import {Background} from '../ui';
 
-export function HomeOwnTicketsScreen() {
+export function HomeStakingScreen() {
   return (
     <Background>
       <></>
