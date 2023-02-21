@@ -1,4 +1,5 @@
 import {NavigatorScreenParams} from '@react-navigation/native';
+import {SvgProps} from 'react-native-svg';
 
 // NAVIGATION
 
@@ -13,6 +14,7 @@ export type RootStackParamList = {
   settings: undefined;
   ticketDetail: TicketInfo;
   profile: undefined;
+  connectWallet: undefined;
 };
 
 // INTERFACES
@@ -27,6 +29,15 @@ export interface TicketInfo {
   imageUrl: string;
   price?: number;
   currencySymbols?: string;
+}
+
+export interface connectMethodType {
+  name: string;
+  /**
+   * @returns Is success or not */
+  onConnect: () => Promise<void>;
+  Logo: (props: SvgProps) => JSX.Element;
+  isAvailable: boolean;
 }
 
 // UTILS

@@ -1,4 +1,4 @@
-package com.joker.newarchitecture.components;
+package com.nft_tickets.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

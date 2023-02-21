@@ -7,12 +7,13 @@ import {vs} from 'react-native-size-matters';
 
 import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
+import {IS_IOS} from 'src/variables';
 
 import {Tab} from './Tab';
 
 export function TabBar({state, navigation}: BottomTabBarProps) {
   const {index, routes} = state;
-  const {bottom: paddingBottom} = useSafeAreaInsets();
+  const {bottom} = useSafeAreaInsets();
   const {styles} = useThematicStyles(rawStyles);
   const handlePress = (name: string, isFocused: boolean) => {
     if (!isFocused) {
@@ -24,7 +25,8 @@ export function TabBar({state, navigation}: BottomTabBarProps) {
   };
 
   return (
-    <View style={[styles.tabContainer, {paddingBottom}]}>
+    // eslint-disable-next-line react-native/no-inline-styles
+    <View style={[styles.tabContainer, {paddingBottom: IS_IOS ? bottom : 8}]}>
       {routes.map(({name, key}, id) => {
         const isFocused = index === id;
         return (

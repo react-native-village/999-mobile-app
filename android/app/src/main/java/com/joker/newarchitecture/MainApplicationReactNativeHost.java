@@ -1,4 +1,4 @@
-package com.joker.newarchitecture;
+package com.nft_tickets.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.joker.BuildConfig;
-import com.joker.newarchitecture.components.MainComponentsRegistry;
-import com.joker.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.nft_tickets.BuildConfig;
+import com.nft_tickets.newarchitecture.components.MainComponentsRegistry;
+import com.nft_tickets.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
