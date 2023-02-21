@@ -9,6 +9,7 @@ import {TicketDetailScreen} from 'src/screens/TicketDetail';
 import {WelcomeScreen} from 'src/screens/Welcome';
 import {RootStackParamList} from 'src/types';
 
+import {QrScanScreen} from './screens/QrScan';
 import {SettingsScreen} from './screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -26,16 +27,19 @@ export function App() {
   return (
     <NavigationContainer ref={navigator}>
       <Stack.Navigator
-        initialRouteName="welcome"
+        initialRouteName="qrScan" // REMOVE LATER
         screenOptions={basicScreenOptions}>
         <Stack.Screen name="welcome" component={WelcomeScreen} />
         <Stack.Screen name="home" component={Home} />
-        <Stack.Screen name="settings" component={SettingsScreen} />
-        <Stack.Screen
-          options={gestureEnabled}
-          name="ticketDetail"
-          component={TicketDetailScreen}
-        />
+        <Stack.Group screenOptions={gestureEnabled}>
+          <Stack.Screen name="ticketDetail" component={TicketDetailScreen} />
+          <Stack.Screen
+            options={gestureEnabled}
+            name="qrScan"
+            component={QrScanScreen}
+          />
+          <Stack.Screen name="settings" component={SettingsScreen} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );

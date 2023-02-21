@@ -13,6 +13,7 @@ export type RootStackParamList = {
   welcome: undefined;
   settings: undefined;
   ticketDetail: TicketInfo;
+  qrScan: undefined;
 };
 
 // INTERFACES
