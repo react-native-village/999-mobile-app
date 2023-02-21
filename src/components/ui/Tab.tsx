@@ -24,11 +24,10 @@ const navDataById = [
     name: 'Market',
   },
   {
-    icon: 'search',
-    name: 'Search',
+    icon: 'coins', // or 'seedling'
+    name: 'Staking',
   },
-  {icon: 'user-circle', name: 'Account'},
-  {icon: 'ticket-alt', name: 'Your tickets'},
+  {icon: 'landmark', name: 'Governance'},
 ];
 
 export function Tab({

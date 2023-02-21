@@ -30,7 +30,7 @@ import {TicketCardRow} from '../ui/TicketCardRow';
 const bounceLimit = 100;
 const imageSize = 220;
 
-interface HomeProfileProps {
+interface ProfileProps {
   onPressSettings: () => void;
   bgImageUrl: string;
   avaUrl: string;
@@ -41,13 +41,13 @@ interface HomeProfileProps {
   }[];
 }
 
-export function HomeProfile({
+export function Profile({
   onPressSettings,
   bgImageUrl,
   avaUrl,
   cryptoAddress,
   ticketsData,
-}: HomeProfileProps) {
+}: ProfileProps) {
   const {styles, colors} = useThematicStyles(rawStyles);
   const {height, width} = useWindowDimensions();
 
