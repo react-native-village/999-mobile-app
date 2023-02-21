@@ -39,7 +39,6 @@ export type TextProps = Omit<RNTextProps, 'style' | 'children'> & {
   t17?: boolean;
   t18?: boolean;
   t19?: boolean;
-  t20?: boolean;
   ibm1?: boolean;
   ibm2?: boolean;
   ibm3?: boolean;
@@ -53,6 +52,27 @@ export type TextProps = Omit<RNTextProps, 'style' | 'children'> & {
   children?: React.ReactNode;
 };
 
+/**
+ * @param t1 - 34 B
+ * @param t2 - 28 B
+ * @param t3 - 20 B
+ * @param t4 - 20 SB
+ * @param t5 - 18 B
+ * @param t6 - 18 SB
+ * @param t7 - 16 B
+ * @param t8 - 16 SB
+ * @param t9 - 16 R
+ * @param t10 - 14 B
+ * @param t11 - 14 SB
+ * @param t12 - 14 R
+ * @param t13 - 12 B
+ * @param t14 - 12 SB
+ * @param t15 - 12 R
+ * @param t16 - 10 B
+ * @param t17 - 10 SB
+ * @param t18 - 10 R
+ * @param t19 - 20 SM
+ */
 export function Text({
   t1,
   t2,
@@ -73,7 +93,6 @@ export function Text({
   t17,
   t18,
   t19,
-  t20,
   ibm1,
   ibm2,
   ibm3,
@@ -113,7 +132,6 @@ export function Text({
           t17 && styles.t17Style,
           t18 && styles.t18Style,
           t19 && styles.t19Style,
-          t20 && styles.t20Style,
           ibm1 && styles.ibm1Style,
           ibm2 && styles.ibm2Style,
           ibm3 && styles.ibm3Style,
@@ -246,11 +264,6 @@ const styles = StyleSheet.create({
   },
   t19Style: {
     fontFamily: 'Montserrat-SemiBold',
-    fontSize: 30,
-    lineHeight: 38,
-  },
-  t20Style: {
-    fontFamily: 'Montserrat-Bold',
     fontSize: 30,
     lineHeight: 38,
   },

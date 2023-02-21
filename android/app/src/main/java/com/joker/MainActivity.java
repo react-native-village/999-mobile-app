@@ -1,4 +1,4 @@
-package com.joker;
+package com.nft_tickets;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

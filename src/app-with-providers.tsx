@@ -10,6 +10,7 @@ import SplashScreen from 'react-native-splash-screen';
 import {App} from 'src/app';
 
 import {ThemeProvider} from './contexts';
+import {IS_ANDROID} from './variables';
 
 export function AppWithProviders() {
   useEffect(() => {
@@ -17,7 +18,7 @@ export function AppWithProviders() {
   }, []);
   return (
     <WalletConnectProvider
-      redirectUrl={'dapp.joker://'}
+      redirectUrl={IS_ANDROID ? 'com.nft_tickets://' : 'dapp.nft-tickets://'}
       storageOptions={{
         asyncStorage: AsyncStorage as any,
       }}>

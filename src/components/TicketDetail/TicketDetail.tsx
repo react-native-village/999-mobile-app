@@ -60,7 +60,7 @@ export function TicketDetail({
             </View>
             <View style={styles.price}>
               {item.price && item.currencySymbols && (
-                <Text t20 color={Color.primary}>
+                <Text t2 color={Color.primary}>
                   {`${item.price} ${item.currencySymbols}`}
                 </Text>
               )}

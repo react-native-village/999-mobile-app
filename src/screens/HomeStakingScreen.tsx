@@ -1,11 +1,7 @@
 import React from 'react';
 
-import {Background} from 'src/components/ui';
+import {HomeStaking} from 'src/components/HomeStaking';
 
 export function HomeStakingScreen() {
-  return (
-    <Background>
-      <></>
-    </Background>
-  );
+  return <HomeStaking />;
 }
