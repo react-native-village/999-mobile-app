@@ -77,7 +77,9 @@ export function TicketDetailBuy({
           )}
         </View>
       </View>
-      <Button onPress={onClose}>Continue</Button>
+      <Button onPress={onClose} style={styles.button}>
+        Continue
+      </Button>
     </BottomSheet>
   );
 }
@@ -97,6 +99,9 @@ const rawStyles = StyleSheet.create({
   },
   price: {
     alignItems: 'flex-end',
+  },
+  button: {
+    marginBottom: 20,
   },
   count: {
     flexDirection: 'row',
