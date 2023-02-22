@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Image, StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View, useColorScheme} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {useThematicStyles} from 'src/hooks';
@@ -11,6 +11,8 @@ import {Spacer} from './spacer';
 import {Text} from './text/text';
 import {TicketCardTags} from './TicketCardTags';
 
+import {dark, light} from '../../../assets/images/cryproCoins/mapping';
+
 export function TicketCardRow({
   name,
   startData,
@@ -18,10 +20,15 @@ export function TicketCardRow({
   tags,
   imageUrl,
   geoPosition,
-  price,
-  currencySymbols,
+  price = 220,
+  currencySymbols = 'AVAX',
 }: Omit<TicketInfo, 'id'>) {
-  const {styles} = useThematicStyles(rawStyles);
+  const {styles, colors} = useThematicStyles(rawStyles);
+  const isDark = useColorScheme() === 'dark';
+
+  const iconName = currencySymbols?.toLowerCase();
+  // @ts-ignore
+  const SvgIcon = !isDark ? dark[iconName] : light[iconName];
 
   return (
     <View style={styles.container}>
@@ -36,9 +43,21 @@ export function TicketCardRow({
         <View style={styles.costAndTagContainer}>
           <TicketCardTags tags={tags} />
           {price && currencySymbols && (
-            <Text
-              t5
-              color={Color.primary}>{`${price} ${currencySymbols}`}</Text>
+            <View style={styles.priceContainer}>
+              <Text t5 color={Color.primary}>
+                {price}
+              </Text>
+              {SvgIcon && (
+                <>
+                  <Spacer width={6} />
+                  <SvgIcon.default
+                    fill={colors.primary}
+                    width={25}
+                    height={25}
+                  />
+                </>
+              )}
+            </View>
           )}
         </View>
         <Spacer height={12} />
@@ -116,5 +135,9 @@ const rawStyles = StyleSheet.create({
   textContainer: {
     flexWrap: 'wrap',
     flex: 1,
+  },
+  priceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

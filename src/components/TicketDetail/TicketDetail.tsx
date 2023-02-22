@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  useColorScheme,
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -21,6 +22,7 @@ import {TicketInfo} from 'src/types';
 import {TicketDetailBuy} from './TicketDetailBuy';
 import {TicketDetailTags} from './TicketDetailTags';
 
+import {dark, light} from '../../../assets/images/cryproCoins/mapping';
 interface TicketDetailProps extends TicketInfo {
   onBack?: () => void;
   priceInDollars?: number;
@@ -28,12 +30,18 @@ interface TicketDetailProps extends TicketInfo {
 
 export function TicketDetail({
   onBack,
-  priceInDollars,
+  priceInDollars = 100,
   ...item
 }: TicketDetailProps) {
   const [showBuy, setShowBuy] = useState(false);
   const insets = useSafeAreaInsets();
   const {styles, colors} = useThematicStyles(rawStyles);
+
+  const isDark = useColorScheme() === 'dark';
+
+  const iconName = item.currencySymbols?.toLowerCase();
+  // @ts-ignore
+  const SvgIcon = !isDark ? dark[iconName] : light[iconName];
 
   return (
     <Background>
@@ -60,15 +68,35 @@ export function TicketDetail({
             </View>
             <View style={styles.price}>
               {item.price && item.currencySymbols && (
-                <Text t2 color={Color.primary}>
-                  {`${item.price} ${item.currencySymbols}`}
-                </Text>
+                <View style={styles.priceContainer}>
+                  <Text t2 color={Color.primary}>
+                    {item.price}
+                  </Text>
+                  {SvgIcon && (
+                    <>
+                      <Spacer width={6} />
+                      <SvgIcon.default
+                        fill={colors.primary}
+                        width={30}
+                        height={30}
+                      />
+                    </>
+                  )}
+                </View>
               )}
-              {priceInDollars && (
-                <Text t12 color={Color.graphicSecond4}>
-                  {priceInDollars}$
-                </Text>
-              )}
+              <View style={styles.priceContainer}>
+                {item.currencySymbols && (
+                  <Text t12 color={Color.graphicSecond4}>
+                    {item.currencySymbols}
+                  </Text>
+                )}
+                {priceInDollars && (
+                  <Text t12 color={Color.graphicSecond4}>
+                    {' '}
+                    - {priceInDollars}$
+                  </Text>
+                )}
+              </View>
             </View>
           </View>
           <View style={styles.rowInfo}>
@@ -209,5 +237,9 @@ const rawStyles = StyleSheet.create({
   },
   flexOne: {
     flex: 1,
+  },
+  priceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
