@@ -5,6 +5,7 @@ export interface ThemeColors {
   primary1: string;
   // MESSAGE MEANING
   textRed1: string;
+  textGreen1: string;
   opacityRed1: string;
   textBlue1: string;
   opacityBlue1: string;
@@ -51,6 +52,7 @@ export enum Color {
   textBlue1 = 'textBlue1',
   opacityBlue1 = 'opacityBlue1',
   textRed1 = 'textRed1',
+  textGreen1 = 'textGreen1',
   opacityRed1 = 'opacityRed1',
   textYellow1 = 'textYellow1',
   opacityYellow1 = 'opacityYellow1',
