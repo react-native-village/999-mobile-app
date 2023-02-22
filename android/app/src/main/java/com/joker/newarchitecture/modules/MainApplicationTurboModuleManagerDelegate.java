@@ -1,4 +1,4 @@
-package com.joker.newarchitecture.modules;
+package com.nft_tickets.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

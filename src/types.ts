@@ -1,5 +1,6 @@
 import {NavigatorScreenParams} from '@react-navigation/native';
 import {StackNavigationOptions} from '@react-navigation/stack';
+import {SvgProps} from 'react-native-svg';
 
 // NAVIGATION
 
@@ -17,6 +18,7 @@ export type RootStackParamList = {
   proposal: {
     id: number;
   };
+  connectWallet: undefined;
 };
 
 // INTERFACES
@@ -36,6 +38,15 @@ export interface ScreenOptionType extends StackNavigationOptions {
   tab?: boolean;
   headerBackVisible?: boolean;
   headerBackHidden?: boolean | string;
+}
+
+export interface connectMethodType {
+  name: string;
+  /**
+   * @returns Is success or not */
+  onConnect: () => Promise<void>;
+  Logo: (props: SvgProps) => JSX.Element;
+  isAvailable: boolean;
 }
 
 // UTILS

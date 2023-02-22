@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Background} from '../ui';
 
-export function HomeStakingScreen() {
+export function HomeStaking() {
   return (
     <Background>
       <></>

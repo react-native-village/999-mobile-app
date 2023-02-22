@@ -7,7 +7,7 @@ export function WelcomeScreen() {
   const {navigate} = useTypedNavigation();
 
   const onContinue = () => {
-    navigate('home');
+    navigate('connectWallet');
   };
 
   return <Welcome onContinue={onContinue} />;
