@@ -1,6 +1,12 @@
 import React from 'react';
 
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  useColorScheme,
+} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {useThematicStyles} from 'src/hooks';
@@ -10,12 +16,14 @@ import {TicketInfo} from 'src/types';
 import {TicketCardTags} from './TicketCardTags';
 
 import {Spacer, Text} from './';
+import {dark, light} from '../../../assets/images/cryproCoins/mapping';
 
 export function TicketCardColumn({
   onPress,
   ...itemProps
 }: TicketInfo & {onPress?: (item: TicketInfo) => void}) {
-  const {styles} = useThematicStyles(rawStyles);
+  const {styles, colors} = useThematicStyles(rawStyles);
+  const isDark = useColorScheme() === 'dark';
   const {
     name,
     startData,
@@ -26,6 +34,10 @@ export function TicketCardColumn({
     price,
     currencySymbols,
   } = itemProps;
+
+  const iconName = currencySymbols?.toLowerCase();
+  // @ts-ignore
+  const SvgIcon = !isDark ? dark[iconName] : light[iconName];
 
   return (
     <TouchableOpacity activeOpacity={0.6} onPress={() => onPress?.(itemProps)}>
@@ -39,12 +51,23 @@ export function TicketCardColumn({
           <View style={styles.costAndTagContainer}>
             <TicketCardTags tags={tags} />
             <Spacer width={10} />
-            <View style={styles.flexOne}>
+            <View style={styles.costContainer}>
               {price && currencySymbols && (
-                <Text
-                  numberOfLines={1}
-                  t5
-                  color={Color.primary}>{`${price} ${currencySymbols}`}</Text>
+                <>
+                  <Text numberOfLines={1} t5 color={Color.primary}>
+                    {price}
+                  </Text>
+                  {SvgIcon && (
+                    <>
+                      <Spacer width={6} />
+                      <SvgIcon.default
+                        fill={colors.primary}
+                        width={25}
+                        height={25}
+                      />
+                    </>
+                  )}
+                </>
               )}
             </View>
           </View>
@@ -136,7 +159,8 @@ const rawStyles = StyleSheet.create({
     flexWrap: 'wrap',
     flex: 1,
   },
-  flexOne: {
+  costContainer: {
     flex: 1,
+    flexDirection: 'row',
   },
 });

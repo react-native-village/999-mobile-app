@@ -109,7 +109,7 @@ export const DATA: TicketInfo[] = [
     endData: 1672947919,
     geoPosition: 'Retro Mountain',
     price: 100000,
-    currencySymbols: 'MATIC',
+    currencySymbols: 'ADA',
     imageUrl:
       'https://d1629ugb7moz2f.cloudfront.net/e/21162/cFPvQBjmRmwyo1PA0VR4hO572mDold5r664eQISO.jpg',
   },
