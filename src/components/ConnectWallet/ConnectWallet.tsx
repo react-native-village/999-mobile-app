@@ -4,10 +4,10 @@ import {ScrollView, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {useWalletConnectMethods} from 'src/hooks';
-import {Color} from 'src/themeTypes';
 
 import {ConnectWalletButton} from './ConnectWalletButton';
 
+import Logo from '../../../assets/images/logo.svg';
 import {Background, Spacer, Text} from '../ui';
 
 export function ConnectWallet() {
@@ -18,9 +18,7 @@ export function ConnectWallet() {
     <Background>
       <ScrollView contentContainerStyle={styles.container}>
         <Spacer height={top + 30} />
-        <Text color={Color.primary} center t1>
-          999
-        </Text>
+        <Logo width={100} height={100} />
         <Spacer height={46} />
         <Text center t2>
           Connect your wallet
@@ -48,6 +46,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
+    alignItems: 'center',
   },
   buttonMargin: {
     marginVertical: 18,
