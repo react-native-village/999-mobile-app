@@ -2,38 +2,12 @@ import React, {useState} from 'react';
 
 import {FlatList, StyleSheet, View} from 'react-native';
 
+import {categoriesData} from 'src/components/variables';
 import {Color} from 'src/themeTypes';
 
 import {CategoryItem} from '.';
 import {Separator} from '..';
 import {HeaderList} from '../headerList';
-
-const DATA = [
-  {
-    id: '0',
-    title: 'All',
-  },
-  {
-    id: '1',
-    title: 'Music',
-  },
-  {
-    id: '2',
-    title: 'Festival',
-  },
-  {
-    id: '3',
-    title: 'Bootcamp',
-  },
-  {
-    id: '4',
-    title: 'Fair',
-  },
-  {
-    id: '5',
-    title: 'Geek',
-  },
-];
 
 function SeparatorMargin() {
   return <Separator margin={7.5} />;
@@ -46,7 +20,7 @@ export function Categories() {
       <HeaderList title={'Categories'} button={'See all'} />
       <FlatList
         horizontal
-        data={DATA}
+        data={categoriesData}
         contentContainerStyle={styles.scrollContent}
         showsHorizontalScrollIndicator={false}
         renderItem={({item: {id, title}}) => (

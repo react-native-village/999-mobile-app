@@ -7,8 +7,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {Spacer, Text} from 'src/components/ui';
 import {useThematicStyles, useTheme} from 'src/hooks';
 import {Color} from 'src/themeTypes';
-
-import {votingCardsData} from './VotingCard';
+import {votingCardsData} from 'src/variables/temporaryData';
 
 export enum VotingCompletedStatuses {
   passed = 'Passed',
