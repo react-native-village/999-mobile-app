@@ -6,6 +6,7 @@ import {FlatList} from 'react-native-gesture-handler';
 import {Background, Spacer, TicketCardColumn} from 'src/components/ui';
 import {useThematicStyles} from 'src/hooks';
 import {TicketInfo} from 'src/types';
+import {ticketsData} from 'src/variables/temporaryData';
 
 import {HomeMarketHeader} from './HomeMarketHeader';
 

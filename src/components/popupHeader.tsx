@@ -1,34 +1,31 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect} from 'react';
 
 import {NavigationAction} from '@react-navigation/routers';
-import {StackHeaderProps} from '@react-navigation/stack';
 import {StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {IconButton, Text} from 'src/components/ui';
+import {useTypedNavigation} from 'src/hooks';
 import {Color} from 'src/themeTypes';
-import {ScreenOptionType} from 'src/types';
 
-type PopupHeaderProps = StackHeaderProps & {
-  options: ScreenOptionType;
+type PopupHeaderProps = {
+  name: string;
+  tab?: boolean;
+  canBack?: boolean;
 };
 const DEFAULT_HITSLOP = {top: 10, bottom: 10, left: 10, right: 10};
 
-export function PopupHeader({options, back, navigation}: PopupHeaderProps) {
+export function PopupHeader({canBack, name}: PopupHeaderProps) {
   const insets = useSafeAreaInsets();
-
-  const canGoBack = useMemo(
-    () => back && !options.headerBackHidden,
-    [back, options.headerBackHidden],
-  );
+  const navigation = useTypedNavigation();
 
   useEffect(() => {
     const subscription = (e: {
       preventDefault: () => void;
       data: {action: NavigationAction};
     }) => {
-      if (!canGoBack && !e.data.action.source) {
+      if (!canBack && !e.data.action.source) {
         e.preventDefault();
       }
     };
@@ -38,11 +35,11 @@ export function PopupHeader({options, back, navigation}: PopupHeaderProps) {
     return () => {
       navigation.removeListener('beforeRemove', subscription);
     };
-  }, [canGoBack, navigation]);
+  }, [navigation]);
 
   return (
-    <View style={[style.container, options.tab && {marginTop: insets.top}]}>
-      {canGoBack ? (
+    <View style={[style.container, {marginTop: insets.top}]}>
+      {canBack ? (
         <IconButton onPress={navigation.goBack} hitSlop={DEFAULT_HITSLOP}>
           <MaterialCommunityIcons
             name="arrow-left"
@@ -53,13 +50,9 @@ export function PopupHeader({options, back, navigation}: PopupHeaderProps) {
         <View style={style.spacer} />
       )}
       <Text t8 center color={Color.textBase1}>
-        {options.title}
+        {name}
       </Text>
-      {options.headerRight ? (
-        options.headerRight({})
-      ) : (
-        <View style={style.spacer} />
-      )}
+      <View style={style.spacer} />
     </View>
   );
 }

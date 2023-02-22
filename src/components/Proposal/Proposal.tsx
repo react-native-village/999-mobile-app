@@ -4,10 +4,12 @@ import {format} from 'date-fns';
 import {Pressable, ScrollView, StyleSheet, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {Badge, Spacer, Text} from 'src/components/ui';
+import {Background, Badge, Spacer, Text} from 'src/components/ui';
 import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
 import {ProposalsTags} from 'src/variables/proposal';
+
+import {PopupHeader} from '../popupHeader';
 
 interface ProposalProps {
   item?: {
@@ -38,8 +40,9 @@ export function Proposal({item}: ProposalProps) {
   const {orderNumber, title, description} = item;
 
   return (
-    <>
-      <ScrollView contentContainerStyle={styles.container}>
+    <Background style={styles.container}>
+      <PopupHeader name={'Proposal'} canBack />
+      <ScrollView contentContainerStyle={styles.listContainer}>
         <Pressable onPress={() => {}}>
           <Spacer height={24} />
           {badgeStatus && (
@@ -138,12 +141,15 @@ export function Proposal({item}: ProposalProps) {
           <Spacer height={bottom + 28} />
         </Pressable>
       </ScrollView>
-    </>
+    </Background>
   );
 }
 
 const rawStyles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  listContainer: {
     paddingHorizontal: 20,
   },
   block: {

@@ -7,9 +7,8 @@ import {navigator} from 'src/navigator';
 import {Home} from 'src/screens/home';
 import {TicketDetailScreen} from 'src/screens/TicketDetail';
 import {WelcomeScreen} from 'src/screens/Welcome';
-import {RootStackParamList, ScreenOptionType} from 'src/types';
+import {RootStackParamList} from 'src/types';
 
-import {PopupHeader} from './components/popup-header';
 import {ConnectWalletScreen} from './screens/ConnectWallet';
 import {ProfileScreen} from './screens/Profile';
 import {ProposalScreen} from './screens/Proposal';
@@ -20,15 +19,6 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const basicScreenOptions = {
   headerShown: false,
   gestureEnabled: false,
-};
-const headerScreenOptions: ScreenOptionType = {
-  tab: true,
-  headerBackVisible: true,
-  headerShown: true,
-  header: PopupHeader,
-  headerStyle: {
-    height: 56,
-  },
 };
 
 const gestureEnabled = {
@@ -49,15 +39,7 @@ export function App() {
           <Stack.Screen name="settings" component={SettingsScreen} />
           <Stack.Screen name="ticketDetail" component={TicketDetailScreen} />
           <Stack.Screen name="profile" component={ProfileScreen} />
-        </Stack.Group>
-        <Stack.Group screenOptions={headerScreenOptions}>
-          <Stack.Screen
-            name="proposal"
-            component={ProposalScreen}
-            options={{
-              title: 'Proposal',
-            }}
-          />
+          <Stack.Screen name="proposal" component={ProposalScreen} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

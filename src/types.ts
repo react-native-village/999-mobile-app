@@ -34,11 +34,6 @@ export interface TicketInfo {
   price?: number;
   currencySymbols?: string;
 }
-export interface ScreenOptionType extends StackNavigationOptions {
-  tab?: boolean;
-  headerBackVisible?: boolean;
-  headerBackHidden?: boolean | string;
-}
 
 export interface connectMethodType {
   name: string;
