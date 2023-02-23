@@ -2,6 +2,7 @@ import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {useWalletConnect} from '@walletconnect/react-native-dapp';
 
 import {navigator} from 'src/navigator';
 import {Home} from 'src/screens/home';
@@ -11,8 +12,8 @@ import {RootStackParamList} from 'src/types';
 
 import {ConnectWalletScreen} from './screens/ConnectWallet';
 import {ProfileScreen} from './screens/Profile';
-import {SearchScreen} from './screens/Search';
 import {ProposalScreen} from './screens/Proposal';
+import {SearchScreen} from './screens/Search';
 import {SettingsScreen} from './screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -27,10 +28,12 @@ const gestureEnabled = {
 };
 
 export function App() {
+  const isWalletConnected = useWalletConnect().connected;
+  const initialScreen = isWalletConnected ? 'home' : 'welcome';
   return (
     <NavigationContainer ref={navigator}>
       <Stack.Navigator
-        initialRouteName="welcome"
+        initialRouteName={initialScreen}
         screenOptions={basicScreenOptions}>
         <Stack.Screen name="welcome" component={WelcomeScreen} />
         <Stack.Screen name="home" component={Home} />
