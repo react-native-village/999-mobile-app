@@ -12,6 +12,7 @@ import {RootStackParamList} from 'src/types';
 import {ConnectWalletScreen} from './screens/ConnectWallet';
 import {ProfileScreen} from './screens/Profile';
 import {SearchScreen} from './screens/Search';
+import {ProposalScreen} from './screens/Proposal';
 import {SettingsScreen} from './screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -40,6 +41,7 @@ export function App() {
           <Stack.Screen name="ticketDetail" component={TicketDetailScreen} />
           <Stack.Screen name="profile" component={ProfileScreen} />
           <Stack.Screen name="search" component={SearchScreen} />
+          <Stack.Screen name="proposal" component={ProposalScreen} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

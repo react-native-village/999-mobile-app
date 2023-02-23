@@ -1,4 +1,5 @@
 import {NavigatorScreenParams} from '@react-navigation/native';
+import {StackNavigationOptions} from '@react-navigation/stack';
 import {SvgProps} from 'react-native-svg';
 
 // NAVIGATION
@@ -15,6 +16,9 @@ export type RootStackParamList = {
   ticketDetail: TicketInfo;
   profile: undefined;
   search: undefined;
+  proposal: {
+    id: number;
+  };
   connectWallet: undefined;
 };
 
@@ -42,6 +46,28 @@ export interface connectMethodType {
 }
 
 // UTILS
+
+export type VoteNamesType = 'yes' | 'no' | 'abstain' | 'veto';
+
+export type VotesType = {
+  yes: number;
+  no: number;
+  abstain: number;
+  veto: number;
+};
+
+export type ProposalsCroppedList = {
+  id: number;
+  status: ProposalsTagKeys;
+  title: string;
+}[];
+
+export type ProposalsTagKeys =
+  | 'all'
+  | 'voting'
+  | 'deposited'
+  | 'passed'
+  | 'rejected';
 
 export type ArrayElementType<
   ArrayType extends readonly unknown[] | null | undefined,
