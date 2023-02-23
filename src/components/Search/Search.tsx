@@ -4,16 +4,16 @@ import {FlatList, StyleSheet} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {TicketInfo} from 'src/types';
+import {ticketsData} from 'src/variables/temporaryData';
 
 import {SearchBar} from './SearchBar';
 import {SearchNoResults} from './SearchNoResults';
 
-import {DATA} from '../HomeMarket';
 import {Background, Separator, TicketCardRow} from '../ui';
 
 function SearchData(searchPhrase: string) {
   let data: TicketInfo[] = [];
-  DATA.map(item => {
+  ticketsData.map(item => {
     if (searchPhrase === '') {
       return data.push(item);
     }
