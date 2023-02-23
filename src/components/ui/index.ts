@@ -22,3 +22,4 @@ export * from './TicketCardRow';
 export * from './categories/categories';
 export * from './headerList';
 export * from './separator';
+export * from './Badge';

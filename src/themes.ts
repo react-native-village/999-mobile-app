@@ -8,6 +8,7 @@ export const LIGHT_THEME: ThemeColors = {
   primary1: 'rgba(255, 104, 131, 0.15)',
   // MESSAGE MEANING
   textRed1: '#E16363',
+  textGreen1: '#01B26E',
   opacityRed1: 'rgba(225, 99, 99, 0.2)',
   textBlue1: '#007AFF',
   opacityBlue1: 'rgba(0, 122, 255, 0.2)',
@@ -44,6 +45,7 @@ export const DARK_THEME: ThemeColors = {
   primary1: 'rgba(255, 104, 131, 0.15)',
   // MESSAGE MEANING
   textRed1: '#E16363',
+  textGreen1: '#01B26E',
   opacityRed1: 'rgba(225, 99, 99, 0.2)',
   textBlue1: '#007AFF',
   opacityBlue1: 'rgba(0, 122, 255, 0.2)',

@@ -11,6 +11,7 @@ import {RootStackParamList} from 'src/types';
 
 import {ConnectWalletScreen} from './screens/ConnectWallet';
 import {ProfileScreen} from './screens/Profile';
+import {ProposalScreen} from './screens/Proposal';
 import {SettingsScreen} from './screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -38,6 +39,7 @@ export function App() {
           <Stack.Screen name="settings" component={SettingsScreen} />
           <Stack.Screen name="ticketDetail" component={TicketDetailScreen} />
           <Stack.Screen name="profile" component={ProfileScreen} />
+          <Stack.Screen name="proposal" component={ProposalScreen} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
