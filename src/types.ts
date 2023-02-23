@@ -15,6 +15,7 @@ export type RootStackParamList = {
   settings: undefined;
   ticketDetail: TicketInfo;
   profile: undefined;
+  search: undefined;
   proposal: {
     id: number;
   };

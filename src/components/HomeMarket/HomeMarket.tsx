@@ -17,12 +17,14 @@ interface HomeMarketProps {
   onPressCard: (item: TicketInfo) => void;
   onPressProfile: () => void;
   onPressSettings: () => void;
+  onPressSearch: () => void;
 }
 
 export function HomeMarket({
   onPressCard,
   onPressProfile,
   onPressSettings,
+  onPressSearch,
 }: HomeMarketProps) {
   const {styles} = useThematicStyles(rawStyles);
 
@@ -31,6 +33,7 @@ export function HomeMarket({
       <HomeMarketHeader
         onPressSettings={onPressSettings}
         onPressProfile={onPressProfile}
+        onPressSearch={onPressSearch}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>

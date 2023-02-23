@@ -19,11 +19,16 @@ export function HomeTicketsMarketScreen() {
     navigate('settings');
   };
 
+  const onPressSearch = () => {
+    navigate('search');
+  };
+
   return (
     <HomeMarket
       onPressSettings={onPressSettings}
       onPressProfile={onPressProfile}
       onPressCard={onPressCard}
+      onPressSearch={onPressSearch}
     />
   );
 }
