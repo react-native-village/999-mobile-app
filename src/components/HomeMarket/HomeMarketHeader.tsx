@@ -13,11 +13,13 @@ import {Spacer, Text} from '../ui';
 interface HomeMarketHeaderProps {
   onPressSettings?: () => void;
   onPressProfile?: () => void;
+  onPressSearch?: () => void;
 }
 
 export function HomeMarketHeader({
   onPressSettings,
   onPressProfile,
+  onPressSearch,
 }: HomeMarketHeaderProps) {
   const {colors} = useTheme();
   const {top} = useSafeAreaInsets();
@@ -34,6 +36,10 @@ export function HomeMarketHeader({
           </Text>
         </View>
         <View style={styles.rightButtons}>
+          <TouchableOpacity onPress={onPressSearch} activeOpacity={0.7}>
+            <Ionicons color={colors.primary} name="search-outline" size={28} />
+          </TouchableOpacity>
+          <Spacer width={12} />
           <TouchableOpacity onPress={onPressSettings} activeOpacity={0.7}>
             <Ionicons color={colors.primary} name="settings-sharp" size={28} />
           </TouchableOpacity>

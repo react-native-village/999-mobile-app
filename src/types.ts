@@ -14,6 +14,7 @@ export type RootStackParamList = {
   settings: undefined;
   ticketDetail: TicketInfo;
   profile: undefined;
+  search: undefined;
   connectWallet: undefined;
 };
 
