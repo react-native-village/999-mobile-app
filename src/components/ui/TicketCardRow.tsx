@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {priceDisplaySmall} from 'src/components/ChangePriceDisplay';
+import {formatPriceSmall} from 'src/components/formatPrice';
 import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
 import {TicketInfo} from 'src/types';
@@ -58,7 +58,7 @@ export function TicketCardRow({
             {price && currencySymbols && (
               <View style={styles.priceContainer}>
                 <Text t7 color={Color.primary}>
-                  {priceDisplaySmall(price)}
+                  {formatPriceSmall(price)}
                 </Text>
                 {SvgIcon && (
                   <>

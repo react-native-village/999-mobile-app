@@ -13,7 +13,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {priceDisplay} from 'src/components/ChangePriceDisplay';
+import {formatPrice} from 'src/components/formatPrice';
 import {Button, Spacer, Text} from 'src/components/ui';
 import {Background} from 'src/components/ui/Background';
 import {useThematicStyles} from 'src/hooks';
@@ -71,7 +71,7 @@ export function TicketDetail({
               {item.price && item.currencySymbols && (
                 <View style={styles.priceContainer}>
                   <Text t2 color={Color.primary}>
-                    {priceDisplay(item.price)}
+                    {formatPrice(item.price)}
                   </Text>
                   {SvgIcon && (
                     <>
@@ -94,7 +94,7 @@ export function TicketDetail({
                 {priceInDollars && (
                   <Text t12 color={Color.graphicSecond4}>
                     {' '}
-                    - {priceDisplay(priceInDollars)} $
+                    - {priceInDollars} $
                   </Text>
                 )}
               </View>

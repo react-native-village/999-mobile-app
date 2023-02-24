@@ -70,9 +70,9 @@ export function TicketDetailBuy({
               {`${(price * count).toLocaleString()} ${currencySymbols}`}
             </Text>
           )}
-          {price && priceInDollars && (
+          {priceInDollars && (
             <Text t12 color={Color.graphicSecond4}>
-              {(price * priceInDollars * count).toLocaleString()} $
+              {priceInDollars.toLocaleString()} $
             </Text>
           )}
         </View>
