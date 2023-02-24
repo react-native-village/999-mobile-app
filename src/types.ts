@@ -1,5 +1,4 @@
 import {NavigatorScreenParams} from '@react-navigation/native';
-import {StackNavigationOptions} from '@react-navigation/stack';
 import {SvgProps} from 'react-native-svg';
 
 // NAVIGATION
