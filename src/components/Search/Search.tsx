@@ -9,7 +9,7 @@ import {ticketsData} from 'src/variables/temporaryData';
 import {SearchBar} from './SearchBar';
 import {SearchNoResults} from './SearchNoResults';
 
-import {Background, Separator, TicketCardRow} from '../ui';
+import {Background, TicketCardRow} from '../ui';
 
 function SearchData(searchPhrase: string) {
   let data: TicketInfo[] = [];
@@ -36,6 +36,7 @@ export function Search({onPressCard}: SearchProps) {
   const insets = useSafeAreaInsets();
   const [clicked, setClicked] = useState(false);
   const [searchPhrase, setSearchPhrase] = useState('');
+
   return (
     <Background
       style={[
@@ -56,7 +57,6 @@ export function Search({onPressCard}: SearchProps) {
         renderItem={({item}) => (
           <TicketCardRow onPress={onPressCard} {...item} />
         )}
-        ItemSeparatorComponent={Separator}
         keyExtractor={item => item.id}
       />
     </Background>

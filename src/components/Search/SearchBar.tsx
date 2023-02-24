@@ -11,6 +11,7 @@ import IonIcon from 'react-native-vector-icons/Ionicons';
 
 import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
+import {IS_IOS} from 'src/variables';
 
 interface SearchBarProps {
   clicked: boolean;
@@ -78,8 +79,11 @@ const rawStyles = StyleSheet.create({
   },
   input: {
     fontSize: 20,
-    lineHeight: 30,
-    marginLeft: 10,
+    lineHeight: 20,
+    marginLeft: 16,
+    textAlignVertical: 'center',
+    top: IS_IOS ? 4 : 0,
+    height: '100%',
   },
   icon: {marginHorizontal: 10, fontSize: 28, color: Color.primary},
 });

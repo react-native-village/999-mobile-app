@@ -113,7 +113,7 @@ const rawStyles = StyleSheet.create({
     width: '100%',
     height: 150,
     flexDirection: 'row',
-    marginVertical: 12.5,
+    marginVertical: 10,
     backgroundColor: Color.card,
   },
   imageContainer: {
