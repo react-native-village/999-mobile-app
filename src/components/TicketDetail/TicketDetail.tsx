@@ -13,6 +13,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {formatPrice} from 'src/components/formatPrice';
 import {Button, Spacer, Text} from 'src/components/ui';
 import {Background} from 'src/components/ui/Background';
 import {useThematicStyles} from 'src/hooks';
@@ -70,7 +71,7 @@ export function TicketDetail({
               {item.price && item.currencySymbols && (
                 <View style={styles.priceContainer}>
                   <Text t2 color={Color.primary}>
-                    {item.price}
+                    {formatPrice(item.price)}
                   </Text>
                   {SvgIcon && (
                     <>
@@ -93,7 +94,7 @@ export function TicketDetail({
                 {priceInDollars && (
                   <Text t12 color={Color.graphicSecond4}>
                     {' '}
-                    - {priceInDollars}$
+                    - {priceInDollars} $
                   </Text>
                 )}
               </View>
@@ -163,6 +164,8 @@ export function TicketDetail({
       </ScrollView>
       {showBuy && (
         <TicketDetailBuy
+          price={item.price}
+          currencySymbols={item.currencySymbols}
           priceInDollars={priceInDollars}
           onClose={() => setShowBuy(false)}
         />
@@ -209,6 +212,7 @@ const rawStyles = StyleSheet.create({
     marginBottom: 45,
   },
   rowTicket: {
+    marginTop: 7,
     flexDirection: 'row',
     alignItems: 'center',
   },

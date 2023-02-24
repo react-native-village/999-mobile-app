@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {formatPriceSmall} from 'src/components/formatPrice';
 import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
 import {TicketInfo} from 'src/types';
@@ -54,16 +55,16 @@ export function TicketCardColumn({
             <View style={styles.costContainer}>
               {price && currencySymbols && (
                 <>
-                  <Text numberOfLines={1} t5 color={Color.primary}>
-                    {price}
+                  <Text numberOfLines={1} t7 color={Color.primary}>
+                    {formatPriceSmall(price)}
                   </Text>
                   {SvgIcon && (
                     <>
-                      <Spacer width={6} />
+                      <Spacer width={4} />
                       <SvgIcon.default
                         fill={colors.primary}
-                        width={25}
-                        height={25}
+                        width={24}
+                        height={24}
                       />
                     </>
                   )}
@@ -136,6 +137,7 @@ const rawStyles = StyleSheet.create({
   costAndTagContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   iconStyle: {
     color: Color.textSecond1,
@@ -160,7 +162,6 @@ const rawStyles = StyleSheet.create({
     flex: 1,
   },
   costContainer: {
-    flex: 1,
     flexDirection: 'row',
   },
 });

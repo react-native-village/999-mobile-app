@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {formatPriceSmall} from 'src/components/formatPrice';
 import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
 import {TicketInfo} from 'src/types';
@@ -57,15 +58,15 @@ export function TicketCardRow({
             {price && currencySymbols && (
               <View style={styles.priceContainer}>
                 <Text t7 color={Color.primary}>
-                  {price}
+                  {formatPriceSmall(price)}
                 </Text>
                 {SvgIcon && (
                   <>
-                    <Spacer width={6} />
+                    <Spacer width={4} />
                     <SvgIcon.default
                       fill={colors.primary}
-                      width={25}
-                      height={25}
+                      width={20}
+                      height={20}
                     />
                   </>
                 )}
@@ -136,6 +137,7 @@ const rawStyles = StyleSheet.create({
   costAndTagContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   iconWithTextContainer: {
     flexDirection: 'row',

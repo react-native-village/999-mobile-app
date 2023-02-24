@@ -30,8 +30,8 @@ export function Tag({name, withMarginLeft}: TagT) {
 
 const rawStyles = StyleSheet.create({
   container: {
-    paddingVertical: 6,
-    paddingHorizontal: 8,
+    paddingVertical: 4,
+    paddingHorizontal: 6,
     alignSelf: 'flex-start',
     borderRadius: 999,
     justifyContent: 'center',

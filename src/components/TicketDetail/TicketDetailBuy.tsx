@@ -66,13 +66,13 @@ export function TicketDetailBuy({
 
         <View style={styles.price}>
           {price && currencySymbols && (
-            <Text t3 color={Color.primary1}>
-              {`${price} ${currencySymbols}`}
+            <Text t3 color={Color.primary}>
+              {`${(price * count).toLocaleString()} ${currencySymbols}`}
             </Text>
           )}
           {priceInDollars && (
             <Text t12 color={Color.graphicSecond4}>
-              {priceInDollars}$
+              {priceInDollars.toLocaleString()} $
             </Text>
           )}
         </View>
