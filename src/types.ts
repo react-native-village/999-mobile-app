@@ -15,6 +15,7 @@ export type RootStackParamList = {
   ticketDetail: TicketInfo;
   profile: undefined;
   search: undefined;
+  scan: undefined;
   proposal: {
     id: number;
   };

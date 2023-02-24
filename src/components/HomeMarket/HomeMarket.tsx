@@ -18,6 +18,7 @@ interface HomeMarketProps {
   onPressProfile: () => void;
   onPressSettings: () => void;
   onPressSearch: () => void;
+  onPressScan: () => void;
 }
 
 export function HomeMarket({
@@ -25,6 +26,7 @@ export function HomeMarket({
   onPressProfile,
   onPressSettings,
   onPressSearch,
+  onPressScan,
 }: HomeMarketProps) {
   const {styles} = useThematicStyles(rawStyles);
 
@@ -34,6 +36,7 @@ export function HomeMarket({
         onPressSettings={onPressSettings}
         onPressProfile={onPressProfile}
         onPressSearch={onPressSearch}
+        onPressScan={onPressScan}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
