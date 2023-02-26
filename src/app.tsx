@@ -34,7 +34,7 @@ export function App() {
   return (
     <NavigationContainer ref={navigator}>
       <Stack.Navigator
-        initialRouteName={initialScreen}
+        initialRouteName={'home'}
         screenOptions={basicScreenOptions}>
         <Stack.Screen name="welcome" component={WelcomeScreen} />
         <Stack.Screen name="home" component={Home} />

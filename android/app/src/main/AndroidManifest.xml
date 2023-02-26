@@ -2,9 +2,8 @@
   package="com.nft_tickets">
   
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.CAMERA" />
-
+    
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
