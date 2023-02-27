@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
+import {useIsFocused} from '@react-navigation/native';
 import {
   Alert,
   Linking,
@@ -22,6 +23,7 @@ interface QRScannerProps {
 }
 
 export function QRScanner({onPressBack, qrEventFound}: QRScannerProps) {
+  const isFocused = useIsFocused();
   const [openScanner, setOpenScanner] = useState(false);
   const [notDesiredQR, setNotDesiredQR] = useState(false);
   const {styles} = useThematicStyles(rawStyles);
@@ -114,7 +116,7 @@ export function QRScanner({onPressBack, qrEventFound}: QRScannerProps) {
     }
   }, [notDesiredQR]);
 
-  return (
+  return isFocused ? (
     <Background style={styles.container}>
       {openScanner ? (
         <CameraScreen
@@ -153,7 +155,7 @@ export function QRScanner({onPressBack, qrEventFound}: QRScannerProps) {
         </View>
       )}
     </Background>
-  );
+  ) : null;
 }
 
 const rawStyles = StyleSheet.create({
