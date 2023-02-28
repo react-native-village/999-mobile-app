@@ -23,12 +23,17 @@ export function HomeTicketsMarketScreen() {
     navigate('search');
   };
 
+  const onPressScan = () => {
+    navigate('scan');
+  };
+
   return (
     <HomeMarket
       onPressSettings={onPressSettings}
       onPressProfile={onPressProfile}
       onPressCard={onPressCard}
       onPressSearch={onPressSearch}
+      onPressScan={onPressScan}
     />
   );
 }
