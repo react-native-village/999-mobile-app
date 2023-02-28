@@ -25,5 +25,4 @@ export * from './separator';
 export * from './Badge';
 export * from './TextSum';
 export * from './InfoBlockAmount';
-export * from './Inline';
 export * from './Loading';

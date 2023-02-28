@@ -1,8 +1,8 @@
 import React, {forwardRef, useImperativeHandle, useRef} from 'react';
 
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
-import {InfoBlockAmount, Inline, Spacer, Text} from 'src/components/ui';
+import {InfoBlockAmount, Spacer, Text} from 'src/components/ui';
 import {cleanNumber} from 'src/helpers/CleanNumber';
 import {Color} from 'src/themeTypes';
 
@@ -53,12 +53,20 @@ export const StakingActive = forwardRef(
           text={'Staked'}
         />
         <Spacer height={12} />
-        <Inline gap={12}>
+        <View style={styles.row}>
           <InfoBlockAmount value={availableSum} text={'Available'} />
+          <Spacer width={10} />
           <InfoBlockAmount value={unDelegationSum} text={'Unbounded'} />
-        </Inline>
+        </View>
         <Spacer height={20} />
       </View>
     );
   },
 );
+
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+});
