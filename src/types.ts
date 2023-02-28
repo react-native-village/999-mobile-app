@@ -16,6 +16,7 @@ export type RootStackParamList = {
   profile: undefined;
   search: undefined;
   scan: undefined;
+  result: undefined;
   proposal: {
     id: number;
   };

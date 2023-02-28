@@ -7734,6 +7734,11 @@ pngjs@^5.0.0:
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-5.0.0.tgz#e79dd2b215767fd9c04561c01236df960bce7fbb"
   integrity sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==
 
+pod-install@^0.1.38:
+  version "0.1.38"
+  resolved "https://registry.yarnpkg.com/pod-install/-/pod-install-0.1.38.tgz#1c16a800a5fc1abea0cafcc0e190f376368c76ab"
+  integrity sha512-NeDWGigjJRriOIKBOvpW2/tK2tYLfyUT7ia6C6L+oarCAhBNP+IGODWdU+GEAqvfsseqOApcFclpXAJTL0UPzA==
+
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
@@ -8080,6 +8085,14 @@ react-native-orientation-locker@^1.5.0:
 "react-native-os@https://github.com/aprock/react-native-os":
   version "1.2.7"
   resolved "https://github.com/aprock/react-native-os#938676ebd92d58b8928168a7e78cbe216838ed17"
+
+react-native-permissions@^3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-3.7.2.tgz#445b3329d66d074fa88f5319b38717e5831b8fee"
+  integrity sha512-hoiygypCvN2KgDexrxX3cEpYb8BZWAv1783dR0ew5CRdLu2LUb4evJmz6enHUqhOutdQOUHMhJhX5M9X8DYYfg==
+  dependencies:
+    picocolors "^1.0.0"
+    read-pkg "^5.2.0"
 
 react-native-qrcode-svg@6.0.6:
   version "6.0.6"
