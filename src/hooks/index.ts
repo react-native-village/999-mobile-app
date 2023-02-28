@@ -7,3 +7,4 @@ export * from './useMarkdownProps';
 export * from './useImageAspect';
 export * from './useThematicStyles';
 export * from './useWalletConnectMethods';
+export * from './useCameraPermissions';

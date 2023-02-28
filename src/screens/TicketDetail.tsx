@@ -1,9 +1,11 @@
 import React from 'react';
 
 import {TicketDetail} from 'src/components/TicketDetail';
-import {useTypedRoute} from 'src/hooks';
+import {useTypedNavigation, useTypedRoute} from 'src/hooks';
 
 export function TicketDetailScreen() {
   const item = useTypedRoute<'ticketDetail'>().params;
-  return <TicketDetail {...item} />;
+  const {goBack} = useTypedNavigation();
+
+  return <TicketDetail onBack={goBack} {...item} />;
 }

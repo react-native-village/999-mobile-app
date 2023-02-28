@@ -1,162 +1,85 @@
-import React, {useEffect, useState} from 'react';
+import React, {forwardRef, useImperativeHandle, useState} from 'react';
 
 import {useIsFocused} from '@react-navigation/native';
-import {
-  Alert,
-  Linking,
-  PermissionsAndroid,
-  Platform,
-  StyleSheet,
-  View,
-} from 'react-native';
-import {Camera, CameraScreen} from 'react-native-camera-kit';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {CameraScreen} from 'react-native-camera-kit';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {Background, Loading, Text} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
+import {useCameraPermissions, useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
-import {TicketInfo} from 'src/types';
-
 interface QRScannerProps {
-  onPressBack?: () => void;
-  qrEventFound: (qrObject: TicketInfo) => void;
+  onScanBarcode: (qrValue: string) => void;
+  onPressBack: () => void;
 }
 
-export function QRScanner({onPressBack, qrEventFound}: QRScannerProps) {
-  const isFocused = useIsFocused();
-  const [openScanner, setOpenScanner] = useState(false);
-  const [notDesiredQR, setNotDesiredQR] = useState(false);
-  const {styles} = useThematicStyles(rawStyles);
+export interface QRScannerRefType {
+  showError: (errorText: string) => void;
+}
 
-  const onBarcodeScan = (qrValue: string) => {
-    try {
-      let qrObject = JSON.parse(qrValue);
-      if (
-        qrObject.name &&
-        qrObject.tags &&
-        qrObject.startData &&
-        qrObject.endData &&
-        qrObject.geoPosition
-      ) {
-        qrEventFound(qrObject);
-      } else {
-        setNotDesiredQR(true);
-      }
-    } catch {
-      setNotDesiredQR(true);
-    }
-  };
+export const QRScanner = forwardRef<QRScannerRefType, QRScannerProps>(
+  ({onScanBarcode, onPressBack}, ref) => {
+    const isFocused = useIsFocused();
+    const isCameraAllowed = useCameraPermissions();
+    const {top} = useSafeAreaInsets();
+    const [warning, setWarning] = useState('');
+    const {styles, colors} = useThematicStyles(rawStyles);
 
-  async function requestCameraPermissionAndroid() {
-    const isCameraAuthorized = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.CAMERA,
-    );
-    if (isCameraAuthorized === PermissionsAndroid.RESULTS.GRANTED) {
-      setOpenScanner(true);
-    } else {
-      Alert.alert(
-        'Error',
-        'The camera is locked for this app, but you can allow it in the app settings',
-        [
-          {
-            text: 'Grant permission',
-            onPress: Linking.openSettings,
-          },
-          {
-            text: 'Back',
-            onPress: onPressBack,
-          },
-        ],
-        {onDismiss: onPressBack},
-      );
-    }
-  }
+    useImperativeHandle(ref, () => ({
+      showError(error?: string) {
+        setWarning(error ?? '');
+      },
+    }));
 
-  async function requestCameraPermissionIos() {
-    const isCameraAuthorized =
-      await Camera.checkDeviceCameraAuthorizationStatus();
-    if (isCameraAuthorized) setOpenScanner(true);
-    else {
-      const isUserAuthorizedCamera =
-        await Camera.requestDeviceCameraAuthorization();
-      if (isUserAuthorizedCamera) setOpenScanner(true);
-      else {
-        Alert.prompt(
-          'Error',
-          'The camera is locked for this app, but you can allow it in the app settings',
-          [
-            {
-              text: 'Grant permission',
-              onPress: Linking.openSettings,
-              style: 'default',
-            },
-            {
-              text: 'Back',
-              onPress: onPressBack,
-              style: 'cancel',
-            },
-          ],
-        );
-        Linking.openSettings();
-      }
-    }
-  }
-
-  if (Platform.OS === 'android') {
-    requestCameraPermissionAndroid();
-  }
-  if (Platform.OS === 'ios') {
-    requestCameraPermissionIos();
-  }
-
-  useEffect(() => {
-    if (notDesiredQR) {
-      const hintVisibility = setTimeout(() => setNotDesiredQR(false), +3000);
-      return () => clearTimeout(hintVisibility);
-    }
-  }, [notDesiredQR]);
-
-  return isFocused ? (
-    <Background style={styles.container}>
-      {openScanner ? (
-        <CameraScreen
-          scanBarcode={true}
-          zoomMode={'off'}
-          onReadCode={event => onBarcodeScan(event.nativeEvent.codeStringValue)}
-          cameraRatioOverlay={undefined}
-          captureButtonImage={undefined}
-          cameraFlipImage={undefined}
-          hideControls={true}
-          showFrame={false}
-          laserColor={'transparent'}
-          frameColor={'transparent'}
-          torchOnImage={undefined}
-          torchOffImage={undefined}
-          torchImageStyle={{}}
-          captureButtonImageStyle={{}}
-          cameraFlipImageStyle={{}}
-          onBottomButtonPressed={() => {}}
-        />
-      ) : (
-        <Loading text={'Loading the camera, please wait.'} />
-      )}
-      {openScanner && (
-        <View style={styles.iconContainer}>
-          <MaterialCommunityIcons name={'scan-helper'} style={styles.icon} />
-        </View>
-      )}
-      {notDesiredQR && (
-        <View style={styles.hintContainer}>
-          <View style={styles.hint}>
+    return isFocused ? (
+      <Background style={styles.container}>
+        {isCameraAllowed ? (
+          <CameraScreen
+            scanBarcode={true}
+            zoomMode={'off'}
+            onReadCode={event =>
+              onScanBarcode(event.nativeEvent.codeStringValue)
+            }
+            cameraRatioOverlay={undefined}
+            captureButtonImage={undefined}
+            cameraFlipImage={undefined}
+            hideControls={true}
+            showFrame={false}
+            laserColor="transparent"
+            frameColor="transparent"
+            torchOnImage={undefined}
+            torchOffImage={undefined}
+            torchImageStyle={{}}
+            captureButtonImageStyle={{}}
+            cameraFlipImageStyle={{}}
+            onBottomButtonPressed={() => {}}
+          />
+        ) : (
+          <Loading text={'Loading the camera, please wait.'} />
+        )}
+        {isCameraAllowed && (
+          <View style={styles.iconContainer}>
+            <MaterialCommunityIcons name={'scan-helper'} style={styles.icon} />
+          </View>
+        )}
+        {warning && (
+          <View style={[styles.hint, {marginTop: top + 20}]}>
             <Text t17 color={Color.textBase3}>
-              It's not QR-event or QR-Ticket
+              {warning}
             </Text>
           </View>
-        </View>
-      )}
-    </Background>
-  ) : null;
-}
+        )}
+        <TouchableOpacity
+          onPress={onPressBack}
+          style={[styles.backContainer, {paddingTop: top}]}>
+          <Icon name="arrow-back" size={24} color={colors.textBase1} />
+        </TouchableOpacity>
+      </Background>
+    ) : null;
+  },
+);
 
 const rawStyles = StyleSheet.create({
   container: {
@@ -174,18 +97,19 @@ const rawStyles = StyleSheet.create({
     opacity: 0.5,
     color: Color.primary,
   },
-  hintContainer: {
-    position: 'absolute',
-    width: '100%',
-    alignItems: 'center',
-  },
   hint: {
-    marginTop: 20,
+    position: 'absolute',
+    alignSelf: 'center',
     width: 180,
     height: 40,
     borderRadius: 100,
     backgroundColor: Color.graphicBase1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  backContainer: {
+    position: 'absolute',
+    left: 20,
+    top: 20,
   },
 });
