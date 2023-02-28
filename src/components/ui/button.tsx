@@ -10,14 +10,16 @@ import {Text} from './text/text';
 interface ButtonT {
   children: string;
   style?: StyleProp<ViewStyle>;
+  disabled?: boolean;
   onPress: () => void;
 }
-export function Button({children, style, onPress}: ButtonT) {
+export function Button({children, style, onPress, disabled}: ButtonT) {
   const {styles} = useThematicStyles(rawStyles);
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
+      disabled={disabled}
       style={[styles.container, style]}>
       <Text t6 color={Color.textBase3}>
         {children}
