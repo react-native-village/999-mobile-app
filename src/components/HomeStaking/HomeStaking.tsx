@@ -2,10 +2,12 @@ import React, {useRef, useState} from 'react';
 
 import {ScrollView, StyleSheet, View} from 'react-native';
 
-import {Background, Button, Spacer, Text} from 'src/components/ui';
+import {Background, Button, Spacer} from 'src/components/ui';
 
 import {StakingActive, StakingActiveInterface} from './StakingActive';
 import {StakingEmpty} from './StakingEmpty';
+
+import {Loading} from '../loading';
 
 export type StakingHomeProps = {
   loading: boolean;
@@ -41,7 +43,7 @@ export function HomeStaking({
   const hasStaking = stakingSum >= 1 / 2;
 
   if (loading) {
-    return <Text>Loading</Text>;
+    return <Loading />;
   }
   return (
     <Background>
