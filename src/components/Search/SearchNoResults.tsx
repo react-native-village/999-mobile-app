@@ -1,14 +1,12 @@
 import React from 'react';
 
-import {Dimensions, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
 
 import {Text} from '../ui';
-
-const width = Dimensions.get('window').width;
 
 export function SearchNoResults() {
   const {styles} = useThematicStyles(rawStyles);
@@ -32,9 +30,8 @@ const rawStyles = StyleSheet.create({
     alignItems: 'center',
   },
   iconContainer: {
-    height: width * 0.5,
-    width: width * 0.5,
-    borderRadius: 100,
+    padding: 30,
+    borderRadius: 999,
     backgroundColor: Color.primary1,
     alignItems: 'center',
     justifyContent: 'center',

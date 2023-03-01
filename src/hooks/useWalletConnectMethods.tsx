@@ -24,6 +24,10 @@ export function useWalletConnectMethods() {
     {
       name: 'Wallet Connect',
       async onConnect() {
+        if (__DEV__) {
+          navigate('home');
+          return;
+        }
         const res = await connectorWC.connect();
         if (res.accounts.length > 0) {
           navigate('home');
