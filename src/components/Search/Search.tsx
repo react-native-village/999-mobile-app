@@ -8,9 +8,9 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTypedNavigation} from 'src/hooks';
 import {Color} from 'src/themeTypes';
 import {TicketInfo} from 'src/types';
+import {IS_ANDROID} from 'src/variables';
 import {ticketsData} from 'src/variables/temporaryData';
 
-import {SearchBar} from './SearchBar';
 import {SearchNoResults} from './SearchNoResults';
 
 import {Background, Spacer, Text, TicketCardRow} from '../ui';
@@ -36,7 +36,8 @@ interface SearchProps {
   onPressCard: (item: TicketInfo) => void;
 }
 
-const headerRight = ({}: HeaderButtonProps) => {
+function HeaderRight({isFocused}: HeaderButtonProps & {isFocused: boolean}) {
+  if (IS_ANDROID && isFocused) return <></>;
   return (
     <TouchableOpacity>
       <Text color={Color.primary} t14>
@@ -44,34 +45,44 @@ const headerRight = ({}: HeaderButtonProps) => {
       </Text>
     </TouchableOpacity>
   );
-};
+}
 export function Search({onPressCard}: SearchProps) {
   const {bottom} = useSafeAreaInsets();
   const [searchPhrase, setSearchPhrase] = useState('');
-  const nav = useTypedNavigation();
+  const navigation = useTypedNavigation();
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
-    nav.setOptions({
+    const headerRight = (props: HeaderButtonProps) => (
+      <HeaderRight isFocused={isFocused} {...props} />
+    );
+    navigation.setOptions({
       headerShown: true,
+      headerTitleAlign: 'left',
+      headerTitle: 'Search',
       headerRight,
       headerSearchBarOptions: {
         placeholder: 'Search',
         hideWhenScrolling: true,
+        onChangeText({nativeEvent: {text}}) {
+          setSearchPhrase(text);
+        },
+        onFocus() {
+          setIsFocused(true);
+        },
+        onBlur() {
+          setIsFocused(false);
+        },
       },
     });
-  }, []);
+  }, [isFocused]);
 
   const footer = () => <Spacer height={bottom} />;
 
   return (
     <Background style={[styles.container]}>
-      {/* <SearchBar
-        clicked={clicked}
-        setClicked={setClicked}
-        searchPhrase={searchPhrase}
-        setSearchPhrase={setSearchPhrase}
-      /> */}
       <FlatList
+        contentInsetAdjustmentBehavior="automatic"
         ListEmptyComponent={SearchNoResults}
         data={SearchData(searchPhrase)}
         style={styles.flatList}
