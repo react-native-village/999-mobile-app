@@ -62,6 +62,8 @@ export type ProposalsCroppedList = {
   title: string;
 }[];
 
+export type sheetPointsT = [number, number];
+
 export type ProposalsTagKeys =
   | 'all'
   | 'voting'
