@@ -16,6 +16,7 @@ export type RootStackParamList = {
   profile: undefined;
   search: undefined;
   scan: undefined;
+  qr: TicketInfo;
   proposal: {
     id: number;
   };
@@ -33,6 +34,7 @@ export interface TicketInfo {
   geoPosition: string;
   imageUrl: string;
   price?: number;
+  tickets: number;
   currencySymbols?: string;
 }
 
