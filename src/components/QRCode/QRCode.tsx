@@ -25,7 +25,6 @@ function QRCodeGenerate(tickets: number) {
     return adress;
   };
   for (let i = 0; i < tickets; i++) {
-    console.log('stroke:', randomAdress());
     ticketsMas.push(
       <View key={i} style={styles.qr}>
         <Text t4 style={styles.qrText}>
