@@ -20,6 +20,7 @@ export type RootStackParamList = {
     id: number;
   };
   connectWallet: undefined;
+  createEvent: undefined;
 };
 
 // INTERFACES
@@ -46,6 +47,8 @@ export interface connectMethodType {
 }
 
 // UTILS
+
+export type InputNameType = 'text' | 'cover' | 'categories' | 'date' | 'time';
 
 export type VoteNamesType = 'yes' | 'no' | 'abstain' | 'veto';
 

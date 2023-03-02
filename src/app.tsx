@@ -13,6 +13,7 @@ import {RootStackParamList} from 'src/types';
 
 import {useTheme} from './hooks';
 import {ConnectWalletScreen} from './screens/ConnectWallet';
+import {CreateEventScreen} from './screens/CreateEvent';
 import {ProfileScreen} from './screens/Profile';
 import {ProposalScreen} from './screens/Proposal';
 import {QRScannerScreen} from './screens/QRScanner';
@@ -63,6 +64,7 @@ export function App() {
           <Stack.Screen name="search" component={SearchScreen} />
           <Stack.Screen name="proposal" component={ProposalScreen} />
           <Stack.Screen name="scan" component={QRScannerScreen} />
+          <Stack.Screen name="createEvent" component={CreateEventScreen} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

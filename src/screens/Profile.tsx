@@ -7,14 +7,14 @@ const url =
 
 export function ProfileScreen() {
   const {navigate} = useTypedNavigation();
-  const onPressSettings = () => {
-    navigate('settings');
+  const onPressCreateEvent = () => {
+    navigate('createEvent');
   };
 
   return (
     <Profile
       bgImageUrl="https://gruppoconcorde-cdn.thron.com/delivery/public/image/gruppoconcorde/ef4bee72-c2c9-4a61-8f38-0a1d9c8a6e74/sccw3m/std/1920x844/AtlasConcorde_Villa%20Privata_Australia_003.jpg?scalemode=auto&format=WEBP"
-      onPressSettings={onPressSettings}
+      onPressCreateEvent={onPressCreateEvent}
       avaUrl={url}
       ticketsData={fakedata}
       cryptoAddress="0x638C4c657F80a8A99faeca550B733aaae81174ef"

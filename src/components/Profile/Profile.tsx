@@ -29,13 +29,13 @@ import {Color} from 'src/themeTypes';
 import {TicketInfo, sheetPointsT} from 'src/types';
 import {ANIMATION_DURATION} from 'src/variables';
 
-import {Avatar, Background, CustomHeader, Spacer, Text} from '../ui';
+import {Avatar, Background, Button, CustomHeader, Spacer, Text} from '../ui';
 import {TicketCardRow} from '../ui/TicketCardRow';
 
 const imageSize = 220;
 
 interface ProfileProps {
-  onPressSettings: () => void;
+  onPressCreateEvent: () => void;
   bgImageUrl: string;
   avaUrl: string;
   cryptoAddress: string;
@@ -46,7 +46,7 @@ interface ProfileProps {
 }
 
 export function Profile({
-  onPressSettings,
+  onPressCreateEvent,
   bgImageUrl,
   avaUrl,
   cryptoAddress,
@@ -204,12 +204,7 @@ export function Profile({
 
   return (
     <>
-      <CustomHeader
-        onPressRight={onPressSettings}
-        iconRight="settings-sharp"
-        style={headerAnimation}
-        title="Dmitry"
-      />
+      <CustomHeader style={headerAnimation} title="Dmitry" />
       <Animated.View style={[{height: height + imageSize}, contentAnimation]}>
         <View style={[styles.posterContainer, {height: closedSnapPoint}]}>
           <Animated.Image
@@ -244,6 +239,11 @@ export function Profile({
                 <Spacer height={20} />
               </View>
             </GestureDetector>
+            <Button
+              onPress={onPressCreateEvent}
+              style={styles.createEventButton}>
+              Create Event
+            </Button>
             <GestureDetector
               gesture={Gesture.Simultaneous(panGesture, scrollViewGesture)}>
               <Animated.ScrollView
@@ -286,6 +286,10 @@ const rawStyles = StyleSheet.create({
   },
   flexOne: {
     flex: 1,
+  },
+  createEventButton: {
+    width: '80%',
+    alignSelf: 'center',
   },
   sectionListContainer: {
     padding: 20,

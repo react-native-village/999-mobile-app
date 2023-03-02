@@ -16,7 +16,7 @@ export const LIGHT_THEME: ThemeColors = {
   opacityYellow1: 'rgba(178, 111, 29, 0.2)',
 
   bg1: '#F5F5F5',
-  bg2: '#EEF9F5',
+  bg2: 'rgba(255, 104, 131, 0.1)',
   bg3: '#F4F8F8',
   bg4: 'rgba(0, 0, 0, 0.6)',
 
@@ -53,7 +53,7 @@ export const DARK_THEME: ThemeColors = {
   opacityYellow1: 'rgba(178, 111, 29, 0.2)',
 
   bg1: '#0B0B0B',
-  bg2: '#25332E',
+  bg2: 'rgba(255, 104, 131, 0.1)',
   bg3: '#212624',
   bg4: 'rgba(0, 0, 0, 0.6)',
 
