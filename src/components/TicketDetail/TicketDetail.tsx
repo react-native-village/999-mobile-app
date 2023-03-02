@@ -26,11 +26,13 @@ import {TicketDetailTags} from './TicketDetailTags';
 import {dark, light} from '../../../assets/images/cryproCoins/mapping';
 interface TicketDetailProps extends TicketInfo {
   onBack?: () => void;
+  onQRCode: () => void;
   priceInDollars?: number;
 }
 
 export function TicketDetail({
   onBack,
+  onQRCode,
   priceInDollars = 100,
   ...item
 }: TicketDetailProps) {
@@ -156,8 +158,20 @@ export function TicketDetail({
               <Text t9>0x0cd46a783f8cxv45x6z5cxhxv13782</Text>
             </View>
           </View>
+          {item.tickets > 0 && (
+            <View>
+              <Text t11 style={styles.ticketText} color={Color.primary}>
+                Tickets available: {item.tickets}
+              </Text>
+              <Button style={styles.ticketButton} onPress={onQRCode}>
+                {item.tickets > 1
+                  ? 'Show QR-code of the tickets'
+                  : 'Show QR-codes of ticket'}
+              </Button>
+            </View>
+          )}
           <Button style={styles.button} onPress={() => setShowBuy(true)}>
-            Buy Ticket
+            {item.tickets > 0 ? 'Buy more' : 'Buy'}
           </Button>
         </View>
         <Spacer height={insets.bottom} />
@@ -177,6 +191,13 @@ export function TicketDetail({
 const rawStyles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  ticketText: {
+    marginBottom: 10,
+    alignSelf: 'center',
+  },
+  ticketButton: {
+    alignSelf: 'center',
   },
   button: {
     marginVertical: 20,

@@ -36,6 +36,7 @@ export const ticketsData: TicketInfo[] = [
     endData: 1672947919,
     geoPosition: 'Retro Mountain',
     price: 100000,
+    tickets: 3,
     currencySymbols: 'ADA',
     imageUrl:
       'https://d1629ugb7moz2f.cloudfront.net/e/21162/cFPvQBjmRmwyo1PA0VR4hO572mDold5r664eQISO.jpg',
@@ -47,6 +48,7 @@ export const ticketsData: TicketInfo[] = [
     price: 3645177,
     currencySymbols: 'ADA',
     startData: 1066608715,
+    tickets: 1,
     endData: 1836575410,
     geoPosition: 'London, United Kingdom',
 
@@ -61,6 +63,7 @@ export const ticketsData: TicketInfo[] = [
     currencySymbols: 'ADA',
     startData: 1845245027,
     endData: 1363965191,
+    tickets: 0,
     geoPosition: 'Berlin, Germany',
     imageUrl:
       'https://sun9-45.userapi.com/impg/lFGaAdWwVD-RiW4bXw4bKcnXsWv606YEtDVkVw/-bJyCbt3Y0A.jpg?size=1728x2160&quality=96&sign=2873a53d37fb2a0260ad8eeda276c385&type=album',
@@ -73,6 +76,7 @@ export const ticketsData: TicketInfo[] = [
     currencySymbols: 'ADA',
     startData: 1710507435,
     endData: 1710907435,
+    tickets: 0,
     geoPosition: 'Bangkok, Tailand',
     imageUrl:
       'https://sun9-16.userapi.com/impg/IM0FOwieyY1mIZnpSCjRdTwsoDjSQKULiBA8VA/FB_BmF3zLwg.jpg?size=1920x1080&quality=96&sign=642aa11f787d1a0407227250c63d4aa0&type=album',
@@ -85,6 +89,7 @@ export const ticketsData: TicketInfo[] = [
     currencySymbols: 'ADA',
     startData: 1262177088,
     endData: 1449452932,
+    tickets: 5,
     geoPosition: 'Bom, Belgium',
     imageUrl:
       'https://sun9-10.userapi.com/impg/S7lroEi5Ox84ce1k898ZQ80OcaLt7FIocaw5sg/A5Gf6lG6UaU.jpg?size=1728x2160&quality=96&sign=36306177bc52952d06692237696078d7&type=album',
@@ -97,6 +102,7 @@ export const ticketsData: TicketInfo[] = [
     currencySymbols: 'ADA',
     startData: 1301231421,
     endData: 1514295824,
+    tickets: 0,
     geoPosition: 'Paris, France',
     imageUrl:
       'https://sun9-69.userapi.com/impg/jDt0aw3j-fLKxhu7mgnxh952Cg9ZhYnZkwLjXg/2kD7PrezqUw.jpg?size=1728x2160&quality=96&sign=a473e5ca3b9375621f1db528ca69fdbd&type=album',

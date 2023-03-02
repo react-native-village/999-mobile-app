@@ -43,7 +43,7 @@ export const StakingActive = forwardRef(
           Rewards
         </Text>
         <Text t2 center color={Color.primary}>
-          {cleanNumber(rewardSum)} Coins
+          {cleanNumber(rewardSum)} ZLATO
         </Text>
         <Spacer height={28} />
         <InfoBlockAmount
