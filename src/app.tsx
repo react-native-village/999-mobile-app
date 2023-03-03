@@ -16,6 +16,7 @@ import {ConnectWalletScreen} from './screens/ConnectWallet';
 import {CreateEventScreen} from './screens/CreateEvent';
 import {ProfileScreen} from './screens/Profile';
 import {ProposalScreen} from './screens/Proposal';
+import {QRCodeScreen} from './screens/QRCodeScreen';
 import {QRScannerScreen} from './screens/QRScanner';
 import {SearchScreen} from './screens/Search';
 import {SettingsScreen} from './screens/SettingsScreen';
@@ -65,6 +66,7 @@ export function App() {
           <Stack.Screen name="proposal" component={ProposalScreen} />
           <Stack.Screen name="scan" component={QRScannerScreen} />
           <Stack.Screen name="createEvent" component={CreateEventScreen} />
+          <Stack.Screen name="qr" component={QRCodeScreen} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
