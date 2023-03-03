@@ -17,7 +17,11 @@ export type RootStackParamList = {
   search: undefined;
   scan: undefined;
   qr: TicketInfo;
-  result: undefined;
+  result: {
+    isSuccessfully: boolean;
+    text: string;
+    navigateToScreenName?: keyof RootStackParamList;
+  };
   proposal: {
     id: number;
   };

@@ -407,7 +407,7 @@ PODS:
     - React-Core
   - RNOS (1.2.7):
     - React
-  - RNPermissions (3.7.3):
+  - RNPermissions (3.7.2):
     - React-Core
   - RNReanimated (2.14.4):
     - DoubleConversion
@@ -724,7 +724,7 @@ SPEC CHECKSUMS:
   RNDateTimePicker: 0530a73a6f3a1a85814cbde0802736993b9e675e
   RNGestureHandler: 071d7a9ad81e8b83fe7663b303d132406a7d8f39
   RNOS: bba50dcae32026943877b163e93d4e1e0eca48eb
-  RNPermissions: 45686cb3eaad2aea03e3038321d5c39a5f7305c9
+  RNPermissions: 5fedf7594417b1927d641b73d0062e3b17aaa662
   RNReanimated: 6668b0587bebd4b15dd849b99e5a9c70fc12ed95
   RNScreens: ea4cd3a853063cda19a4e3c28d2e52180c80f4eb
   RNSVG: d787d64ca06b9158e763ad2638a8c4edce00782a

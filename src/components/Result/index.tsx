@@ -1,36 +1,54 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {StyleSheet, View} from 'react-native';
+import {
+  OrientationType,
+  useOrientationChange,
+} from 'react-native-orientation-locker';
 
 import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
 
 import Error from './Error.svg';
-import Succesfully from './Succesfully.svg';
+import Successfully from './Successfully.svg';
 
 import {Background, Button, Text} from '../ui';
 
 interface ResultT {
   onContinue: () => void;
-  isSuccesfully: boolean;
+  isSuccessfully: boolean;
+  text: string;
 }
-export function Result({onContinue, isSuccesfully}: ResultT) {
+export function Result({onContinue, isSuccessfully, text}: ResultT) {
   const {styles} = useThematicStyles(rawStyles);
+  const [isLandscape, setIsLandscape] = useState<boolean>();
 
-  const text = isSuccesfully
-    ? 'Great! Your ticket check has been successful.'
-    : 'Sorry! Your ticket has been used. Please try again with a QR code.';
+  useOrientationChange(orientation => {
+    setIsLandscape(
+      orientation === OrientationType['LANDSCAPE-LEFT'] ||
+        orientation === OrientationType['LANDSCAPE-RIGHT'],
+    );
+  });
+
   return (
-    <Background style={styles.container}>
-      <View>
-        {isSuccesfully ? (
-          <Succesfully style={styles.imageStyle} />
+    <Background style={[styles.container, isLandscape && styles.lsContainer]}>
+      <View style={styles.imgContainer}>
+        {isSuccessfully ? (
+          <Successfully width="70%" height="70%" />
         ) : (
-          <Error style={styles.imageStyle} />
+          <Error width="70%" height="70%" />
         )}
       </View>
-      <Text color={Color.textBase1} center t6 children={text} />
-      <Button style={styles.buttonStyle} onPress={onContinue} children="OK" />
+      <View style={styles.contentContainer}>
+        <Text color={Color.textBase1} center t6>
+          {text}
+        </Text>
+        <Button
+          style={styles.buttonStyle}
+          onPress={onContinue}
+          children="Confirm"
+        />
+      </View>
     </Background>
   );
 }
@@ -38,15 +56,22 @@ export function Result({onContinue, isSuccesfully}: ResultT) {
 const rawStyles = StyleSheet.create({
   container: {
     justifyContent: 'flex-end',
-    paddingBottom: 100,
+  },
+  lsContainer: {
+    flexDirection: 'row',
   },
   buttonStyle: {
-    marginTop: 187,
     width: '85%',
     alignSelf: 'center',
   },
-  imageStyle: {
-    alignSelf: 'center',
-    marginBottom: 79,
+  imgContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
 });

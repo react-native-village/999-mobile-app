@@ -15,7 +15,7 @@ import {useTheme} from './hooks';
 import {ConnectWalletScreen} from './screens/ConnectWallet';
 import {ProfileScreen} from './screens/Profile';
 import {ProposalScreen} from './screens/Proposal';
-import {QRCodeScreen} from './screens/QRCodeScreen';
+// import {QRCodeScreen} from './screens/QRCodeScreen';
 import {QRScannerScreen} from './screens/QRScanner';
 import {ResultScreen} from './screens/ResultScreen';
 import {SearchScreen} from './screens/Search';
@@ -36,7 +36,7 @@ export function App() {
   const isWalletConnected = useWalletConnect().connected;
   const {colors} = useTheme();
   const isDark = useColorScheme() === 'dark';
-  const initialScreen = isWalletConnected ? 'home' : 'welcome';
+  const initialScreen = isWalletConnected ? 'result' : 'welcome';
   return (
     <NavigationContainer
       theme={{
