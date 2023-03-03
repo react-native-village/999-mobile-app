@@ -26,6 +26,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Spacer, Text} from 'src/components/ui';
 import {useAndroidStatusBarAnimation, useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
+import {sheetPointsT} from 'src/types';
 import {ANIMATION_DURATION, ANIMATION_TYPE} from 'src/variables';
 
 export type BottomSheetProps = {
@@ -38,8 +39,6 @@ export type BottomSheetProps = {
 
 const AnimatedStatusBar = RNAnimated.createAnimatedComponent(StatusBar);
 
-type pointsT = [number, number];
-
 export function BottomSheet({
   children,
   onClose,
@@ -51,11 +50,11 @@ export function BottomSheet({
   const {bottom: bottomInsets, top: topInsets} = useSafeAreaInsets();
 
   const bottomSheetHeight = height - (topInsets + 12);
-  const snapPointFromTop: pointsT = [0, bottomSheetHeight];
+  const snapPointFromTop: sheetPointsT = [0, bottomSheetHeight];
 
   const fullyOpenSnapPoint = snapPointFromTop[0];
   const closedSnapPoint = snapPointFromTop[snapPointFromTop.length - 1];
-  const mockedSnapPointFromTop: pointsT = [
+  const mockedSnapPointFromTop: sheetPointsT = [
     fullyOpenSnapPoint,
     closeDistance ? closeDistance * 2 : closedSnapPoint,
   ];

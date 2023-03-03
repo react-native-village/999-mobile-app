@@ -16,6 +16,7 @@ export type RootStackParamList = {
   profile: undefined;
   search: undefined;
   scan: undefined;
+  qr: TicketInfo;
   result: undefined;
   proposal: {
     id: number;
@@ -34,6 +35,7 @@ export interface TicketInfo {
   geoPosition: string;
   imageUrl: string;
   price?: number;
+  tickets: number;
   currencySymbols?: string;
 }
 
@@ -62,6 +64,8 @@ export type ProposalsCroppedList = {
   status: ProposalsTagKeys;
   title: string;
 }[];
+
+export type sheetPointsT = [number, number];
 
 export type ProposalsTagKeys =
   | 'all'

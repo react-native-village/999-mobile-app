@@ -7,4 +7,4 @@
 5. [Discord 999](https://discord.gg/HqX3Dj3mhP) group
 6. [React native vector icons directory](https://oblador.github.io/react-native-vector-icons/)
 7. [Faraway kingdom](https://faraway-kingdom.vercel.app/) next js
-8. [999 docs](https://faraway-kingdom-docs.vercel.app/) site
+8. [999 docs](https://faraway-kingdom-liard.vercel.app) site

@@ -3,6 +3,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useWalletConnect} from '@walletconnect/react-native-dapp';
+import {useColorScheme} from 'react-native';
 
 import {navigator} from 'src/navigator';
 import {Home} from 'src/screens/home';
@@ -10,9 +11,11 @@ import {TicketDetailScreen} from 'src/screens/TicketDetail';
 import {WelcomeScreen} from 'src/screens/Welcome';
 import {RootStackParamList} from 'src/types';
 
+import {useTheme} from './hooks';
 import {ConnectWalletScreen} from './screens/ConnectWallet';
 import {ProfileScreen} from './screens/Profile';
 import {ProposalScreen} from './screens/Proposal';
+import {QRCodeScreen} from './screens/QRCodeScreen';
 import {QRScannerScreen} from './screens/QRScanner';
 import {ResultScreen} from './screens/ResultScreen';
 import {SearchScreen} from './screens/Search';
@@ -31,9 +34,23 @@ const gestureEnabled = {
 
 export function App() {
   const isWalletConnected = useWalletConnect().connected;
+  const {colors} = useTheme();
+  const isDark = useColorScheme() === 'dark';
   const initialScreen = isWalletConnected ? 'home' : 'welcome';
   return (
-    <NavigationContainer ref={navigator}>
+    <NavigationContainer
+      theme={{
+        dark: isDark,
+        colors: {
+          background: colors.bg1,
+          border: colors.grayStroke,
+          card: colors.card,
+          primary: colors.primary,
+          text: colors.textBase1,
+          notification: colors.primary,
+        },
+      }}
+      ref={navigator}>
       <Stack.Navigator
         initialRouteName={initialScreen}
         screenOptions={basicScreenOptions}>

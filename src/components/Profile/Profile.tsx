@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef, useState} from 'react';
 
 import {
   SectionList,
@@ -7,14 +7,18 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import {StyleSheet} from 'react-native';
-import {Gesture, GestureDetector} from 'react-native-gesture-handler';
+import {
+  Gesture,
+  GestureDetector,
+  PanGestureHandlerEventPayload,
+} from 'react-native-gesture-handler';
 import Animated, {
   interpolate,
+  runOnJS,
   useAnimatedStyle,
   useDerivedValue,
   useSharedValue,
-  withDecay,
-  withSpring,
+  withTiming,
 } from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -22,12 +26,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {useThematicStyles} from 'src/hooks';
 import {SHADOW_COLOR} from 'src/themes';
 import {Color} from 'src/themeTypes';
-import {TicketInfo} from 'src/types';
+import {TicketInfo, sheetPointsT} from 'src/types';
+import {ANIMATION_DURATION} from 'src/variables';
 
 import {Avatar, Background, CustomHeader, Spacer, Text} from '../ui';
 import {TicketCardRow} from '../ui/TicketCardRow';
 
-const bounceLimit = 100;
 const imageSize = 220;
 
 interface ProfileProps {
@@ -51,43 +55,138 @@ export function Profile({
   const {styles, colors} = useThematicStyles(rawStyles);
   const {height, width} = useWindowDimensions();
 
-  const translationY = useSharedValue(0);
-  const startY = useSharedValue(0);
   const {bottom} = useSafeAreaInsets();
+  const fullyOpenSnapPoint = 0;
+  const closedSnapPoint = imageSize;
+  const snapPointFromTop: sheetPointsT = [fullyOpenSnapPoint, closedSnapPoint];
+
+  const mockedSnapPointFromTop: sheetPointsT = [
+    fullyOpenSnapPoint,
+    closedSnapPoint,
+  ];
+
+  const panGestureRef = useRef(Gesture.Pan());
+  const blockScrollUntilAtTheTopRef = useRef(Gesture.Tap());
+  const [snapPoint, setSnapPoint] = useState(closedSnapPoint);
+  const translationY = useSharedValue(0);
+  const scrollOffset = useSharedValue(closedSnapPoint);
+  const sheetTranslateY = useSharedValue(closedSnapPoint);
+  //
+
+  // const gesture = Gesture.Pan()
+  //   .onStart(() => {
+  //     startY.value = Math.max(translationY.value, -bounceLimit);
+  //   })
+  //   .onUpdate(e => {
+  //     translationY.value = Math.max(
+  //       startY.value - e.translationY,
+  //       -bounceLimit,
+  //     );
+  //   })
+  //   .onEnd(e => {
+  //     if (translationY.value <= 0) {
+  //       translationY.value = withSpring(0, {damping: 10, stiffness: 100});
+  //     } else {
+  //       translationY.value = withDecay(
+  //         {
+  //           velocity: -e.velocityY,
+  //           deceleration: 0.998,
+  //           clamp: [-bounceLimit, imageSize],
+  //         },
+  //         () => {
+  //           if (translationY.value <= -100) {
+  //             translationY.value = Math.max(translationY.value, -bounceLimit);
+  //             translationY.value = withSpring(0, {damping: 100, stiffness: 80});
+  //           }
+  //         },
+  //       );
+  //     }
+  //   });
+
+  const onHandlerEndOnJS = (point: number) => {
+    setSnapPoint(point);
+  };
+
+  const onHandlerEnd = ({velocityY}: PanGestureHandlerEventPayload) => {
+    'worklet';
+    const dragToss = 0.05;
+    const endOffsetY =
+      sheetTranslateY.value + translationY.value + velocityY * dragToss;
+
+    let destSnapPoint = fullyOpenSnapPoint;
+
+    if (snapPoint === fullyOpenSnapPoint && endOffsetY < fullyOpenSnapPoint) {
+      return;
+    }
+
+    mockedSnapPointFromTop.forEach((point, id) => {
+      const distFromSnap = Math.abs(point - endOffsetY);
+      if (distFromSnap < Math.abs(destSnapPoint - endOffsetY)) {
+        destSnapPoint = snapPointFromTop[id];
+      }
+    });
+
+    sheetTranslateY.value = sheetTranslateY.value + translationY.value;
+    translationY.value = 0;
+
+    sheetTranslateY.value = withTiming(destSnapPoint, {
+      duration: ANIMATION_DURATION,
+    });
+    runOnJS(onHandlerEndOnJS)(destSnapPoint);
+  };
+
+  const clampedTranslateY = useDerivedValue(() => {
+    const translateY = sheetTranslateY.value + translationY.value;
+
+    const minTranslateY = Math.max(fullyOpenSnapPoint, translateY);
+    return Math.min(closedSnapPoint, minTranslateY);
+  });
+
+  const panGesture = Gesture.Pan()
+    .onUpdate(e => {
+      if (snapPoint === fullyOpenSnapPoint) {
+        translationY.value = e.translationY - scrollOffset.value;
+      } else {
+        translationY.value = e.translationY;
+      }
+    })
+    .onEnd(onHandlerEnd)
+    .withRef(panGestureRef);
+
+  const blockScrollUntilAtTheTop = Gesture.Tap()
+    .maxDeltaY(snapPoint - fullyOpenSnapPoint)
+    .maxDuration(100000)
+    .simultaneousWithExternalGesture(panGesture)
+    .withRef(blockScrollUntilAtTheTopRef);
+
+  const headerGesture = Gesture.Pan()
+    .onUpdate(e => {
+      translationY.value = e.translationY;
+    })
+    .onEnd(onHandlerEnd);
+
+  const scrollViewGesture = Gesture.Native().requireExternalGestureToFail(
+    blockScrollUntilAtTheTop,
+  );
+
+  // / / / / / /
 
   const imageAnimation = useAnimatedStyle(() => {
     return {
-      height:
-        translationY.value < 0
-          ? Math.max(
-              imageSize - Math.max(translationY.value, -bounceLimit),
-              imageSize,
-            )
-          : imageSize,
+      height: clampedTranslateY.value,
     };
   });
   const contentAnimation = useAnimatedStyle(() => {
     return {
-      transform: [
-        {
-          translateY: Math.min(
-            Math.min(
-              translationY.value > 0
-                ? Math.max(-translationY.value, -imageSize)
-                : 0,
-            ),
-            imageSize,
-          ),
-        },
-      ],
+      transform: [{translateY: clampedTranslateY.value - closedSnapPoint}],
     };
   });
 
   const headerState = useDerivedValue(() => {
     return interpolate(
-      translationY.value,
-      [imageSize / 2, imageSize],
-      [0, 1],
+      clampedTranslateY.value,
+      [imageSize / 3, imageSize],
+      [1, 0],
       'clamp',
     );
   });
@@ -103,36 +202,6 @@ export function Profile({
     transform: [{scale: interpolate(headerState.value, [0, 1], [1, 0.6])}],
   }));
 
-  const gesture = Gesture.Pan()
-    .onStart(() => {
-      startY.value = Math.max(translationY.value, -bounceLimit);
-    })
-    .onUpdate(e => {
-      translationY.value = Math.max(
-        startY.value - e.translationY,
-        -bounceLimit,
-      );
-    })
-    .onEnd(e => {
-      if (translationY.value <= 0) {
-        translationY.value = withSpring(0, {damping: 10, stiffness: 100});
-      } else {
-        translationY.value = withDecay(
-          {
-            velocity: -e.velocityY,
-            deceleration: 0.998,
-            clamp: [-bounceLimit, imageSize],
-          },
-          () => {
-            if (translationY.value <= -100) {
-              translationY.value = Math.max(translationY.value, -bounceLimit);
-              translationY.value = withSpring(0, {damping: 100, stiffness: 80});
-            }
-          },
-        );
-      }
-    });
-
   return (
     <>
       <CustomHeader
@@ -142,46 +211,67 @@ export function Profile({
         title="Dmitry"
       />
       <Animated.View style={[{height: height + imageSize}, contentAnimation]}>
-        <Animated.Image
-          style={[styles.imgContainer, imageAnimation]}
-          resizeMode="cover"
-          source={{
-            uri: bgImageUrl,
-          }}
-        />
-        <GestureDetector gesture={gesture}>
-          <Animated.View style={[{height, width}, styles.mediumShadow]}>
-            <Background style={{height, width}}>
-              <Animated.View style={[styles.ava, avaSizeAnimation]}>
-                <Avatar size="xLarge" uri={avaUrl} />
-              </Animated.View>
+        <View style={[styles.posterContainer, {height: closedSnapPoint}]}>
+          <Animated.Image
+            style={[styles.imgContainer, imageAnimation]}
+            resizeMode="cover"
+            source={{
+              uri: bgImageUrl,
+            }}
+          />
+        </View>
+        <Animated.View style={[{height, width}, styles.mediumShadow]}>
+          <Background style={{height, width}}>
+            <GestureDetector gesture={headerGesture}>
+              <View>
+                <Animated.View style={[styles.ava, avaSizeAnimation]}>
+                  <Avatar size="xLarge" uri={avaUrl} />
+                </Animated.View>
 
-              <Spacer height={120} />
-              <TouchableOpacity style={styles.addressLine}>
-                <Text color={Color.primary} numberOfLines={1} t12>
-                  {cryptoAddress}
-                </Text>
-                <View style={styles.copyIconContainer}>
-                  <Icon size={18} color={colors.primary} name="copy-outline" />
-                </View>
-              </TouchableOpacity>
-              <Spacer height={20} />
-              <SectionList
-                style={styles.sectionList}
-                contentContainerStyle={styles.sectionListContainer}
-                renderItem={({item}) => <TicketCardRow {...item} />}
-                keyExtractor={item => item.id}
-                sections={ticketsData}
-                renderSectionHeader={({section: {title}}) => (
-                  <Text t3 color={Color.primary}>
-                    {title}
+                <Spacer height={120} />
+                <TouchableOpacity style={styles.addressLine}>
+                  <Text color={Color.primary} numberOfLines={1} t12>
+                    {cryptoAddress}
                   </Text>
-                )}
-              />
-              <Spacer height={bottom + 50} />
-            </Background>
-          </Animated.View>
-        </GestureDetector>
+                  <View style={styles.copyIconContainer}>
+                    <Icon
+                      size={18}
+                      color={colors.primary}
+                      name="copy-outline"
+                    />
+                  </View>
+                </TouchableOpacity>
+                <Spacer height={20} />
+              </View>
+            </GestureDetector>
+            <GestureDetector
+              gesture={Gesture.Simultaneous(panGesture, scrollViewGesture)}>
+              <Animated.ScrollView
+                bounces={false}
+                showsVerticalScrollIndicator={false}
+                scrollEventThrottle={1}
+                onScrollBeginDrag={e => {
+                  scrollOffset.value = e.nativeEvent.contentOffset.y;
+                }}
+                style={styles.sectionList}>
+                <SectionList
+                  scrollEnabled={false}
+                  style={styles.sectionList}
+                  contentContainerStyle={styles.sectionListContainer}
+                  renderItem={({item}) => <TicketCardRow {...item} />}
+                  keyExtractor={item => item.id}
+                  sections={ticketsData}
+                  renderSectionHeader={({section: {title}}) => (
+                    <Text t3 color={Color.primary}>
+                      {title}
+                    </Text>
+                  )}
+                />
+                <Spacer height={bottom + 50} />
+              </Animated.ScrollView>
+            </GestureDetector>
+          </Background>
+        </Animated.View>
       </Animated.View>
     </>
   );
@@ -245,5 +335,8 @@ const rawStyles = StyleSheet.create({
   copyIconContainer: {
     width: 40,
     alignItems: 'center',
+  },
+  posterContainer: {
+    justifyContent: 'flex-end',
   },
 });

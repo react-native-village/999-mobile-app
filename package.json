@@ -9,7 +9,6 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "ts-coverage": "typescript-coverage-report",
-    "prestart": "sb-rn-get-stories",
     "postinstall": "patch-package && node_modules/.bin/rn-nodeify --install stream,http,https,os,vm,crypto --yarn --hack && react-native setup-ios-permissions && pod-install",
     "link-asset": "npx react-native-asset"
   },
