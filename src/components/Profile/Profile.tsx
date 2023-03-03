@@ -35,6 +35,7 @@ import {TicketCardRow} from '../ui/TicketCardRow';
 const imageSize = 220;
 
 interface ProfileProps {
+  onBack?: () => void;
   onPressCreateEvent: () => void;
   bgImageUrl: string;
   avaUrl: string;
@@ -46,6 +47,7 @@ interface ProfileProps {
 }
 
 export function Profile({
+  onBack,
   onPressCreateEvent,
   bgImageUrl,
   avaUrl,
@@ -201,10 +203,15 @@ export function Profile({
   const avaSizeAnimation = useAnimatedStyle(() => ({
     transform: [{scale: interpolate(headerState.value, [0, 1], [1, 0.6])}],
   }));
-
   return (
     <>
-      <CustomHeader style={headerAnimation} title="Dmitry" />
+      <CustomHeader
+        style={headerAnimation}
+        title="Dmitry"
+        iconLeft="arrow-back"
+        colorLeft={Color.primary}
+        onPressLeft={onBack}
+      />
       <Animated.View style={[{height: height + imageSize}, contentAnimation]}>
         <View style={[styles.posterContainer, {height: closedSnapPoint}]}>
           <Animated.Image

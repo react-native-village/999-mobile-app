@@ -48,7 +48,22 @@ export interface connectMethodType {
 
 // UTILS
 
-export type InputNameType = 'text' | 'cover' | 'categories' | 'date' | 'time';
+export type InputNameType =
+  | 'eventName'
+  | 'location'
+  | 'country'
+  | 'price'
+  | 'cover'
+  | 'categories'
+  | 'date';
+
+export type EventError =
+  | 'eventName'
+  | 'location'
+  | 'country'
+  | 'date'
+  | 'price'
+  | 'none';
 
 export type VoteNamesType = 'yes' | 'no' | 'abstain' | 'veto';
 

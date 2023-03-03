@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 
 import {ScrollView, StyleSheet, View} from 'react-native';
 
 import {Color} from 'src/themeTypes';
+import {EventError} from 'src/types';
 
 import {InputContainer} from '../InputContainer';
 import {Background, Button, CustomHeader, Text} from '../ui';
@@ -12,11 +13,27 @@ interface CreateEventProps {
 }
 
 export function CreateEvent({onBack}: CreateEventProps) {
+  const [error, setError] = useState<EventError>('none');
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
-  const [time, setTime] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [datePlaceholder, setDatePlaceholder] = useState('__.__.____');
+  const [timePlaceholder, setTimePlaceholder] = useState('__:__');
   const [country, setCountry] = useState('');
   const [price, setPrice] = useState('');
+  const createEventRef = useRef();
+  const locationRef = useRef();
+  const countryRef = useRef();
+  const priceRef = useRef();
+  function createEvent() {
+    if (name === '') return setError('eventName');
+    if (location === '') return setError('location');
+    if (country === '') return setError('country');
+    if (datePlaceholder === '__.__.____' || timePlaceholder === '__:__')
+      return setError('date');
+    if (Number(price) < 1) return setError('price');
+    return setError('none');
+  }
   return (
     <Background style={styles.background}>
       <CustomHeader
@@ -36,48 +53,60 @@ export function CreateEvent({onBack}: CreateEventProps) {
         </View>
         <InputContainer
           title={'Event name *'}
-          onChangeText={setName}
+          error={error}
+          currentRef={createEventRef}
+          nextRef={locationRef}
+          onChangeValue={setName}
           initialText={'Event name'}
-          input={'text'}
-          valueText={name}
+          input={'eventName'}
+          value={name}
         />
         <InputContainer
           title={'Location *'}
-          onChangeText={setLocation}
+          error={error}
+          currentRef={locationRef}
+          nextRef={countryRef}
+          onChangeValue={setLocation}
           initialText={'Location'}
-          input={'text'}
-          valueText={location}
+          input={'location'}
+          value={location}
         />
         <InputContainer
           title={'Country *'}
-          onChangeText={setCountry}
+          error={error}
+          currentRef={countryRef}
+          nextRef={priceRef}
+          onChangeValue={setCountry}
           initialText={'Country'}
-          input={'text'}
-          valueText={country}
+          input={'country'}
+          value={country}
         />
         <InputContainer
           title={'Date *'}
-          onChangeText={setCountry}
+          error={error}
+          onChangeDate={setDate}
           input={'date'}
-          valueText={country}
-          onChangeText2={setTime}
-          input2={'time'}
-          valueText2={time}
+          dateValue={date}
+          datePlaceholder={datePlaceholder}
+          setDatePlaceholder={setDatePlaceholder}
+          time
+          timePlaceholder={timePlaceholder}
+          setTimePlaceholder={setTimePlaceholder}
         />
         <InputContainer
           title={'Price *'}
-          onChangeText={setPrice}
+          error={error}
+          currentRef={priceRef}
+          onChangeValue={setPrice}
           initialText={'Price'}
-          input={'text'}
-          valueText={price}
+          input={'price'}
+          value={price}
           price
         />
       </ScrollView>
-      <View style={styles.buttonContainer}>
-        <Button style={styles.button} onPress={() => {}}>
-          Create
-        </Button>
-      </View>
+      <Button style={styles.button} onPress={createEvent}>
+        Create
+      </Button>
     </Background>
   );
 }
@@ -85,20 +114,13 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
   },
-  buttonContainer: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
   button: {
     width: '80%',
-    marginBottom: 25,
+    marginVertical: 25,
+    alignSelf: 'center',
   },
   container: {
     alignItems: 'center',
-    paddingBottom: 110,
     paddingHorizontal: 24,
   },
   header: {
