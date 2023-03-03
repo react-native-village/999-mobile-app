@@ -21,7 +21,7 @@ export function Button({children, style, onPress, disabled}: ButtonT) {
       activeOpacity={0.7}
       disabled={disabled}
       style={[styles.container, style]}>
-      <Text t6 color={Color.textBase3}>
+      <Text t6 color={Color.white}>
         {children}
       </Text>
     </TouchableOpacity>
