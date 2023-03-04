@@ -47,7 +47,9 @@ export function TicketCardColumn({
           <Image style={styles.image} source={{uri: imageUrl}} />
         </View>
         <View style={styles.infoContainer}>
-          <Text t6>{name}</Text>
+          <Text t6 numberOfLines={1}>
+            {name}
+          </Text>
           <Spacer height={8} />
           <View style={styles.costAndTagContainer}>
             <TicketCardTags tags={tags} />
