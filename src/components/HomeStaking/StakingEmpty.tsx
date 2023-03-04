@@ -32,7 +32,7 @@ export function StakingEmpty({availableSum}: StakingEmptyProps) {
           Available
         </Text>
         <Text t2 center color={Color.primary}>
-          {cleanNumber(availableSum)} Coins
+          {cleanNumber(availableSum)} ZLATO
         </Text>
       </View>
       <Spacer />

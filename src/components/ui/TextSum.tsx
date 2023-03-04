@@ -28,7 +28,7 @@ export function TextSum({
   style,
 }: TextSumProps) {
   const hasRightText = typeof rightText !== 'undefined';
-  const text = hasRightText ? rightText : 'Coins' + suffix;
+  const text = hasRightText ? rightText : 'ZLATO' + suffix;
 
   const viewStyles = StyleSheet.flatten([
     center && styles.center,
