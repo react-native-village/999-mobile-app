@@ -36,7 +36,7 @@ export function App() {
   const isWalletConnected = useWalletConnect().connected;
   const {colors} = useTheme();
   const isDark = useColorScheme() === 'dark';
-  const initialScreen = isWalletConnected ? 'result' : 'welcome';
+  const initialScreen = isWalletConnected ? 'home' : 'welcome';
   return (
     <NavigationContainer
       theme={{
