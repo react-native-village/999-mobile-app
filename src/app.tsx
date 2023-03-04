@@ -37,7 +37,7 @@ export function App() {
   const isWalletConnected = useWalletConnect().connected;
   const {colors} = useTheme();
   const isDark = useColorScheme() === 'dark';
-  const initialScreen = isWalletConnected ? 'result' : 'welcome';
+  const initialScreen = isWalletConnected ? 'home' : 'welcome';
   return (
     <NavigationContainer
       theme={{
@@ -53,7 +53,7 @@ export function App() {
       }}
       ref={navigator}>
       <Stack.Navigator
-        initialRouteName={'home'}
+        initialRouteName={initialScreen}
         screenOptions={basicScreenOptions}>
         <Stack.Screen name="welcome" component={WelcomeScreen} />
         <Stack.Screen name="home" component={Home} />

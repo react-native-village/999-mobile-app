@@ -401,7 +401,7 @@ PODS:
     - React-Core
   - RNCClipboard (1.11.1):
     - React-Core
-  - RNDateTimePicker (6.7.1):
+  - RNDateTimePicker (6.7.5):
     - React-Core
   - RNGestureHandler (2.9.0):
     - React-Core
@@ -721,7 +721,7 @@ SPEC CHECKSUMS:
   ReactNativeCameraKit: 9d46a5d7dd544ca64aa9c03c150d2348faf437eb
   RNCAsyncStorage: 8616bd5a58af409453ea4e1b246521bb76578d60
   RNCClipboard: 2834e1c4af68697089cdd455ee4a4cdd198fa7dd
-  RNDateTimePicker: 0530a73a6f3a1a85814cbde0802736993b9e675e
+  RNDateTimePicker: 65e1d202799460b286ff5e741d8baf54695e8abd
   RNGestureHandler: 071d7a9ad81e8b83fe7663b303d132406a7d8f39
   RNOS: bba50dcae32026943877b163e93d4e1e0eca48eb
   RNPermissions: 5fedf7594417b1927d641b73d0062e3b17aaa662
