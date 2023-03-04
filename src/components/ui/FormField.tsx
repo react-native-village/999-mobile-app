@@ -3,31 +3,35 @@ import React from 'react';
 import {useFormContext} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 
-import {BlockMessage, Text} from 'src/components/ui';
+import {
+  BlockMessage,
+  FormDateTime,
+  FormTextInput,
+  Text,
+} from 'src/components/ui';
 import {useThematicStyles} from 'src/hooks';
 
-import {FormDateTime} from './FormDateTime';
-import {FormTextInput} from './FormTextInput';
-
-interface InputFieldProps {
+interface FormFieldProps {
   // style?: StyleProp<ViewStyle>;
   title: string;
   name: string;
   fieldType: 'date' | 'time' | 'price' | 'input';
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   placeholder?: string;
+  nextField?: string;
 }
 
 /**
  * USE WITH HOOK FORM PROVIDER
  */
-export function InputField({
+export function FormField({
   title,
   fieldType,
   autoCapitalize,
+  nextField,
   name,
   placeholder,
-}: InputFieldProps) {
+}: FormFieldProps) {
   const {styles} = useThematicStyles(rawStyles);
   const {
     formState: {errors},
@@ -52,6 +56,7 @@ export function InputField({
       {(fieldType === 'price' || fieldType === 'input') && (
         <FormTextInput
           placeholder={placeholder}
+          nextField={nextField}
           autoCapitalize={autoCapitalize}
           isPrice={fieldType === 'price'}
           name={name}

@@ -39,7 +39,7 @@ export function CreateEventScreen() {
   const form = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
-      date: new Date(),
+      date: new Date(Date.now() - 10000),
       time: new Date(),
     },
   });

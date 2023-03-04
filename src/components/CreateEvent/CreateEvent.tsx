@@ -5,8 +5,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 import {Color} from 'src/themeTypes';
 
-import {Background, Button, CustomHeader, Text} from '../ui';
-import {InputField} from '../ui/InputField';
+import {Background, Button, CustomHeader, FormField, Text} from '../ui';
 import {KeyboardSafeArea} from '../ui/keyboard-safe-area';
 
 interface CreateEventProps {
@@ -39,47 +38,49 @@ export function CreateEvent({onBack, handleSubmit}: CreateEventProps) {
               generate tickets.
             </Text>
           </View>
-          <InputField
+          <FormField
             fieldType="input"
+            nextField="location"
             title="Event name *"
             placeholder="Event name"
             name="eventName"
           />
-          <InputField
+          <FormField
             fieldType="input"
             title="Location"
+            nextField="country"
             placeholder="Location"
             name="location"
           />
-          <InputField
+          <FormField
             fieldType="input"
             title="Country"
+            nextField="price"
             placeholder="Country"
             name="country"
           />
-          <InputField
+          <FormField
             fieldType="date"
             title="Date"
             placeholder="__.__.____"
             name="date"
           />
-          <InputField
+          <FormField
             fieldType="time"
             title="Time"
-            placeholder="__:__"
+            placeholder="same as now"
             name="time"
           />
-          <InputField
+          <FormField
             fieldType="price"
             title="Price"
             placeholder="0 ETH"
             name="price"
           />
-          {
-            <Button style={styles.button} onPress={handleSubmit}>
-              Create
-            </Button>
-          }
+
+          <Button style={styles.button} onPress={handleSubmit}>
+            Create
+          </Button>
         </ScrollView>
       </KeyboardSafeArea>
     </Background>

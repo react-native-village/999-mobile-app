@@ -20,6 +20,7 @@ interface FormTextInputProps {
   isPrice: boolean;
   placeholder?: string;
   name: string;
+  nextField?: string;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
 }
 
@@ -27,12 +28,12 @@ export function FormTextInput({
   isPrice,
   style,
   name,
+  nextField,
   autoCapitalize,
   placeholder,
 }: FormTextInputProps) {
   const {styles, colors} = useThematicStyles(rawStyles);
-  const {control} = useFormContext();
-
+  const {control, setFocus} = useFormContext();
   return (
     <View style={styles.row}>
       <Controller
@@ -52,12 +53,12 @@ export function FormTextInput({
               placeholder={placeholder}
               blurOnSubmit={true}
               onChangeText={onChange}
-              // onSubmitEditing={() => nextRef && nextRef.current.focus()}
+              onSubmitEditing={() => nextField && setFocus(nextField)}
               value={value}
               selectionColor={colors.primary}
               keyboardType={isPrice ? 'phone-pad' : 'default'}
               placeholderTextColor={colors.primary2}
-              // returnKeyType={nextRef ? 'next' : 'default'}
+              returnKeyType={nextField ? 'next' : 'default'}
             />
           );
         }}
