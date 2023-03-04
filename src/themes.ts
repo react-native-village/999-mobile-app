@@ -6,6 +6,7 @@ export const SHADOW_COLOR = '#000';
 export const LIGHT_THEME: ThemeColors = {
   primary: '#FF6883',
   primary1: 'rgba(255, 104, 131, 0.15)',
+  primary2: 'rgba(255, 104, 131, 0.6)',
   // MESSAGE MEANING
   textRed1: '#E16363',
   textGreen1: '#01B26E',
@@ -17,7 +18,7 @@ export const LIGHT_THEME: ThemeColors = {
   white: '#FFF',
 
   bg1: '#F5F5F5',
-  bg2: '#EEF9F5',
+  bg2: 'rgba(0, 0, 0, 0.02)',
   bg3: '#F4F8F8',
   bg4: 'rgba(0, 0, 0, 0.6)',
 
@@ -44,6 +45,7 @@ export const LIGHT_THEME: ThemeColors = {
 export const DARK_THEME: ThemeColors = {
   primary: '#FF6883',
   primary1: 'rgba(255, 104, 131, 0.15)',
+  primary2: 'rgba(255, 104, 131, 0.6)',
   // MESSAGE MEANING
   textRed1: '#E16363',
   textGreen1: '#01B26E',
@@ -55,7 +57,7 @@ export const DARK_THEME: ThemeColors = {
   white: '#FFF',
 
   bg1: '#0B0B0B',
-  bg2: '#25332E',
+  bg2: 'rgba(255, 255, 255, 0.02)',
   bg3: '#212624',
   bg4: 'rgba(0, 0, 0, 0.6)',
 
