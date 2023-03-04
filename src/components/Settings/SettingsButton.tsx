@@ -37,7 +37,7 @@ export function SettingsButton({onPress, title, icon}: SettingsButtonProps) {
 
 const rawStyles = StyleSheet.create({
   iconStyle: {
-    fontSize: 20,
+    fontSize: 25,
     color: Color.primary,
   },
   buttonStyle: {

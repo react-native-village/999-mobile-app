@@ -9,4 +9,5 @@ declare module '@env' {
   export const PRIVATE_SECRET_KEY_1: string | undefined;
   export const PRIVATE_SECRET_KEY_2: string | undefined;
   export const STORYBOOK_ENABLED: string;
+  export const IS_DEVELOPMENT: boolean;
 }

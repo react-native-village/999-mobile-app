@@ -40,8 +40,8 @@ function HeaderRight({isFocused}: HeaderButtonProps & {isFocused: boolean}) {
   if (IS_ANDROID && isFocused) return <></>;
   return (
     <TouchableOpacity>
-      <Text color={Color.primary} t14>
-        Сортировать
+      <Text color={Color.primary} t11>
+        Sorting
       </Text>
     </TouchableOpacity>
   );

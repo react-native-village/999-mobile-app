@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {IS_DEVELOPMENT} from '@env';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useWalletConnect} from '@walletconnect/react-native-dapp';
@@ -52,7 +53,7 @@ export function App() {
       }}
       ref={navigator}>
       <Stack.Navigator
-        initialRouteName={initialScreen}
+        initialRouteName={IS_DEVELOPMENT ? 'home' : initialScreen}
         screenOptions={basicScreenOptions}>
         <Stack.Screen name="welcome" component={WelcomeScreen} />
         <Stack.Screen name="home" component={Home} />
