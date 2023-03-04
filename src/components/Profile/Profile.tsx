@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 
 import {
   SectionList,
-  TouchableOpacity,
+  // TouchableOpacity,
   View,
   useWindowDimensions,
 } from 'react-native';
@@ -21,7 +21,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/Ionicons';
+// import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useThematicStyles} from 'src/hooks';
 import {SHADOW_COLOR} from 'src/themes';
@@ -29,13 +29,14 @@ import {Color} from 'src/themeTypes';
 import {TicketInfo, sheetPointsT} from 'src/types';
 import {ANIMATION_DURATION} from 'src/variables';
 
-import {Avatar, Background, CustomHeader, Spacer, Text} from '../ui';
+import {Avatar, Background, Button, CustomHeader, Spacer, Text} from '../ui';
 import {TicketCardRow} from '../ui/TicketCardRow';
 
 const imageSize = 220;
 
 interface ProfileProps {
-  onPressSettings: () => void;
+  onBack?: () => void;
+  onPressCreateEvent: () => void;
   bgImageUrl: string;
   avaUrl: string;
   cryptoAddress: string;
@@ -46,20 +47,22 @@ interface ProfileProps {
 }
 
 export function Profile({
-  onPressSettings,
+  onBack,
+  onPressCreateEvent,
   bgImageUrl,
   avaUrl,
-  cryptoAddress,
+  // cryptoAddress,
   ticketsData,
 }: ProfileProps) {
-  const {styles, colors} = useThematicStyles(rawStyles);
+  const {styles /*, colors*/} = useThematicStyles(rawStyles);
   const {height, width} = useWindowDimensions();
 
   const {bottom} = useSafeAreaInsets();
+
+  // ANIMATIONS VARIABLES
   const fullyOpenSnapPoint = 0;
   const closedSnapPoint = imageSize;
   const snapPointFromTop: sheetPointsT = [fullyOpenSnapPoint, closedSnapPoint];
-
   const mockedSnapPointFromTop: sheetPointsT = [
     fullyOpenSnapPoint,
     closedSnapPoint,
@@ -71,37 +74,8 @@ export function Profile({
   const translationY = useSharedValue(0);
   const scrollOffset = useSharedValue(closedSnapPoint);
   const sheetTranslateY = useSharedValue(closedSnapPoint);
-  //
 
-  // const gesture = Gesture.Pan()
-  //   .onStart(() => {
-  //     startY.value = Math.max(translationY.value, -bounceLimit);
-  //   })
-  //   .onUpdate(e => {
-  //     translationY.value = Math.max(
-  //       startY.value - e.translationY,
-  //       -bounceLimit,
-  //     );
-  //   })
-  //   .onEnd(e => {
-  //     if (translationY.value <= 0) {
-  //       translationY.value = withSpring(0, {damping: 10, stiffness: 100});
-  //     } else {
-  //       translationY.value = withDecay(
-  //         {
-  //           velocity: -e.velocityY,
-  //           deceleration: 0.998,
-  //           clamp: [-bounceLimit, imageSize],
-  //         },
-  //         () => {
-  //           if (translationY.value <= -100) {
-  //             translationY.value = Math.max(translationY.value, -bounceLimit);
-  //             translationY.value = withSpring(0, {damping: 100, stiffness: 80});
-  //           }
-  //         },
-  //       );
-  //     }
-  //   });
+  // ANIMATIONS
 
   const onHandlerEndOnJS = (point: number) => {
     setSnapPoint(point);
@@ -169,7 +143,7 @@ export function Profile({
     blockScrollUntilAtTheTop,
   );
 
-  // / / / / / /
+  // STYLES
 
   const imageAnimation = useAnimatedStyle(() => {
     return {
@@ -181,7 +155,6 @@ export function Profile({
       transform: [{translateY: clampedTranslateY.value - closedSnapPoint}],
     };
   });
-
   const headerState = useDerivedValue(() => {
     return interpolate(
       clampedTranslateY.value,
@@ -190,7 +163,6 @@ export function Profile({
       'clamp',
     );
   });
-
   const headerAnimation = useAnimatedStyle(() => {
     return {
       ...styles.headerStyles,
@@ -202,13 +174,15 @@ export function Profile({
     transform: [{scale: interpolate(headerState.value, [0, 1], [1, 0.6])}],
   }));
 
+  // JSX
   return (
     <>
       <CustomHeader
-        onPressRight={onPressSettings}
-        iconRight="settings-sharp"
         style={headerAnimation}
         title="Dmitry"
+        iconLeft="arrow-back"
+        colorLeft={Color.primary}
+        onPressLeft={onBack}
       />
       <Animated.View style={[{height: height + imageSize}, contentAnimation]}>
         <View style={[styles.posterContainer, {height: closedSnapPoint}]}>
@@ -229,7 +203,7 @@ export function Profile({
                 </Animated.View>
 
                 <Spacer height={120} />
-                <TouchableOpacity style={styles.addressLine}>
+                {/* <TouchableOpacity style={styles.addressLine}>
                   <Text color={Color.primary} numberOfLines={1} t12>
                     {cryptoAddress}
                   </Text>
@@ -241,9 +215,14 @@ export function Profile({
                     />
                   </View>
                 </TouchableOpacity>
-                <Spacer height={20} />
+                <Spacer height={20} /> */}
               </View>
             </GestureDetector>
+            <Button
+              onPress={onPressCreateEvent}
+              style={styles.createEventButton}>
+              Create Event
+            </Button>
             <GestureDetector
               gesture={Gesture.Simultaneous(panGesture, scrollViewGesture)}>
               <Animated.ScrollView
@@ -286,6 +265,11 @@ const rawStyles = StyleSheet.create({
   },
   flexOne: {
     flex: 1,
+  },
+  createEventButton: {
+    width: '80%',
+    alignSelf: 'center',
+    marginBottom: 20,
   },
   sectionListContainer: {
     padding: 20,

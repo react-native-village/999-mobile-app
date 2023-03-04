@@ -279,8 +279,8 @@ const styles = StyleSheet.create({
   },
   ibm3Style: {
     fontFamily: ibm,
-    fontSize: 18,
-    lineHeight: 24,
+    fontSize: 16,
+    lineHeight: 18,
   },
   l1Style: {
     fontFamily: editUndo,
