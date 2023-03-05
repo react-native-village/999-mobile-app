@@ -31,9 +31,9 @@ export function HomeMarketHeader({
       <Spacer height={top} />
       <View style={styles.rowContainer}>
         <View style={styles.logoContainer}>
-          <Logo width={38} height={38} />
-          <Spacer width={12} />
-          <Text t3 color={Color.textBase1}>
+          <Logo width={36} height={36} />
+          <Spacer width={8} />
+          <Text t5 color={Color.textBase1}>
             DAO 999 NFT
           </Text>
         </View>
@@ -41,15 +41,15 @@ export function HomeMarketHeader({
           <TouchableOpacity onPress={onPressScan} activeOpacity={0.7}>
             <Ionicons color={colors.primary} name="scan-sharp" size={28} />
           </TouchableOpacity>
-          <Spacer width={12} />
+          <Spacer width={9} />
           <TouchableOpacity onPress={onPressSearch} activeOpacity={0.7}>
             <Ionicons color={colors.primary} name="search-outline" size={28} />
           </TouchableOpacity>
-          <Spacer width={12} />
+          <Spacer width={9} />
           <TouchableOpacity onPress={onPressSettings} activeOpacity={0.7}>
             <Ionicons color={colors.primary} name="settings-sharp" size={28} />
           </TouchableOpacity>
-          <Spacer width={12} />
+          <Spacer width={9} />
           <TouchableOpacity onPress={onPressProfile} activeOpacity={0.7}>
             <Ionicons color={colors.primary} name="person-circle" size={28} />
           </TouchableOpacity>
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   rightButtons: {
     flexDirection: 'row',
