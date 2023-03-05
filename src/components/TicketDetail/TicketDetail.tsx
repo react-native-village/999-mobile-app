@@ -158,6 +158,16 @@ export function TicketDetail({
               <Text t9>0x0cd46a783f8cxv45x6z5cxhxv13782</Text>
             </View>
           </View>
+          {item.description && (
+            <>
+              <Text t7 style={styles.dateText}>
+                Desciption
+              </Text>
+              <Spacer height={20} />
+              <Text t9>{item.description}</Text>
+              <Spacer height={36} />
+            </>
+          )}
           {item.tickets > 0 && (
             <View>
               <Text t11 style={styles.ticketText} color={Color.primary}>
