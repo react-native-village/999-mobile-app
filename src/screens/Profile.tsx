@@ -25,35 +25,57 @@ export function ProfileScreen() {
 // REMOVE WHEN THERE IS A WORKING API
 const item1Sample = {
   id: '1',
-  name: 'Garage drunkenness',
-  tags: ['Relax', 'Drunk'],
+  name: 'SUNSET SESSION WITH HIOKO AT ZEN BEACH',
+  tags: [],
   startData: 1698231832274,
   endData: 1700231832274,
-  geoPosition: 'United States, 2373 Ingram Road, Winston Salem, North Carolina',
+  geoPosition: 'Grasshopper bar at Zen beach',
   imageUrl:
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2rCIJzZ_df7K7WycovWQfsBlgG91B6bLneA&usqp=CAU',
+    'https://phangan.events/wp-content/uploads/2023/02/E26F74CC-D3EA-4FAA-99D3-5563D6710F86.jpeg',
 };
 
 const item2Sample = {
   id: '2',
-  name: 'Bastau Concert',
-  tags: ['Music'],
+  name: 'EASY LISTENING - ПОГРУЖЕНИЕ В МУЗЫКУ',
+  tags: [],
   startData: 1678231832274,
   endData: 1679231832274,
-  geoPosition: 'Hua Mak, Bang Kapi, Bang Kok, Thai Land',
+  geoPosition: 'Seeds of Dreams',
   imageUrl:
-    'https://astanait.edu.kz/wp-content/uploads/2018/08/austin-neill-247047-unsplash.jpg',
+    'https://phangan.events/wp-content/uploads/2023/03/22939_image_334283563_173916178723577_2728694524234742505_n-300x253.jpg',
 };
 
 const item3Sample = {
   id: '3',
-  name: 'Pizza party',
+  name: 'LIGHTHOUSE',
   tags: ['Eat'],
   startData: 1778231832274,
   endData: 1779231832274,
-  geoPosition: 'Call to find out +0854925383429',
+  geoPosition: 'Lighthouse Bungalows',
   imageUrl:
-    'https://www.creativefabrica.com/wp-content/uploads/2020/01/09/1578559481/Pizza-Party-580x386.jpg',
+    'https://phangan.events/wp-content/uploads/2023/03/22951_image_330380336_608432701103463_5612991213670295673_n-300x157.jpg',
+};
+
+const item4Sample = {
+  id: '4',
+  name: 'LOVING KINDNESS MEDITATION',
+  tags: [],
+  startData: 1778231832274,
+  endData: 1779231832274,
+  geoPosition: 'Orion Healing Center ( Detox & Yoga ) Koh Phangan',
+  imageUrl:
+    'https://phangan.events/wp-content/uploads/2023/01/20029_image_322479900_3284544431795007_5117711846834910952_n-300x169.jpg',
+};
+
+const item5Sample = {
+  id: '5',
+  name: 'RIVER ROOTS & TABEAH CONCERT AT SUNSET HILL',
+  tags: [],
+  startData: 1778231832274,
+  endData: 1779231832274,
+  geoPosition: 'Sunset Hill Resort, Koh Phangan',
+  imageUrl:
+    'https://phangan.events/wp-content/uploads/2023/02/22744_image_332680139_861868188207960_953913658554101534_n-300x169.jpg',
 };
 
 const fakedata = [
@@ -71,6 +93,6 @@ const fakedata = [
   },
   {
     title: `Favorited ${0}`,
-    data: [],
+    data: [item4Sample, item5Sample],
   },
 ];

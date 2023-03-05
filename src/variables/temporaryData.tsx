@@ -106,6 +106,32 @@ export const ticketsData: TicketInfo[] = [
     imageUrl:
       'https://phangan.events/wp-content/uploads/2023/02/22733_image_332519269_1628244057636908_6289305796911057743_n-300x169.jpg',
   },
+  {
+    id: '7',
+    name: 'THE PANGANEROS @ COCO LOCCO IN HAAD YAO',
+    tags: [],
+    price: 1,
+    currencySymbols: 'ADA',
+    startData: 1301231421,
+    endData: 1514295824,
+    tickets: 0,
+    geoPosition: 'Coco Locco Beach Bar & Restaurant',
+    imageUrl:
+      'https://phangan.events/wp-content/uploads/2023/02/22831_image_333553781_615090077117034_5248947287834983819_n-300x156.jpg',
+  },
+  {
+    id: '8',
+    name: 'JUNGLE EXPERIENCE 6TH MAR',
+    tags: [],
+    price: 758.4,
+    currencySymbols: 'ADA',
+    startData: 1301231421,
+    endData: 1514295824,
+    tickets: 0,
+    geoPosition: 'Jungle Experience Koh Phangan',
+    imageUrl:
+      'https://phangan.events/wp-content/uploads/2023/02/22288_image_329998992_765892494902803_8496433742418709574_n-300x157.jpg',
+  },
 ];
 export const votingCardsData = [
   {
