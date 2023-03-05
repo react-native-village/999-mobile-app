@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {format} from 'date-fns';
 import {
   Image,
   StyleSheet,
@@ -94,10 +95,10 @@ export function TicketCardColumn({
             />
             <View style={styles.textContainer}>
               <Text numberOfLines={1} t11>
-                Start: {startData}
+                Start: {format(startData, 'MMM d, y')}
               </Text>
               <Text numberOfLines={1} t11>
-                End: {endData}
+                End: {format(endData, 'MMM d, y')}
               </Text>
             </View>
           </View>
