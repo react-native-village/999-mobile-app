@@ -8,7 +8,7 @@ import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
 
 // @ts-ignore
-import welcomeImage from '../../../assets/images/welcome.png';
+import welcomeImage from '../../../assets/images/welcome.jpg';
 
 interface WelcomeProps {
   onContinue: () => void;

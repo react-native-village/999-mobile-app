@@ -4,9 +4,9 @@ export const TRANSPARENT = 'transparent';
 export const SHADOW_COLOR = '#000';
 
 export const LIGHT_THEME: ThemeColors = {
-  primary: '#FF6883',
-  primary1: 'rgba(255, 104, 131, 0.15)',
-  primary2: 'rgba(255, 104, 131, 0.6)',
+  primary: '#FFA1CD',
+  primary1: 'rgba(255, 161, 205, 0.15)',
+  primary2: 'rgba(255, 161, 205, 0.6)',
   // MESSAGE MEANING
   textRed1: '#E16363',
   textGreen1: '#01B26E',
@@ -43,9 +43,9 @@ export const LIGHT_THEME: ThemeColors = {
 };
 
 export const DARK_THEME: ThemeColors = {
-  primary: '#FF6883',
-  primary1: 'rgba(255, 104, 131, 0.15)',
-  primary2: 'rgba(255, 104, 131, 0.6)',
+  primary: '#FFA1CD',
+  primary1: 'rgba(255, 161, 205, 0.15)',
+  primary2: 'rgba(255, 161, 205, 0.6)',
   // MESSAGE MEANING
   textRed1: '#E16363',
   textGreen1: '#01B26E',
