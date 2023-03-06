@@ -8,6 +8,7 @@ export function SettingsScreen({navigation}: any) {
       onPressDisconnect={() => {}}
       onPressEdit={() => {}}
       onPressWallet={() => {}}
+      onPressThemes={() => {}}
       onPressBack={navigation.goBack}
     />
   );

@@ -10,11 +10,13 @@ interface SettingsProps {
   onPressWallet: () => void;
   onPressDisconnect: () => void;
   onPressBack: () => void;
+  onPressThemes: () => void;
 }
 export function Settings({
   onPressEdit,
   onPressWallet,
   onPressDisconnect,
+  onPressThemes,
   onPressBack,
 }: SettingsProps) {
   return (
@@ -31,6 +33,11 @@ export function Settings({
         onPress={onPressEdit}
       />
       <SettingsButton icon="wallet" title="My Wallet" onPress={onPressWallet} />
+      <SettingsButton
+        icon="albums-outline"
+        title="Themes"
+        onPress={onPressThemes}
+      />
       <SettingsButton
         icon="exit"
         title="Disconnect"
