@@ -41,6 +41,7 @@ export const light = {
   avax: require('./white/avax.svg'),
   aywa: require('./white/aywa.svg'),
   bab: require('./white/bab.svg'),
+  zlt: require('./white/zlt.svg'),
 };
 
 export const dark = {
@@ -86,4 +87,5 @@ export const dark = {
   avax: require('./black/avax.svg'),
   aywa: require('./black/aywa.svg'),
   bab: require('./black/bab.svg'),
+  zlt: require('./black/zlt.svg'),
 };

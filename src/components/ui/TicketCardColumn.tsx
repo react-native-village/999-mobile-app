@@ -95,10 +95,10 @@ export function TicketCardColumn({
             />
             <View style={styles.textContainer}>
               <Text numberOfLines={1} t11>
-                Start: {format(startData, 'dd.MM.yyyy')}
+                Start: {format(startData, 'MMM d, y')}
               </Text>
               <Text numberOfLines={1} t11>
-                End: {format(endData, 'dd.MM.yyyy')}
+                End: {format(endData, 'MMM d, y')}
               </Text>
             </View>
           </View>

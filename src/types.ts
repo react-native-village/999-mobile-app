@@ -42,6 +42,7 @@ export interface TicketInfo {
   price?: number;
   tickets: number;
   currencySymbols?: string;
+  description?: string;
 }
 
 export interface connectMethodType {

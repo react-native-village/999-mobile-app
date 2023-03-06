@@ -18,6 +18,7 @@ export function TicketDetailTags({tags}: TicketDetailTagsProps) {
   return (
     <View>
       <FlatList
+        showsHorizontalScrollIndicator={false}
         horizontal
         data={tags}
         renderItem={({item}) => <Tag name={item} />}

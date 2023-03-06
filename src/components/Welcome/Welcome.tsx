@@ -23,10 +23,13 @@ export function Welcome({onContinue}: WelcomeProps) {
       <Image source={welcomeImage} style={styles.image} />
       <View style={styles.container}>
         <Spacer height={insets.top} />
-        <Text t4 color={Color.graphicBase3}>
+        <Text t4 style={styles.textStyle} color={Color.primary}>
           Welcome to
         </Text>
-        <Text t2 color={Color.primary} style={styles.titleText}>
+        <Text
+          t2
+          color={Color.primary}
+          style={[styles.titleText, styles.textStyle]}>
           999 Ticketing System
         </Text>
         <Button style={styles.buttonContainer} onPress={onContinue}>
@@ -60,5 +63,15 @@ const rawStyles = StyleSheet.create({
   },
   buttonContainer: {
     width: '85%',
+  },
+  textStyle: {
+    textShadowColor: Color.bg4,
+    textShadowRadius: 1,
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    elevation: 7,
   },
 });

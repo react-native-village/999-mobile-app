@@ -31,9 +31,9 @@ export function HomeMarketHeader({
       <Spacer height={top} />
       <View style={styles.rowContainer}>
         <View style={styles.logoContainer}>
-          <Logo width={38} height={38} />
+          <Logo width={36} height={36} />
           <Spacer width={8} />
-          <Text t3 color={Color.textBase1}>
+          <Text t5 color={Color.textBase1}>
             DAO 999 NFT
           </Text>
         </View>
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     flexDirection: 'row',
+    alignItems: 'center',
   },
   rightButtons: {
     flexDirection: 'row',
