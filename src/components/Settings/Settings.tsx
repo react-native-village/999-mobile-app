@@ -34,7 +34,7 @@ export function Settings({
       />
       <SettingsButton icon="wallet" title="My Wallet" onPress={onPressWallet} />
       <SettingsButton
-        icon="albums-outline"
+        icon="color-palette-outline"
         title="Themes"
         onPress={onPressThemes}
       />

@@ -13,6 +13,7 @@ import {WelcomeScreen} from 'src/screens/Welcome';
 import {RootStackParamList} from 'src/types';
 
 import {useTheme} from './hooks';
+import {ChangeThemeScreen} from './screens/ChangeThemeScreen';
 import {ConnectWalletScreen} from './screens/ConnectWallet';
 import {CreateEventScreen} from './screens/CreateEvent';
 import {ProfileScreen} from './screens/Profile';
@@ -70,6 +71,7 @@ export function App() {
           <Stack.Screen name="result" component={ResultScreen} />
           <Stack.Screen name="createEvent" component={CreateEventScreen} />
           <Stack.Screen name="qr" component={QRCodeScreen} />
+          <Stack.Screen name="themes" component={ChangeThemeScreen} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
