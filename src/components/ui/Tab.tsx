@@ -28,6 +28,7 @@ const navDataById = [
     name: 'Staking',
   },
   {icon: 'landmark', name: 'Governance'},
+  {icon: 'glass-cheers', name: 'Dating'},
 ];
 
 export function Tab({

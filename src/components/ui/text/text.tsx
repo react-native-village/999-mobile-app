@@ -39,6 +39,8 @@ export type TextProps = Omit<RNTextProps, 'style' | 'children'> & {
   t17?: boolean;
   t18?: boolean;
   t19?: boolean;
+  t20?: boolean;
+  t21?: boolean;
   ibm1?: boolean;
   ibm2?: boolean;
   ibm3?: boolean;
@@ -93,6 +95,8 @@ export function Text({
   t17,
   t18,
   t19,
+  t20,
+  t21,
   ibm1,
   ibm2,
   ibm3,
@@ -132,6 +136,8 @@ export function Text({
           t17 && styles.t17Style,
           t18 && styles.t18Style,
           t19 && styles.t19Style,
+          t20 && styles.t20Style,
+          t21 && styles.t21Style,
           ibm1 && styles.ibm1Style,
           ibm2 && styles.ibm2Style,
           ibm3 && styles.ibm3Style,
@@ -150,16 +156,15 @@ export function Text({
   );
 }
 
-const shadowColor = '#FF06F4';
-const aquaShadow = '#62F5D4';
+const shadowColor = 'black';
+const aquaShadow = 'black';
 const ibm = IS_IOS ? 'IBM 3270' : '3270';
 const editUndo = IS_IOS ? 'Edit Undo Line BRK' : 'edit-undo-line';
 const KLMN = IS_IOS ? 'KLMN-Flash-Pix' : 'KLMN_Flash_Pix';
 
 const styles = StyleSheet.create({
   shadow: {
-    textShadowOffset: {width: 1, height: 1},
-    textShadowRadius: 1,
+    textShadowRadius: 2,
     textShadowColor: shadowColor,
     shadowColor: aquaShadow,
     shadowOpacity: 1,
@@ -175,7 +180,7 @@ const styles = StyleSheet.create({
   t1Style: {
     fontFamily: 'Montserrat-Bold',
     fontSize: 34,
-    lineHeight: 46,
+    lineHeight: 36,
   },
   t2Style: {
     fontFamily: 'Montserrat-Bold',
@@ -266,6 +271,16 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 30,
     lineHeight: 38,
+  },
+  t20Style: {
+    fontFamily: 'Montserrat-Bold',
+    fontSize: 22,
+    lineHeight: 30,
+  },
+  t21Style: {
+    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 24,
+    lineHeight: 30,
   },
   ibm1Style: {
     fontFamily: ibm,

@@ -10,6 +10,7 @@ import {RouteProp} from '@react-navigation/native';
 import {TabBar} from 'src/components/ui';
 import {TabParamList} from 'src/types';
 
+import {HomeDatingScreen} from './HomeDating';
 import {HomeGovernanceScreen} from './HomeGovernance';
 import {HomeStakingScreen} from './HomeStakingScreen';
 import {HomeTicketsMarketScreen} from './HomeTicketsMarket';
@@ -41,6 +42,11 @@ export function Home() {
       <Tab.Screen
         name="homeGovernance"
         component={HomeGovernanceScreen}
+        options={screenOptions}
+      />
+      <Tab.Screen
+        name="homeDating"
+        component={HomeDatingScreen}
         options={screenOptions}
       />
     </Tab.Navigator>

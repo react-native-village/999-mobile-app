@@ -13,6 +13,7 @@ export interface ThemeColors {
   textYellow1: string;
   opacityYellow1: string;
   white: string;
+  black: string;
 
   bg1: string;
   bg2: string;
@@ -60,6 +61,7 @@ export enum Color {
   textYellow1 = 'textYellow1',
   opacityYellow1 = 'opacityYellow1',
   white = 'white',
+  black = 'black',
 
   bg1 = 'bg1',
   bg2 = 'bg2',

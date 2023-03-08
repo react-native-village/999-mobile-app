@@ -7,6 +7,7 @@ export type TabParamList = {
   homeStaking: undefined;
   homeGovernance: undefined;
   homeTicketsMarket: undefined;
+  homeDating: undefined;
 };
 export type RootStackParamList = {
   home?: NavigatorScreenParams<TabParamList>;
@@ -43,6 +44,16 @@ export interface TicketInfo {
   tickets: number;
   currencySymbols?: string;
   description?: string;
+}
+
+export interface PersonInfo {
+  id: string;
+  name: string;
+  age: number;
+  distance: string;
+  geo: string;
+  photoUrl: string;
+  description: string;
 }
 
 export interface connectMethodType {
