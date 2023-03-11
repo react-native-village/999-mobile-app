@@ -1,4 +1,66 @@
-import {TicketInfo} from 'src/types';
+import {PersonInfo, TicketInfo} from 'src/types';
+
+export const DatingData: PersonInfo[] = [
+  {
+    id: '0',
+    name: 'Diego',
+    age: 26,
+    geo: 'Nai Wok',
+    distance: '200 meters',
+    photoUrl:
+      'https://wedgo.ru/data/photo/Photosession/4077/d3e7f2a047fed64f4a8dae1384f3c21b.jpg',
+    description: '',
+  },
+  {
+    id: '1',
+    name: 'Michelle',
+    age: 27,
+    geo: 'Nai Wok',
+    distance: '176,4 meters',
+    photoUrl:
+      'https://phanganist.com/sites/default/files/pictures/14-Jane-Vurt-Phanganist-Koh%20Phangan-Party-Girl-2014.jpg',
+    description: '',
+  },
+  {
+    id: '2',
+    name: 'Alex',
+    age: 30,
+    geo: 'Wok Tum',
+    distance: '1054 meters',
+    photoUrl: 'https://schlock.ru/wp-content/uploads/2019/03/7gbE3_-6UMQ.jpg',
+    description: '',
+  },
+  {
+    id: '3',
+    name: 'Ulia',
+    age: 27,
+    geo: 'Nai Suan',
+    distance: '4324 meters',
+    photoUrl:
+      'https://thumbs.dreamstime.com/b/girl-dj-beach-club-playing-mixing-music-island-koh-phangan-thailand-december-vinyl-turntable-full-moon-party-71947413.jpg',
+    description: '',
+  },
+  {
+    id: '4',
+    name: 'Max',
+    age: 23,
+    geo: 'Ban Wok',
+    distance: '6173 meters',
+    photoUrl:
+      'https://i.pinimg.com/736x/46/02/a6/4602a63afd7b469ad2897645fd274d95--male-witch-male-elf.jpg',
+    description: '',
+  },
+  {
+    id: '5',
+    name: 'Timotei',
+    age: 30,
+    geo: 'Ban Tai',
+    distance: '4996 meters',
+    photoUrl:
+      'https://avatars.dzeninfra.ru/get-zen_doc/198359/pub_5af30052799d9ddc1ed569ed_5af3015ba815f14484527e0e/scale_1200',
+    description: '',
+  },
+];
 
 export const categoriesData = [
   {
