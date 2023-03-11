@@ -18,6 +18,7 @@ export type RootStackParamList = {
   search: undefined;
   scan: undefined;
   qr: TicketInfo;
+  themes: undefined;
   result: {
     isSuccessfully: boolean;
     text: string;
@@ -43,7 +44,6 @@ export interface TicketInfo {
   price?: number;
   tickets: number;
   currencySymbols?: string;
-  description?: string;
 }
 
 export interface PersonInfo {
