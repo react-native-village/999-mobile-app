@@ -1,12 +1,7 @@
 import React, {memo, useState} from 'react';
 
-import {
-  Image,
-  StyleProp,
-  StyleSheet,
-  TouchableOpacity,
-  ViewStyle,
-} from 'react-native';
+import {StyleProp, StyleSheet, TouchableOpacity, ViewStyle} from 'react-native';
+import FastImage from 'react-native-fast-image';
 
 import {Loading} from '../loading';
 
@@ -64,7 +59,7 @@ export const Avatar = memo<AvatarT>(
     return (
       <>
         <TouchableOpacity onPress={onPress} style={[container, viewStyle]}>
-          <Image
+          <FastImage
             style={ava(size)}
             source={{uri}}
             onLoadEnd={() => setValue(true)}

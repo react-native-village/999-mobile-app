@@ -1,20 +1,13 @@
 import React, {useState} from 'react';
 
 import {format} from 'date-fns';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  useColorScheme,
-} from 'react-native';
+import {ScrollView, StyleSheet, View, useColorScheme} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {formatPrice} from 'src/components/formatPrice';
-import {Button, Spacer, Text} from 'src/components/ui';
+import {Button, CustomHeader, Spacer, Text} from 'src/components/ui';
 import {Background} from 'src/components/ui/Background';
 import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
@@ -48,14 +41,13 @@ export function TicketDetail({
 
   return (
     <Background>
+      <CustomHeader
+        title={item.name}
+        iconLeft="arrow-back"
+        onPressLeft={onBack}
+      />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        <Image source={{uri: item.imageUrl}} style={styles.image} />
-        <TouchableOpacity
-          style={styles.goBackContainer}
-          onPress={onBack}
-          activeOpacity={0.7}>
-          <Ionicons size={22} color={colors.graphicBase3} name="arrow-back" />
-        </TouchableOpacity>
+        <FastImage source={{uri: item.imageUrl}} style={styles.image} />
         <View style={styles.details}>
           <TicketDetailTags tags={item.tags} />
           <Text t19 style={styles.name}>

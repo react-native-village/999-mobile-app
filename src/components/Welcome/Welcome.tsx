@@ -63,6 +63,7 @@ const rawStyles = StyleSheet.create({
   },
   buttonContainer: {
     width: '85%',
+    alignSelf: 'center',
   },
   textStyle: {
     textShadowColor: Color.bg4,

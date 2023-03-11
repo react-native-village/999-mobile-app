@@ -1,6 +1,7 @@
 import React, {memo} from 'react';
 
-import {Image, StyleSheet, View, useWindowDimensions} from 'react-native';
+import {StyleSheet, View, useWindowDimensions} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {s} from 'react-native-size-matters';
 
 import {useImageAspect} from 'src/hooks';
@@ -25,7 +26,7 @@ export const Img = memo<ImgT>(
 
     return (
       <View style={[mainBlock, {maxHeight}]}>
-        <Image
+        <FastImage
           style={[
             img,
             {
@@ -34,7 +35,7 @@ export const Img = memo<ImgT>(
               maxHeight,
             },
           ]}
-          resizeMode="contain"
+          resizeMode={FastImage.resizeMode.contain}
           source={{uri}}
         />
       </View>
