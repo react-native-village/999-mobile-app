@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {StyleSheet, ViewStyle} from 'react-native';
+import {StyleSheet, View, ViewStyle} from 'react-native';
 import {StyleProp} from 'react-native';
 import Animated from 'react-native-reanimated';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -56,9 +56,11 @@ CustomHeaderProps) {
         icon={iconLeft}
         /* i18n={i18nTextLeft} */
       />
-      <Text t8 center>
-        {title}
-      </Text>
+      <View style={styles.textContainer}>
+        <Text t8 center numberOfLines={1} style={styles.textStyle}>
+          {title}
+        </Text>
+      </View>
       <HeaderButton
         onPress={onPressRight}
         disabled={disabledRight}
@@ -79,5 +81,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 22,
     flexDirection: 'row',
     zIndex: 1,
+  },
+  textStyle: {
+    alignSelf: 'center',
+  },
+  textContainer: {
+    maxWidth: '70%',
   },
 });

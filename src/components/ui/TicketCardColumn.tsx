@@ -1,13 +1,8 @@
 import React from 'react';
 
 import {format} from 'date-fns';
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  useColorScheme,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, useColorScheme} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {formatPriceSmall} from 'src/components/formatPrice';
@@ -45,7 +40,7 @@ export function TicketCardColumn({
     <TouchableOpacity activeOpacity={0.6} onPress={() => onPress?.(itemProps)}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <Image style={styles.image} source={{uri: imageUrl}} />
+          <FastImage style={styles.image} source={{uri: imageUrl}} />
         </View>
         <View style={styles.infoContainer}>
           <Text t6 numberOfLines={1}>
@@ -111,7 +106,7 @@ export function TicketCardColumn({
 const borderW = 0.6;
 const rawStyles = StyleSheet.create({
   container: {
-    width: 220,
+    width: 200,
     height: 380,
     borderRadius: 16,
     overflow: 'hidden',
@@ -119,8 +114,8 @@ const rawStyles = StyleSheet.create({
     backgroundColor: Color.card,
   },
   imageContainer: {
-    width: 220,
-    height: 220,
+    width: 200,
+    height: 200,
   },
   image: {
     flex: 1,
