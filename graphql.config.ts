@@ -1,11 +1,11 @@
-import {CodegenConfig} from '@graphql-codegen/cli';
+import {CodegenConfig} from '@graphql-codegen/cli'
 
 const defaultGenerateConfig = {
   plugins: ['typescript', 'typescript-operations', 'typescript-react-apollo'],
   config: {
     withRefetchFn: true,
   },
-};
+}
 
 const config: CodegenConfig = {
   overwrite: true,
@@ -27,5 +27,5 @@ const config: CodegenConfig = {
       ...defaultGenerateConfig,
     },
   },
-};
-export default config;
+}
+export default config

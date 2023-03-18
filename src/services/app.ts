@@ -1,31 +1,31 @@
-import {EventEmitter} from 'events';
+import {EventEmitter} from 'events'
 
-import {AppState, Appearance} from 'react-native';
+import {AppState, Appearance} from 'react-native'
 
-type appThemeType = 'light' | 'dark' | null | undefined;
+type appThemeType = 'light' | 'dark' | null | undefined
 
 class App extends EventEmitter {
-  private appStatus: AppStatus = AppStatus.inactive;
-  private appTheme: appThemeType;
+  private appStatus: AppStatus = AppStatus.inactive
+  private appTheme: appThemeType
 
   constructor() {
-    super();
-    Appearance.addChangeListener(this.onAppThemeChanged.bind(this) as any);
-    AppState.addEventListener('change', this.onAppStatusChanged.bind(this));
+    super()
+    Appearance.addChangeListener(this.onAppThemeChanged.bind(this) as any)
+    AppState.addEventListener('change', this.onAppStatusChanged.bind(this))
   }
 
   async onAppStatusChanged() {
-    const appStatus = getAppStatus();
+    const appStatus = getAppStatus()
     if (this.appStatus !== appStatus) {
-      this.emit('theme-status', appStatus);
-      this.appStatus = appStatus;
+      this.emit('theme-status', appStatus)
+      this.appStatus = appStatus
     }
   }
 
   onAppThemeChanged(theme: appThemeType) {
     if (this.appTheme !== theme && theme) {
-      this.emit('theme-changed', theme);
-      this.appTheme = theme;
+      this.emit('theme-changed', theme)
+      this.appTheme = theme
     }
   }
 }
@@ -38,7 +38,7 @@ enum AppStatus {
 function getAppStatus() {
   return AppState.currentState === 'active'
     ? AppStatus.active
-    : AppStatus.inactive;
+    : AppStatus.inactive
 }
 
-export const app = new App();
+export const app = new App()

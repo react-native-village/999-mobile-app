@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-import {Result} from 'src/components/Result';
-import {useTypedNavigation, useTypedRoute} from 'src/hooks';
+import {Result} from 'src/components/Result'
+import {useTypedNavigation, useTypedRoute} from 'src/hooks'
 
 export function ResultScreen() {
-  const {navigate} = useTypedNavigation();
+  const {navigate} = useTypedNavigation()
   const {isSuccessfully, text, navigateToScreenName} =
-    useTypedRoute<'result'>().params ?? {};
+    useTypedRoute<'result'>().params ?? {}
 
   const onContinue = () => {
     // @ts-ignore
-    navigate(navigateToScreenName ?? 'home');
-  };
+    navigate(navigateToScreenName ?? 'home')
+  }
 
   return (
     <Result
@@ -19,5 +19,5 @@ export function ResultScreen() {
       text={text}
       isSuccessfully={isSuccessfully}
     />
-  );
+  )
 }

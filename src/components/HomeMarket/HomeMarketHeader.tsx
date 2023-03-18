@@ -1,20 +1,20 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {StyleSheet, TouchableOpacity, View} from 'react-native'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
-import {useTheme} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {useTheme} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import Logo from '../../../assets/images/logo.svg';
-import {Spacer, Text} from '../ui';
+import Logo from '../../../assets/images/logo.svg'
+import {Spacer, Text} from '../ui'
 
 interface HomeMarketHeaderProps {
-  onPressSettings?: () => void;
-  onPressProfile?: () => void;
-  onPressSearch?: () => void;
-  onPressScan?: () => void;
+  onPressSettings?: () => void
+  onPressProfile?: () => void
+  onPressSearch?: () => void
+  onPressScan?: () => void
 }
 
 export function HomeMarketHeader({
@@ -23,8 +23,8 @@ export function HomeMarketHeader({
   onPressSearch,
   onPressScan,
 }: HomeMarketHeaderProps) {
-  const {colors} = useTheme();
-  const {top} = useSafeAreaInsets();
+  const {colors} = useTheme()
+  const {top} = useSafeAreaInsets()
 
   return (
     <>
@@ -56,7 +56,7 @@ export function HomeMarketHeader({
         </View>
       </View>
     </>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -76,4 +76,4 @@ const styles = StyleSheet.create({
   rightButtons: {
     flexDirection: 'row',
   },
-});
+})

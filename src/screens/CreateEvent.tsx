@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import {yupResolver} from '@hookform/resolvers/yup';
-import {FormProvider, useForm} from 'react-hook-form';
-import * as yup from 'yup';
+import {yupResolver} from '@hookform/resolvers/yup'
+import {FormProvider, useForm} from 'react-hook-form'
+import * as yup from 'yup'
 
-import {CreateEvent} from 'src/components/CreateEvent';
-import {useTypedNavigation} from 'src/hooks';
+import {CreateEvent} from 'src/components/CreateEvent'
+import {useTypedNavigation} from 'src/hooks'
 
 const schema = yup
   .object({
@@ -30,30 +30,30 @@ const schema = yup
       .positive('The price cannot be negative')
       .integer('The number must be an integer'),
   })
-  .required();
+  .required()
 
-type FormData = yup.InferType<typeof schema>;
+type FormData = yup.InferType<typeof schema>
 
 export function CreateEventScreen() {
-  const {goBack, navigate} = useTypedNavigation();
+  const {goBack, navigate} = useTypedNavigation()
   const form = useForm<FormData>({
     resolver: yupResolver(schema),
     defaultValues: {
       date: new Date(Date.now() - 10000),
       time: new Date(),
     },
-  });
+  })
 
   const onSuccess = (data: any) => {
     navigate('result', {
       text: JSON.stringify(data),
       isSuccessfully: true,
-    });
-  };
+    })
+  }
   const onError = (e: any) => {
-    console.log('🚀 - e:', e);
-    console.log('Error 😭');
-  };
+    console.log('🚀 - e:', e)
+    console.log('Error 😭')
+  }
 
   return (
     <FormProvider {...form}>
@@ -62,5 +62,5 @@ export function CreateEventScreen() {
         onBack={goBack}
       />
     </FormProvider>
-  );
+  )
 }

@@ -1,15 +1,15 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import {Color} from 'src/themeTypes';
+import {Color} from 'src/themeTypes'
 
-import {Text, TextProps} from './text';
+import {Text, TextProps} from './text'
 
 type ErrorTextProps = {
-  e0?: boolean;
-  e1?: boolean;
-  e2?: boolean;
-  e3?: boolean;
-} & TextProps;
+  e0?: boolean
+  e1?: boolean
+  e2?: boolean
+  e3?: boolean
+} & TextProps
 
 export function ErrorText({e0, e1, e2, e3, style, ...props}: ErrorTextProps) {
   return (
@@ -22,5 +22,5 @@ export function ErrorText({e0, e1, e2, e3, style, ...props}: ErrorTextProps) {
       style={style}
       {...props}
     />
-  );
+  )
 }

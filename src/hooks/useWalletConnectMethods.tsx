@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from 'react'
 
-import {useWalletConnect} from '@walletconnect/react-native-dapp';
+import {useWalletConnect} from '@walletconnect/react-native-dapp'
 import Svg, {
   Defs,
   G,
@@ -9,28 +9,28 @@ import Svg, {
   RadialGradient,
   Stop,
   SvgProps,
-} from 'react-native-svg';
+} from 'react-native-svg'
 
-import {connectMethodType} from 'src/types';
+import {connectMethodType} from 'src/types'
 
-import {useTheme} from './useTheme';
-import {useTypedNavigation} from './useTypedNavigation';
+import {useTheme} from './useTheme'
+import {useTypedNavigation} from './useTypedNavigation'
 
 export function useWalletConnectMethods() {
-  const connectorWC = useWalletConnect();
-  const {navigate} = useTypedNavigation();
+  const connectorWC = useWalletConnect()
+  const {navigate} = useTypedNavigation()
 
   const walletConnectMethods: connectMethodType[] = [
     {
       name: 'Wallet Connect',
       async onConnect() {
         if (__DEV__) {
-          navigate('home');
-          return;
+          navigate('home')
+          return
         }
-        const res = await connectorWC.connect();
+        const res = await connectorWC.connect()
         if (res.accounts.length > 0) {
-          navigate('home');
+          navigate('home')
         }
       },
       Logo: WCLogo,
@@ -47,8 +47,8 @@ export function useWalletConnectMethods() {
       Logo: LedgerLogo,
       isAvailable: false,
     },
-  ];
-  return walletConnectMethods;
+  ]
+  return walletConnectMethods
 }
 // Use: https://react-svgr.com/playground/?icon=true&native=true&typescript=true
 function WCLogo(props: SvgProps) {
@@ -77,11 +77,11 @@ function WCLogo(props: SvgProps) {
         </RadialGradient>
       </Defs>
     </Svg>
-  );
+  )
 }
 
 function LedgerLogo(props: SvgProps) {
-  const {colors} = useTheme();
+  const {colors} = useTheme()
   return (
     <Svg width={30} height={30} fill="none" viewBox="0 0 100 101" {...props}>
       <Mask
@@ -100,5 +100,5 @@ function LedgerLogo(props: SvgProps) {
         />
       </G>
     </Svg>
-  );
+  )
 }

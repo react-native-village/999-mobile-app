@@ -1,34 +1,34 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native'
 import {
   OrientationType,
   useOrientationChange,
-} from 'react-native-orientation-locker';
+} from 'react-native-orientation-locker'
 
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import Error from './Error.svg';
-import Successfully from './Successfully.svg';
+import Error from './Error.svg'
+import Successfully from './Successfully.svg'
 
-import {Background, Button, Text} from '../ui';
+import {Background, Button, Text} from '../ui'
 
 interface ResultT {
-  onContinue: () => void;
-  isSuccessfully: boolean;
-  text: string;
+  onContinue: () => void
+  isSuccessfully: boolean
+  text: string
 }
 export function Result({onContinue, isSuccessfully, text}: ResultT) {
-  const {styles} = useThematicStyles(rawStyles);
-  const [isLandscape, setIsLandscape] = useState<boolean>();
+  const {styles} = useThematicStyles(rawStyles)
+  const [isLandscape, setIsLandscape] = useState<boolean>()
 
   useOrientationChange(orientation => {
     setIsLandscape(
       orientation === OrientationType['LANDSCAPE-LEFT'] ||
         orientation === OrientationType['LANDSCAPE-RIGHT'],
-    );
-  });
+    )
+  })
 
   return (
     <Background style={[styles.container, isLandscape && styles.lsContainer]}>
@@ -50,7 +50,7 @@ export function Result({onContinue, isSuccessfully, text}: ResultT) {
         />
       </View>
     </Background>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -74,4 +74,4 @@ const rawStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
   },
-});
+})

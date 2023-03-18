@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import {
   ActivityIndicator,
@@ -6,22 +6,22 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from 'react-native'
 
-import {useTheme} from 'src/hooks';
+import {useTheme} from 'src/hooks'
 
 type WaitingProps = {
-  style?: StyleProp<ViewStyle>;
-};
+  style?: StyleProp<ViewStyle>
+}
 
 export function Waiting({style}: WaitingProps) {
-  const {colors} = useTheme();
+  const {colors} = useTheme()
 
   return (
     <View style={[styles.container, style]}>
       <ActivityIndicator size="large" color={colors.primary} />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})

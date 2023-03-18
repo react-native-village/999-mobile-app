@@ -1,27 +1,27 @@
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react'
 
-import {Image} from 'react-native';
+import {Image} from 'react-native'
 
 export const useImageAspect = (image: string | any, isAsset?: boolean) => {
-  const [aspect, setAspect] = useState(1);
+  const [aspect, setAspect] = useState(1)
 
   const imgObj = useMemo(() => {
     if (image && isAsset) {
-      const {width, height} = Image.resolveAssetSource(image);
-      const assetAspect = width / height;
-      return assetAspect;
+      const {width, height} = Image.resolveAssetSource(image)
+      const assetAspect = width / height
+      return assetAspect
     } else {
-      return 1;
+      return 1
     }
-  }, [image]);
+  }, [image])
 
   useEffect(() => {
     if (!isAsset) {
       Image.getSize(image, (w, h) => {
-        setAspect(w / h);
-      });
+        setAspect(w / h)
+      })
     }
-  }, []);
+  }, [])
 
-  return isAsset ? imgObj : aspect;
-};
+  return isAsset ? imgObj : aspect
+}

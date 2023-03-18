@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet} from 'react-native';
-import Animated from 'react-native-reanimated';
+import {StyleSheet} from 'react-native'
+import Animated from 'react-native-reanimated'
 
-import {KeyboardSafeAreaProps} from '.';
+import {KeyboardSafeAreaProps} from '.'
 
 export function KeyboardSafeArea({
   children,
@@ -51,11 +51,11 @@ export function KeyboardSafeArea({
     <Animated.View style={[styles.container, style]} {...props}>
       {children}
     </Animated.View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-});
+})

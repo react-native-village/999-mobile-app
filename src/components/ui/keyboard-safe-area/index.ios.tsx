@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-import {useHeaderHeight} from '@react-navigation/elements';
-import {KeyboardAvoidingView, StyleSheet} from 'react-native';
+import {useHeaderHeight} from '@react-navigation/elements'
+import {KeyboardAvoidingView, StyleSheet} from 'react-native'
 
-import {KeyboardSafeAreaProps} from '.';
+import {KeyboardSafeAreaProps} from '.'
 
 export function KeyboardSafeArea({
   children,
   style,
   ...props
 }: KeyboardSafeAreaProps) {
-  const header = useHeaderHeight();
+  const header = useHeaderHeight()
 
   return (
     <KeyboardAvoidingView
@@ -20,11 +20,11 @@ export function KeyboardSafeArea({
       {...props}>
       {children}
     </KeyboardAvoidingView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   flexOne: {
     flex: 1,
   },
-});
+})

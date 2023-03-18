@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 
 import {format} from 'date-fns';
 import {ScrollView, StyleSheet, View, useColorScheme} from 'react-native';
@@ -13,14 +13,14 @@ import {useThematicStyles} from 'src/hooks';
 import {Color} from 'src/themeTypes';
 import {TicketInfo} from 'src/types';
 
-import {TicketDetailBuy} from './TicketDetailBuy';
-import {TicketDetailTags} from './TicketDetailTags';
+import {TicketDetailBuy} from './TicketDetailBuy'
+import {TicketDetailTags} from './TicketDetailTags'
 
-import {dark, light} from '../../../assets/images/cryproCoins/mapping';
+import {dark, light} from '../../../assets/images/cryproCoins/mapping'
 interface TicketDetailProps extends TicketInfo {
-  onBack?: () => void;
-  onQRCode: () => void;
-  priceInDollars?: number;
+  onBack?: () => void
+  onQRCode: () => void
+  priceInDollars?: number
 }
 
 export function TicketDetail({
@@ -29,15 +29,15 @@ export function TicketDetail({
   priceInDollars = 100,
   ...item
 }: TicketDetailProps) {
-  const [showBuy, setShowBuy] = useState(false);
-  const insets = useSafeAreaInsets();
-  const {styles, colors} = useThematicStyles(rawStyles);
+  const [showBuy, setShowBuy] = useState(false)
+  const insets = useSafeAreaInsets()
+  const {styles, colors} = useThematicStyles(rawStyles)
 
-  const isDark = useColorScheme() === 'dark';
+  const isDark = useColorScheme() === 'dark'
 
-  const iconName = item.currencySymbols?.toLowerCase();
+  const iconName = item.currencySymbols?.toLowerCase()
   // @ts-ignore
-  const SvgIcon = !isDark ? dark[iconName] : light[iconName];
+  const SvgIcon = !isDark ? dark[iconName] : light[iconName]
 
   return (
     <Background>
@@ -187,7 +187,7 @@ export function TicketDetail({
         />
       )}
     </Background>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -269,4 +269,4 @@ const rawStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-});
+})

@@ -1,1 +1,1 @@
-export * from './CreateEvent';
+export * from './CreateEvent'

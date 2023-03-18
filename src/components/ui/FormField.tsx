@@ -1,24 +1,24 @@
-import React from 'react';
+import React from 'react'
 
-import {useFormContext} from 'react-hook-form';
-import {StyleSheet, View} from 'react-native';
+import {useFormContext} from 'react-hook-form'
+import {StyleSheet, View} from 'react-native'
 
 import {
   BlockMessage,
   FormDateTime,
   FormTextInput,
   Text,
-} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
+} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
 
 interface FormFieldProps {
   // style?: StyleProp<ViewStyle>;
-  title: string;
-  name: string;
-  fieldType: 'date' | 'time' | 'price' | 'input';
-  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
-  placeholder?: string;
-  nextField?: string;
+  title: string
+  name: string
+  fieldType: 'date' | 'time' | 'price' | 'input'
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters'
+  placeholder?: string
+  nextField?: string
 }
 
 /**
@@ -32,12 +32,12 @@ export function FormField({
   name,
   placeholder,
 }: FormFieldProps) {
-  const {styles} = useThematicStyles(rawStyles);
+  const {styles} = useThematicStyles(rawStyles)
   const {
     formState: {errors},
-  } = useFormContext();
+  } = useFormContext()
 
-  const error = errors[name];
+  const error = errors[name]
 
   return (
     <View style={styles.container}>
@@ -68,7 +68,7 @@ export function FormField({
         </BlockMessage>
       )}
     </View>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -87,4 +87,4 @@ const rawStyles = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
-});
+})

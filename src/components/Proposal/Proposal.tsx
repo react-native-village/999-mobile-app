@@ -1,43 +1,43 @@
-import React, {useMemo} from 'react';
+import React, {useMemo} from 'react'
 
-import {format} from 'date-fns';
-import {Pressable, ScrollView, StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {format} from 'date-fns'
+import {Pressable, ScrollView, StyleSheet, View} from 'react-native'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-import {Background, Badge, Spacer, Text} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {ProposalsTags} from 'src/variables/proposal';
+import {Background, Badge, Spacer, Text} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {ProposalsTags} from 'src/variables/proposal'
 
-import {PopupHeader} from '../popupHeader';
+import {PopupHeader} from '../popupHeader'
 
 interface ProposalProps {
   item?: {
-    status: string;
-    orderNumber: string;
-    title: string;
-    createdAt: number;
-    depositEnd: number;
-    description: string;
-    dateEnd: number;
-    dateStart: number;
-  };
+    status: string
+    orderNumber: string
+    title: string
+    createdAt: number
+    depositEnd: number
+    description: string
+    dateEnd: number
+    dateStart: number
+  }
 }
 
 export function Proposal({item}: ProposalProps) {
-  const {bottom} = useSafeAreaInsets();
-  const {styles} = useThematicStyles(rawStyles);
+  const {bottom} = useSafeAreaInsets()
+  const {styles} = useThematicStyles(rawStyles)
 
   const badgeStatus = useMemo(
     () => ProposalsTags.find(tag => tag[0] === item?.status),
     [item?.status],
-  );
+  )
 
   if (!item) {
-    return <></>;
+    return <></>
   }
 
-  const {orderNumber, title, description} = item;
+  const {orderNumber, title, description} = item
 
   return (
     <Background style={styles.container}>
@@ -142,7 +142,7 @@ export function Proposal({item}: ProposalProps) {
         </Pressable>
       </ScrollView>
     </Background>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -168,4 +168,4 @@ const rawStyles = StyleSheet.create({
   infoBlockMargin: {
     marginTop: 8,
   },
-});
+})

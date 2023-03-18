@@ -1,24 +1,24 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState} from 'react'
 
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native'
 
-import {Background, Button, Spacer} from 'src/components/ui';
-import {NUM_PRECISION} from 'src/variables/common';
+import {Background, Button, Spacer} from 'src/components/ui'
+import {NUM_PRECISION} from 'src/variables/common'
 
-import {StakingActive, StakingActiveInterface} from './StakingActive';
-import {StakingEmpty} from './StakingEmpty';
+import {StakingActive, StakingActiveInterface} from './StakingActive'
+import {StakingEmpty} from './StakingEmpty'
 
-import {Loading} from '../loading';
+import {Loading} from '../loading'
 
 export type StakingHomeProps = {
-  loading: boolean;
-  availableSum: number;
-  stakingSum: number;
-  rewardsSum: number;
-  unDelegationSum: number;
-  onPressValidators: () => void;
-  onPressGetRewards?: () => void;
-};
+  loading: boolean
+  availableSum: number
+  stakingSum: number
+  rewardsSum: number
+  unDelegationSum: number
+  onPressValidators: () => void
+  onPressGetRewards?: () => void
+}
 
 export function HomeStaking({
   loading,
@@ -29,22 +29,22 @@ export function HomeStaking({
   onPressValidators,
   onPressGetRewards,
 }: StakingHomeProps) {
-  const [isAnimation, setIsAnimation] = useState(false);
-  const stakingActiveRef = useRef<StakingActiveInterface>(null);
+  const [isAnimation, setIsAnimation] = useState(false)
+  const stakingActiveRef = useRef<StakingActiveInterface>(null)
 
-  const canGetRewards = rewardsSum >= 1 / NUM_PRECISION;
+  const canGetRewards = rewardsSum >= 1 / NUM_PRECISION
 
   const handleGetRewards = () => {
-    stakingActiveRef.current?.getReward();
-    setIsAnimation(true);
-    setTimeout(() => setIsAnimation(false), 2000);
-    onPressGetRewards?.();
-  };
+    stakingActiveRef.current?.getReward()
+    setIsAnimation(true)
+    setTimeout(() => setIsAnimation(false), 2000)
+    onPressGetRewards?.()
+  }
 
-  const hasStaking = stakingSum >= 1 / NUM_PRECISION;
+  const hasStaking = stakingSum >= 1 / NUM_PRECISION
 
   if (loading) {
-    return <Loading />;
+    return <Loading />
   }
   return (
     <Background>
@@ -79,7 +79,7 @@ export function HomeStaking({
         </View>
       </ScrollView>
     </Background>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'space-between',
   },
-});
+})

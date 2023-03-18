@@ -1,13 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, View, ViewProps /* , useColorScheme */} from 'react-native';
+import {StyleSheet, View, ViewProps /* , useColorScheme */} from 'react-native'
 
-import {useThematicStyles} from 'src/hooks/useThematicStyles';
-import {Color} from 'src/themeTypes';
+import {useThematicStyles} from 'src/hooks/useThematicStyles'
+import {Color} from 'src/themeTypes'
 
 interface BackgroundPros extends ViewProps {
-  centered?: boolean;
-  bgImg?: 'symbols';
+  centered?: boolean
+  bgImg?: 'symbols'
 }
 
 // const BgImages = {
@@ -24,7 +24,7 @@ export function Background({
   children,
   ...restProps
 }: BackgroundPros) {
-  const {styles} = useThematicStyles(rawStyles);
+  const {styles} = useThematicStyles(rawStyles)
   // const scheme = useColorScheme();
   // const bg = ('symbols-' + scheme) as keyof typeof BgImages;
 
@@ -36,7 +36,7 @@ export function Background({
         {/* {BgImages[bg]()} */}
         {children}
       </View>
-    );
+    )
   }
   return (
     <View
@@ -44,7 +44,7 @@ export function Background({
       style={[centered && styles.centered, styles.container, style]}>
       {children}
     </View>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -60,4 +60,4 @@ const rawStyles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     position: 'absolute',
   },
-});
+})

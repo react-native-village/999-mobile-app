@@ -5,13 +5,13 @@
  * @format
  */
 
-const {getDefaultConfig} = require('metro-config');
-const blacklist = require('metro-config/src/defaults/exclusionList');
+const {getDefaultConfig} = require('metro-config')
+const blacklist = require('metro-config/src/defaults/exclusionList')
 
 module.exports = (async () => {
   const {
     resolver: {sourceExts, assetExts},
-  } = await getDefaultConfig();
+  } = await getDefaultConfig()
   return {
     transformer: {
       getTransformOptions: async () => ({
@@ -32,5 +32,5 @@ module.exports = (async () => {
       sourceExts: [...sourceExts, 'svg', 'js', 'json', 'ts', 'tsx'],
       resolverMainFields: ['sbmodern', 'react-native', 'browser', 'main'],
     },
-  };
-})();
+  }
+})()

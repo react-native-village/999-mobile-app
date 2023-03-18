@@ -1,24 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 
 import {
   StyleSheet,
   TouchableOpacity,
   View,
   useWindowDimensions,
-} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+} from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {BottomSheet} from 'src/components/bottom-sheet';
-import {Button, Text} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {TicketInfo} from 'src/types';
+import {BottomSheet} from 'src/components/bottom-sheet'
+import {Button, Text} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {TicketInfo} from 'src/types'
 
 interface TicketDetailBuyProps {
-  onClose: () => void;
-  currencySymbols?: TicketInfo['currencySymbols'];
-  price?: TicketInfo['price'];
-  priceInDollars?: number;
+  onClose: () => void
+  currencySymbols?: TicketInfo['currencySymbols']
+  price?: TicketInfo['price']
+  priceInDollars?: number
 }
 
 export function TicketDetailBuy({
@@ -27,20 +27,20 @@ export function TicketDetailBuy({
   price,
   priceInDollars,
 }: TicketDetailBuyProps) {
-  const [count, setCount] = useState(1);
-  const {styles} = useThematicStyles(rawStyles);
-  const {height: H} = useWindowDimensions();
+  const [count, setCount] = useState(1)
+  const {styles} = useThematicStyles(rawStyles)
+  const {height: H} = useWindowDimensions()
 
-  const closeDistance = H / 5;
+  const closeDistance = H / 5
 
   const pressMinus = () => {
-    if (count === 1) return;
-    else setCount(count - 1);
-  };
+    if (count === 1) return
+    else setCount(count - 1)
+  }
   const pressPlus = () => {
-    if (count === 99) return;
-    else setCount(count + 1);
-  };
+    if (count === 99) return
+    else setCount(count + 1)
+  }
   return (
     <BottomSheet onClose={onClose} closeDistance={closeDistance}>
       <View style={styles.rowAmount}>
@@ -81,7 +81,7 @@ export function TicketDetailBuy({
         Continue
       </Button>
     </BottomSheet>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -118,4 +118,4 @@ const rawStyles = StyleSheet.create({
     fontSize: 30,
     color: Color.primary,
   },
-});
+})

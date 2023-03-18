@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 
 import {
   StyleProp,
@@ -6,26 +6,26 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-} from 'react-native';
+} from 'react-native'
 
-import {Spacer, Text, TextSum} from 'src/components/ui';
-import {cleanNumber} from 'src/helpers/CleanNumber';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Spacer, Text, TextSum} from 'src/components/ui'
+import {cleanNumber} from 'src/helpers/CleanNumber'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
 type valueType = {
-  amount: number;
-  suffix?: string;
-};
+  amount: number
+  suffix?: string
+}
 
 export type InfoBlockAmountProps = {
-  style?: StyleProp<ViewStyle>;
-  values?: number[] | valueType[];
-  value?: number | valueType;
-  text: string;
-  amountColor?: Color;
-  isLarge?: boolean;
-};
+  style?: StyleProp<ViewStyle>
+  values?: number[] | valueType[]
+  value?: number | valueType
+  text: string
+  amountColor?: Color
+  isLarge?: boolean
+}
 
 export function InfoBlockAmount({
   style,
@@ -35,25 +35,25 @@ export function InfoBlockAmount({
   amountColor = Color.textBase1,
   isLarge,
 }: InfoBlockAmountProps) {
-  const [isShow, setIsShow] = useState(false);
-  const {styles} = useThematicStyles(rawStyles);
+  const [isShow, setIsShow] = useState(false)
+  const {styles} = useThematicStyles(rawStyles)
 
-  let mapValues = values;
+  let mapValues = values
   if (mapValues.length === 0) {
-    mapValues = [value] as number[] | valueType[];
+    mapValues = [value] as number[] | valueType[]
   }
   mapValues = mapValues.map(item => {
     if (typeof item === 'number') {
-      return {amount: item};
+      return {amount: item}
     }
-    return item;
-  });
+    return item
+  })
 
-  const buttonExists = mapValues.length > 2;
+  const buttonExists = mapValues.length > 2
 
   const onPressShow = () => {
-    setIsShow(pr => !pr);
-  };
+    setIsShow(pr => !pr)
+  }
 
   return (
     <View style={[styles.blockContainer, !isLarge && styles.flexOne, style]}>
@@ -80,7 +80,7 @@ export function InfoBlockAmount({
         )}
       </View>
     </View>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -97,4 +97,4 @@ const rawStyles = StyleSheet.create({
   flexOne: {
     flex: 1,
   },
-});
+})

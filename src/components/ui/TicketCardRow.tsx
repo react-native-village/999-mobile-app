@@ -1,32 +1,32 @@
-import React from 'react';
+import React from 'react'
 
-import {format} from 'date-fns';
+import {format} from 'date-fns'
 import {
   Image,
   StyleSheet,
   TouchableOpacity,
   View,
   useColorScheme,
-} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+} from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {formatPriceSmall} from 'src/components/formatPrice';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {TicketInfo} from 'src/types';
+import {formatPriceSmall} from 'src/components/formatPrice'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {TicketInfo} from 'src/types'
 
-import {Spacer} from './spacer';
-import {Text} from './text/text';
-import {TicketCardTags} from './TicketCardTags';
+import {Spacer} from './spacer'
+import {Text} from './text/text'
+import {TicketCardTags} from './TicketCardTags'
 
-import {dark, light} from '../../../assets/images/cryproCoins/mapping';
+import {dark, light} from '../../../assets/images/cryproCoins/mapping'
 
 export function TicketCardRow({
   onPress,
   ...itemProps
 }: TicketInfo & {onPress?: (item: TicketInfo) => void}) {
-  const {styles, colors} = useThematicStyles(rawStyles);
-  const isDark = useColorScheme() === 'dark';
+  const {styles, colors} = useThematicStyles(rawStyles)
+  const isDark = useColorScheme() === 'dark'
   const {
     name,
     startData,
@@ -36,11 +36,11 @@ export function TicketCardRow({
     geoPosition,
     price,
     currencySymbols,
-  } = itemProps;
+  } = itemProps
 
-  const iconName = currencySymbols?.toLowerCase();
+  const iconName = currencySymbols?.toLowerCase()
   // @ts-ignore
-  const SvgIcon = !isDark ? dark[iconName] : light[iconName];
+  const SvgIcon = !isDark ? dark[iconName] : light[iconName]
 
   return (
     <TouchableOpacity activeOpacity={0.6} onPress={() => onPress?.(itemProps)}>
@@ -103,9 +103,9 @@ export function TicketCardRow({
         </View>
       </View>
     </TouchableOpacity>
-  );
+  )
 }
-const borderW = 0.6;
+const borderW = 0.6
 const rawStyles = StyleSheet.create({
   container: {
     borderRadius: 16,
@@ -156,4 +156,4 @@ const rawStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-});
+})

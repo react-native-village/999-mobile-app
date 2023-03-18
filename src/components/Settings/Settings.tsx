@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 
-import {Background, CustomHeader} from 'src/components/ui';
-import {Color} from 'src/themeTypes';
+import {Background, CustomHeader} from 'src/components/ui'
+import {Color} from 'src/themeTypes'
 
-import {SettingsButton} from './SettingsButton';
+import {SettingsButton} from './SettingsButton'
 
 interface SettingsProps {
-  onPressEdit: () => void;
-  onPressWallet: () => void;
-  onPressDisconnect: () => void;
-  onPressBack: () => void;
-  onPressThemes: () => void;
+  onPressEdit: () => void
+  onPressWallet: () => void
+  onPressDisconnect: () => void
+  onPressBack: () => void
+  onPressThemes: () => void
 }
 export function Settings({
   onPressEdit,
@@ -44,5 +44,5 @@ export function Settings({
         onPress={onPressDisconnect}
       />
     </Background>
-  );
+  )
 }

@@ -1,34 +1,34 @@
-import React, {useMemo} from 'react';
+import React, {useMemo} from 'react'
 
-import {Theme, useTheme} from '@react-navigation/native';
+import {Theme, useTheme} from '@react-navigation/native'
 // @ts-ignore
-import blockEmbedPlugin from 'markdown-it-block-embed';
-import {StyleProp, StyleSheet, TextStyle} from 'react-native';
-import {RenderRules} from 'react-native-markdown-display';
-import {MarkdownIt} from 'react-native-markdown-display';
-import {ms, mvs, s, vs} from 'react-native-size-matters';
+import blockEmbedPlugin from 'markdown-it-block-embed'
+import {StyleProp, StyleSheet, TextStyle} from 'react-native'
+import {RenderRules} from 'react-native-markdown-display'
+import {MarkdownIt} from 'react-native-markdown-display'
+import {ms, mvs, s, vs} from 'react-native-size-matters'
 
-import {Img} from 'src/components/ui';
+import {Img} from 'src/components/ui'
 
 const markdownItInstance = MarkdownIt({typographer: true, breaks: true}).use(
   blockEmbedPlugin,
   {
     containerClassName: 'video-embed',
   },
-);
+)
 
-const factor = 0.3;
+const factor = 0.3
 const bodyText = {
   fontSize: ms(14, factor),
   fontFamily: 'Montserrat',
   lineHeight: ms(22, factor),
-};
+}
 
 export const useMarkdownProps = (
   YouTubeContainerWidthCoefficient?: number,
   ImageWidthCoefficient?: number,
 ) => {
-  const theme = useTheme();
+  const theme = useTheme()
   const props = useMemo(
     () =>
       getMarkdownStyle(
@@ -37,9 +37,9 @@ export const useMarkdownProps = (
         ImageWidthCoefficient,
       ),
     [theme, YouTubeContainerWidthCoefficient],
-  );
-  return {...props, markdownit: markdownItInstance};
-};
+  )
+  return {...props, markdownit: markdownItInstance}
+}
 
 export const getMarkdownStyle = (
   theme: Theme,
@@ -48,7 +48,7 @@ export const getMarkdownStyle = (
 ) => {
   const {
     colors: {text, border, primary, card, background},
-  } = theme;
+  } = theme
   const paragraph: StyleProp<TextStyle> = {
     flexWrap: 'wrap',
     flexDirection: 'row',
@@ -59,7 +59,7 @@ export const getMarkdownStyle = (
     color: text,
 
     letterSpacing: ms(0.2, factor),
-  };
+  }
   const style = StyleSheet.create({
     body: {},
     // Headings
@@ -218,7 +218,7 @@ export const getMarkdownStyle = (
       flex: 1,
       padding: s(5),
     },
-  });
+  })
   const rules: RenderRules = {
     // video: (node, children, parent, styles) => {
     //   const {videoID, serviceName} = (node as any).sourceInfo;
@@ -236,8 +236,8 @@ export const getMarkdownStyle = (
     //   }
     // },
     image: node => {
-      const {src} = node.attributes;
-      return <Img widthCoefficient={IMGwPercent} key={node.key} uri={src} />;
+      const {src} = node.attributes
+      return <Img widthCoefficient={IMGwPercent} key={node.key} uri={src} />
     },
     // fence: a => {
     //   // console.log('fence:', a)
@@ -248,9 +248,9 @@ export const getMarkdownStyle = (
     //   // console.log('code_inline:', a)
     //   return <CodeHighlighter key={nanoid()} type={'js'} codeText={a.content} />
     // }
-  };
+  }
   return {
     style,
     rules,
-  };
-};
+  }
+}

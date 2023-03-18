@@ -1,20 +1,20 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native'
 
-import {Spacer, Text} from 'src/components/ui';
-import {cleanNumber} from 'src/helpers/CleanNumber';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Spacer, Text} from 'src/components/ui'
+import {cleanNumber} from 'src/helpers/CleanNumber'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import Logo from '../../../assets/images/logo.svg';
+import Logo from '../../../assets/images/logo.svg'
 
 interface StakingEmptyProps {
-  availableSum: number;
+  availableSum: number
 }
 
 export function StakingEmpty({availableSum}: StakingEmptyProps) {
-  const {styles} = useThematicStyles(rawStyles);
+  const {styles} = useThematicStyles(rawStyles)
   return (
     <>
       <Spacer />
@@ -37,7 +37,7 @@ export function StakingEmpty({availableSum}: StakingEmptyProps) {
       </View>
       <Spacer />
     </>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -53,4 +53,4 @@ const rawStyles = StyleSheet.create({
   logo: {
     marginTop: 6,
   },
-});
+})

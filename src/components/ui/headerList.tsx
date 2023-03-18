@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native'
 
-import {Color} from 'src/themeTypes';
+import {Color} from 'src/themeTypes'
 
-import {Text} from '.';
+import {Text} from '.'
 
 interface HeaderListProps {
-  title: string;
-  button: string;
+  title: string
+  button: string
 }
 
 export function HeaderList({title, button}: HeaderListProps) {
@@ -21,7 +21,7 @@ export function HeaderList({title, button}: HeaderListProps) {
         </Text>
       </TouchableOpacity>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -36,4 +36,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     marginBottom: 20,
   },
-});
+})

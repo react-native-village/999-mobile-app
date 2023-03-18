@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import {render, screen} from '@testing-library/react-native';
+import {render, screen} from '@testing-library/react-native'
 
-import {Text} from './text';
+import {Text} from './text'
 
 test('render text test', async () => {
-  expect.assertions(2);
+  expect.assertions(2)
 
-  const expectedLine = 'hello';
-  render(<Text children={'hello'} />);
+  const expectedLine = 'hello'
+  render(<Text children={'hello'} />)
 
-  expect(screen.getByTestId('text').children[0]).toBe(expectedLine);
-  expect(screen.toJSON()).toMatchSnapshot();
-});
+  expect(screen.getByTestId('text').children[0]).toBe(expectedLine)
+  expect(screen.toJSON()).toMatchSnapshot()
+})

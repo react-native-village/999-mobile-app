@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import {Settings} from 'src/components/Settings';
+import {Settings} from 'src/components/Settings'
 
 export function SettingsScreen({navigation}: any) {
   return (
@@ -11,5 +11,5 @@ export function SettingsScreen({navigation}: any) {
       onPressThemes={() => {}}
       onPressBack={navigation.goBack}
     />
-  );
+  )
 }

@@ -1,17 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 
-import {HomeGovernance} from 'src/components/HomeGovernance';
-import {useTypedNavigation} from 'src/hooks';
-import {ProposalsCroppedList, ProposalsTagKeys} from 'src/types';
-import {ProposalsTagType} from 'src/variables/proposal';
+import {HomeGovernance} from 'src/components/HomeGovernance'
+import {useTypedNavigation} from 'src/hooks'
+import {ProposalsCroppedList, ProposalsTagKeys} from 'src/types'
+import {ProposalsTagType} from 'src/variables/proposal'
 
 export function HomeGovernanceScreen() {
-  const [statusFilter, setStatusFilter] = useState<ProposalsTagKeys>('all');
-  const {navigate} = useTypedNavigation();
+  const [statusFilter, setStatusFilter] = useState<ProposalsTagKeys>('all')
+  const {navigate} = useTypedNavigation()
 
   const onPressCard = (id: number) => {
-    navigate('proposal', {id});
-  };
+    navigate('proposal', {id})
+  }
 
   const proposals: ProposalsCroppedList = [
     {
@@ -44,11 +44,11 @@ export function HomeGovernanceScreen() {
       status: 'rejected',
       title: 'Randomly reward',
     },
-  ];
+  ]
 
   const onSelect = (tag: ProposalsTagType) => () => {
-    setStatusFilter(tag[0]);
-  };
+    setStatusFilter(tag[0])
+  }
 
   return (
     <HomeGovernance
@@ -57,5 +57,5 @@ export function HomeGovernanceScreen() {
       onSelect={onSelect}
       onPressCard={onPressCard}
     />
-  );
+  )
 }

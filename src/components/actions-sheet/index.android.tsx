@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react';
+import React, {useEffect} from 'react'
 
-import {Keyboard, StyleSheet, View, useWindowDimensions} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Keyboard, StyleSheet, View, useWindowDimensions} from 'react-native'
+import {TouchableOpacity} from 'react-native-gesture-handler'
 import Animated, {
   Easing,
   WithTimingConfig,
@@ -10,61 +10,61 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+} from 'react-native-reanimated'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-import {Text} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Text} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import {ActionsSheetProps} from '.';
+import {ActionsSheetProps} from '.'
 
 const timingOutAnimationConfig: WithTimingConfig = {
   duration: 550,
   easing: Easing.in(Easing.back()),
-};
+}
 
 const timingInAnimationConfig: WithTimingConfig = {
   duration: 550,
   easing: Easing.out(Easing.back()),
-};
+}
 
 export function ActionsSheet({
   onPressDiscard,
   onPressKeepEditing,
 }: ActionsSheetProps) {
-  const {height: H} = useWindowDimensions();
-  const {bottom} = useSafeAreaInsets();
-  const {styles} = useThematicStyles(rawStyles);
+  const {height: H} = useWindowDimensions()
+  const {bottom} = useSafeAreaInsets()
+  const {styles} = useThematicStyles(rawStyles)
 
-  const fullyOpen = 0;
-  const fullyClosed = H * 0.45;
+  const fullyOpen = 0
+  const fullyClosed = H * 0.45
 
-  const fadeAnim = useSharedValue(fullyClosed);
+  const fadeAnim = useSharedValue(fullyClosed)
 
   const fadeOut = (endCallback?: () => void) => {
-    const onEnd = () => endCallback?.();
+    const onEnd = () => endCallback?.()
     fadeAnim.value = withTiming(fullyClosed, timingOutAnimationConfig, () =>
       runOnJS(onEnd)(),
-    );
-  };
+    )
+  }
 
   useEffect(() => {
-    Keyboard.dismiss();
-    fadeAnim.value = withTiming(fullyOpen, timingInAnimationConfig);
-  }, [fadeAnim]);
+    Keyboard.dismiss()
+    fadeAnim.value = withTiming(fullyOpen, timingInAnimationConfig)
+  }, [fadeAnim])
 
   const bgAnimation = useAnimatedStyle(() => ({
     opacity: interpolate(fadeAnim.value, [fullyOpen, fullyClosed], [0.5, 0]),
-  }));
+  }))
 
   const slideFromBottomAnimation = useAnimatedStyle(() => ({
     transform: [{translateY: fadeAnim.value}],
-  }));
+  }))
 
-  const handleDiscard = () => fadeOut(onPressDiscard);
+  const handleDiscard = () => fadeOut(onPressDiscard)
 
-  const handleKeepEditing = () => fadeOut(onPressKeepEditing);
+  const handleKeepEditing = () => fadeOut(onPressKeepEditing)
 
   return (
     <View style={StyleSheet.absoluteFillObject}>
@@ -98,7 +98,7 @@ export function ActionsSheet({
         </View>
       </Animated.View>
     </View>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -140,4 +140,4 @@ const rawStyles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-});
+})

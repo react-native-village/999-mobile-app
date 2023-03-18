@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {StyleSheet, TouchableOpacity, View} from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import {Text} from '../ui';
+import {Text} from '../ui'
 
 interface SettingsButtonProps {
-  onPress: () => void;
-  title?: string;
-  icon: string;
+  onPress: () => void
+  title?: string
+  icon: string
 }
 
 export function SettingsButton({onPress, title, icon}: SettingsButtonProps) {
-  const {styles} = useThematicStyles(rawStyles);
+  const {styles} = useThematicStyles(rawStyles)
 
   return (
     <TouchableOpacity
@@ -32,7 +32,7 @@ export function SettingsButton({onPress, title, icon}: SettingsButtonProps) {
       </View>
       <Icon name="chevron-forward" style={styles.chevronStyle} />
     </TouchableOpacity>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -67,4 +67,4 @@ const rawStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-});
+})

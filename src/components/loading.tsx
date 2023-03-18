@@ -1,7 +1,7 @@
-import React, {memo} from 'react';
+import React, {memo} from 'react'
 
-import {StyleSheet, View} from 'react-native';
-import Spinner, {SpinnerType} from 'react-native-spinkit';
+import {StyleSheet, View} from 'react-native'
+import Spinner, {SpinnerType} from 'react-native-spinkit'
 
 const styles = StyleSheet.create({
   activityIndicator: {
@@ -13,20 +13,20 @@ const styles = StyleSheet.create({
     top: 10,
     bottom: 10,
   },
-});
+})
 
 interface LoadingT {
-  size?: number;
-  type?: SpinnerType;
-  animating?: boolean;
-  color?: string;
+  size?: number
+  type?: SpinnerType
+  animating?: boolean
+  color?: string
 }
 
 export const Loading = memo<LoadingT>(({size, animating, type, color}) => {
-  const {activityIndicator} = styles;
+  const {activityIndicator} = styles
   return (
     <View style={activityIndicator}>
       {!animating && <Spinner size={size} type={type} color={color} />}
     </View>
-  );
-});
+  )
+})

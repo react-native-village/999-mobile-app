@@ -1,2 +1,2 @@
-export * from './VotingCard';
-export * from './VotingCardCompleted';
+export * from './VotingCard'
+export * from './VotingCardCompleted'

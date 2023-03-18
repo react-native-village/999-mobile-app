@@ -1,1 +1,1 @@
-export * from './QRScanner';
+export * from './QRScanner'

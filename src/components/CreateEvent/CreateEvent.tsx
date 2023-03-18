@@ -1,20 +1,20 @@
-import React from 'react';
+import React from 'react'
 
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {ScrollView, StyleSheet, View} from 'react-native'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-import {Color} from 'src/themeTypes';
+import {Color} from 'src/themeTypes'
 
-import {Background, Button, CustomHeader, FormField, Text} from '../ui';
-import {KeyboardSafeArea} from '../ui/keyboard-safe-area';
+import {Background, Button, CustomHeader, FormField, Text} from '../ui'
+import {KeyboardSafeArea} from '../ui/keyboard-safe-area'
 
 interface CreateEventProps {
-  onBack: () => void;
-  handleSubmit: () => void;
+  onBack: () => void
+  handleSubmit: () => void
 }
 
 export function CreateEvent({onBack, handleSubmit}: CreateEventProps) {
-  const {bottom} = useSafeAreaInsets();
+  const {bottom} = useSafeAreaInsets()
 
   return (
     <Background style={styles.background}>
@@ -84,7 +84,7 @@ export function CreateEvent({onBack, handleSubmit}: CreateEventProps) {
         </ScrollView>
       </KeyboardSafeArea>
     </Background>
-  );
+  )
 }
 const styles = StyleSheet.create({
   background: {
@@ -109,4 +109,4 @@ const styles = StyleSheet.create({
     height: 70,
     justifyContent: 'space-between',
   },
-});
+})

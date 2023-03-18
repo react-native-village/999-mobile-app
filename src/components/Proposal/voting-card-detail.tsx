@@ -1,8 +1,6 @@
-import React, {forwardRef, useEffect, useImperativeHandle, useRef} from 'react';
+import React, {forwardRef, useEffect, useImperativeHandle, useRef} from 'react'
 
-import {View} from 'react-native';
-
-import {Color} from '@app/colors';
+import {Color} from '@app/colors'
 import {
   Icon,
   ProgressCircle,
@@ -12,25 +10,26 @@ import {
   Spacer,
   Text,
   TextSum,
-} from '@app/components/ui';
-import {VotingLine, VotingLineInterface} from '@app/components/voting-line';
-import {createTheme} from '@app/helpers';
-import {I18N} from '@app/i18n';
-import {ProposalRealmType} from '@app/models/governance-voting';
-import {VoteNamesType} from '@app/types';
-import {VOTES} from '@app/variables/votes';
+} from '@app/components/ui'
+import {VotingLine, VotingLineInterface} from '@app/components/voting-line'
+import {createTheme} from '@app/helpers'
+import {I18N} from '@app/i18n'
+import {ProposalRealmType} from '@app/models/governance-voting'
+import {VoteNamesType} from '@app/types'
+import {VOTES} from '@app/variables/votes'
+import {View} from 'react-native'
 
 export type VotingCardDetailRefInterface =
   | ({
-      updateNotEnoughProgress: (value: number) => void;
-      updateDepositProgress: (value: number) => void;
+      updateNotEnoughProgress: (value: number) => void
+      updateDepositProgress: (value: number) => void
     } & VotingLineInterface)
-  | undefined;
+  | undefined
 
 interface VotingCardDetailProps {
-  item: ProposalRealmType;
-  yourVote?: VoteNamesType;
-  totalCollected?: number;
+  item: ProposalRealmType
+  yourVote?: VoteNamesType
+  totalCollected?: number
 }
 
 export const VotingCardDetail = forwardRef<
@@ -43,13 +42,13 @@ export const VotingCardDetail = forwardRef<
     proposalVotes,
     isDeposited,
     isVoting,
-  } = item;
-  const circleRef = useRef<ProgressCircleInterface>();
-  const votingRef = useRef<VotingLineInterface | undefined>();
-  const depositLineRef = useRef<ProgressLineInterface | undefined>();
-  const notEnoughVotesRef = useRef<ProgressLineInterface | undefined>();
+  } = item
+  const circleRef = useRef<ProgressCircleInterface>()
+  const votingRef = useRef<VotingLineInterface | undefined>()
+  const depositLineRef = useRef<ProgressLineInterface | undefined>()
+  const notEnoughVotesRef = useRef<ProgressLineInterface | undefined>()
 
-  const {i18n, color} = VOTES.find(v => v.name === yourVote) || {};
+  const {i18n, color} = VOTES.find(v => v.name === yourVote) || {}
 
   useImperativeHandle(ref, () => ({
     setSelected: (...params) => votingRef.current?.setSelected(...params),
@@ -58,15 +57,15 @@ export const VotingCardDetail = forwardRef<
     updateValues: (...params) => votingRef.current?.updateValues(...params),
     updateDepositProgress: (...params) =>
       depositLineRef.current?.updateProgress(...params),
-  }));
+  }))
 
   useEffect(() => {
-    circleRef.current?.animateTo(item.timeLeftPercent);
-  }, [item.timeLeftPercent]);
+    circleRef.current?.animateTo(item.timeLeftPercent)
+  }, [item.timeLeftPercent])
 
-  const isNotEnoughVotes = item.yesPercent < 51;
+  const isNotEnoughVotes = item.yesPercent < 51
 
-  const iconColor = isDeposited ? Color.textBlue1 : Color.graphicGreen1;
+  const iconColor = isDeposited ? Color.textBlue1 : Color.graphicGreen1
   return (
     <>
       <View style={styles.cardInfo}>
@@ -158,8 +157,8 @@ export const VotingCardDetail = forwardRef<
         </View>
       )}
     </>
-  );
-});
+  )
+})
 
 const styles = createTheme({
   cardInfo: {
@@ -191,4 +190,4 @@ const styles = createTheme({
     borderColor: Color.graphicSecond1,
     borderRadius: 12,
   },
-});
+})

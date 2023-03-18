@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleProp, StyleSheet, TouchableOpacity, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, TouchableOpacity, ViewStyle} from 'react-native'
 
-import {Spacer, Text} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {connectMethodType} from 'src/types';
+import {Spacer, Text} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {connectMethodType} from 'src/types'
 
 interface ConnectWalletButtonProps extends connectMethodType {
-  style?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>
 }
 
 export function ConnectWalletButton({
@@ -18,7 +18,7 @@ export function ConnectWalletButton({
   Logo,
   style,
 }: ConnectWalletButtonProps) {
-  const {styles} = useThematicStyles(rawStyles);
+  const {styles} = useThematicStyles(rawStyles)
   return (
     <TouchableOpacity
       style={[styles.container, style]}
@@ -35,7 +35,7 @@ export function ConnectWalletButton({
         {isAvailable ? 'Connect' : 'Coming Soon!'}
       </Text>
     </TouchableOpacity>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -52,4 +52,4 @@ const rawStyles = StyleSheet.create({
   nameText: {
     flex: 1,
   },
-});
+})

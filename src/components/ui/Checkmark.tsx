@@ -1,22 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleProp, ViewStyle} from 'react-native';
-import Svg, {ClipPath, Defs, G, Path, SvgProps} from 'react-native-svg';
+import {StyleProp, ViewStyle} from 'react-native'
+import Svg, {ClipPath, Defs, G, Path, SvgProps} from 'react-native-svg'
 
-import {useTheme} from 'src/hooks';
+import {useTheme} from 'src/hooks'
 
 export type CheckmarkProps = {
-  isFilled?: boolean;
-  style?: StyleProp<ViewStyle>;
-};
+  isFilled?: boolean
+  style?: StyleProp<ViewStyle>
+}
 
 export function Checkmark({isFilled, style}: CheckmarkProps) {
-  const {colors} = useTheme();
+  const {colors} = useTheme()
   return isFilled ? (
     <CheckboxFilled style={style} width={28} color={colors.primary} />
   ) : (
     <CheckboxEmpty style={style} width={28} color={colors.primary} />
-  );
+  )
 }
 
 // const styles = StyleSheet.create({
@@ -40,7 +40,7 @@ function CheckboxEmpty({color, ...props}: SvgProps) {
         </ClipPath>
       </Defs>
     </Svg>
-  );
+  )
 }
 
 function CheckboxFilled({color, ...props}: SvgProps) {
@@ -58,5 +58,5 @@ function CheckboxFilled({color, ...props}: SvgProps) {
         </ClipPath>
       </Defs>
     </Svg>
-  );
+  )
 }

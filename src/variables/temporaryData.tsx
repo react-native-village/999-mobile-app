@@ -1,4 +1,4 @@
-import {PersonInfo, TicketInfo} from 'src/types';
+import {PersonInfo, TicketInfo} from 'src/types'
 
 export const DatingData: PersonInfo[] = [
   {
@@ -60,7 +60,7 @@ export const DatingData: PersonInfo[] = [
       'https://avatars.dzeninfra.ru/get-zen_doc/198359/pub_5af30052799d9ddc1ed569ed_5af3015ba815f14484527e0e/scale_1200',
     description: '',
   },
-];
+]
 
 export const categoriesData = [
   {
@@ -87,7 +87,7 @@ export const categoriesData = [
     id: '5',
     title: 'Geek',
   },
-];
+]
 
 export const ticketsData: TicketInfo[] = [
   {
@@ -223,7 +223,7 @@ Table reservation +66 92 424 6439`,
     imageUrl:
       'https://phangan.events/wp-content/uploads/2023/03/22998_image_329287712_914959506293579_6832003462502429261_n.jpg',
   },
-].reverse();
+].reverse()
 export const votingCardsData = [
   {
     status: 'passed',
@@ -291,4 +291,4 @@ export const votingCardsData = [
     dateStart: 1659974401000,
     dateEnd: 1659992401000,
   },
-];
+]

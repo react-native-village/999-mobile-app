@@ -1,37 +1,37 @@
-import React, {forwardRef, useImperativeHandle, useState} from 'react';
+import React, {forwardRef, useImperativeHandle, useState} from 'react'
 
-import {useIsFocused} from '@react-navigation/native';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {CameraScreen} from 'react-native-camera-kit';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useIsFocused} from '@react-navigation/native'
+import {StyleSheet, TouchableOpacity, View} from 'react-native'
+import {CameraScreen} from 'react-native-camera-kit'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
+import Icon from 'react-native-vector-icons/Ionicons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {Background, Loading, Text} from 'src/components/ui';
-import {useCameraPermissions, useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Background, Loading, Text} from 'src/components/ui'
+import {useCameraPermissions, useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 interface QRScannerProps {
-  onScanBarcode: (qrValue: string) => void;
-  onPressBack: () => void;
+  onScanBarcode: (qrValue: string) => void
+  onPressBack: () => void
 }
 
 export interface QRScannerRefType {
-  showError: (errorText: string) => void;
+  showError: (errorText: string) => void
 }
 
 export const QRScanner = forwardRef<QRScannerRefType, QRScannerProps>(
   ({onScanBarcode, onPressBack}, ref) => {
-    const isFocused = useIsFocused();
-    const isCameraAllowed = useCameraPermissions();
-    const {top} = useSafeAreaInsets();
-    const [warning, setWarning] = useState('');
-    const {styles, colors} = useThematicStyles(rawStyles);
+    const isFocused = useIsFocused()
+    const isCameraAllowed = useCameraPermissions()
+    const {top} = useSafeAreaInsets()
+    const [warning, setWarning] = useState('')
+    const {styles, colors} = useThematicStyles(rawStyles)
 
     useImperativeHandle(ref, () => ({
       showError(error?: string) {
-        setWarning(error ?? '');
+        setWarning(error ?? '')
       },
-    }));
+    }))
 
     return isFocused ? (
       <Background style={styles.container}>
@@ -77,9 +77,9 @@ export const QRScanner = forwardRef<QRScannerRefType, QRScannerProps>(
           <Icon name="arrow-back" size={24} color={colors.textBase1} />
         </TouchableOpacity>
       </Background>
-    ) : null;
+    ) : null
   },
-);
+)
 
 const rawStyles = StyleSheet.create({
   container: {
@@ -112,4 +112,4 @@ const rawStyles = StyleSheet.create({
     left: 20,
     top: 20,
   },
-});
+})

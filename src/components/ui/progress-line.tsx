@@ -1,27 +1,27 @@
-import React, {forwardRef, memo, useImperativeHandle} from 'react';
+import React, {forwardRef, memo, useImperativeHandle} from 'react'
 
-import {ColorValue, StyleSheet, View} from 'react-native';
+import {ColorValue, StyleSheet, View} from 'react-native'
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
+} from 'react-native-reanimated'
 
-import {Spacer, Text} from 'src/components/ui';
-import {useThematicStyles, useTheme} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Spacer, Text} from 'src/components/ui'
+import {useThematicStyles, useTheme} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
 export type ProgressLineProps = {
-  initialProgress?: number;
-  lineColor?: ColorValue;
-  max?: number;
-  total?: number;
-  showBottomInfo?: true;
-  markPosition?: number;
-};
+  initialProgress?: number
+  lineColor?: ColorValue
+  max?: number
+  total?: number
+  showBottomInfo?: true
+  markPosition?: number
+}
 
 export interface ProgressLineInterface {
-  updateProgress: (newVotes: number) => void;
+  updateProgress: (newVotes: number) => void
 }
 
 export const ProgressLine = memo(
@@ -37,20 +37,20 @@ export const ProgressLine = memo(
       }: ProgressLineProps,
       ref,
     ) => {
-      const {colors} = useTheme();
-      const {styles} = useThematicStyles(rawStyles);
-      if (lineColor === undefined) lineColor = colors.primary;
-      const width = useSharedValue(initialProgress);
+      const {colors} = useTheme()
+      const {styles} = useThematicStyles(rawStyles)
+      if (lineColor === undefined) lineColor = colors.primary
+      const width = useSharedValue(initialProgress)
 
       useImperativeHandle(ref, () => ({
         updateProgress(percent: number) {
-          width.value = withTiming(percent, {duration: 500});
+          width.value = withTiming(percent, {duration: 500})
         },
-      }));
+      }))
 
       const progressWidth = useAnimatedStyle(() => ({
         width: `${width.value * 100}%`,
-      }));
+      }))
 
       return (
         <>
@@ -75,10 +75,10 @@ export const ProgressLine = memo(
             </Text>
           )}
         </>
-      );
+      )
     },
   ),
-);
+)
 
 const rawStyles = StyleSheet.create({
   container: {
@@ -100,4 +100,4 @@ const rawStyles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: Color.graphicSecond4,
   },
-});
+})

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import {
   ScrollView,
@@ -6,33 +6,33 @@ import {
   StyleSheet,
   View,
   ViewProps,
-} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+} from 'react-native'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-type PopupContainerViewProps = {plain: true} & ViewProps;
-type PopupContainerScrollProps = {plain?: undefined} & ScrollViewProps;
+type PopupContainerViewProps = {plain: true} & ViewProps
+type PopupContainerScrollProps = {plain?: undefined} & ScrollViewProps
 export type PopupContainerProps =
   | PopupContainerViewProps
-  | PopupContainerScrollProps;
+  | PopupContainerScrollProps
 
 export function PopupContainer({
   children,
   style,
   ...props
 }: PopupContainerProps) {
-  const insets = useSafeAreaInsets();
+  const insets = useSafeAreaInsets()
 
   const propStyle = StyleSheet.compose(
     {flexGrow: 1, paddingBottom: insets.bottom},
     style,
-  );
+  )
 
   if ('plain' in props) {
     return (
       <View {...props} style={propStyle}>
         {children}
       </View>
-    );
+    )
   }
 
   return (
@@ -44,5 +44,5 @@ export function PopupContainer({
       {...props}>
       {children}
     </ScrollView>
-  );
+  )
 }

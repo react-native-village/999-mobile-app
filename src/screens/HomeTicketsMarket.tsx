@@ -1,31 +1,31 @@
-import React from 'react';
+import React from 'react'
 
-import {HomeMarket} from 'src/components/HomeMarket';
-import {useTypedNavigation} from 'src/hooks';
-import {TicketInfo} from 'src/types';
+import {HomeMarket} from 'src/components/HomeMarket'
+import {useTypedNavigation} from 'src/hooks'
+import {TicketInfo} from 'src/types'
 
 export function HomeTicketsMarketScreen() {
-  const {navigate} = useTypedNavigation();
+  const {navigate} = useTypedNavigation()
 
   const onPressCard = (item: TicketInfo) => {
-    navigate('ticketDetail', item);
-  };
+    navigate('ticketDetail', item)
+  }
 
   const onPressProfile = () => {
-    navigate('profile');
-  };
+    navigate('profile')
+  }
 
   const onPressSettings = () => {
-    navigate('settings');
-  };
+    navigate('settings')
+  }
 
   const onPressSearch = () => {
-    navigate('search');
-  };
+    navigate('search')
+  }
 
   const onPressScan = () => {
-    navigate('scan');
-  };
+    navigate('scan')
+  }
 
   return (
     <HomeMarket
@@ -35,5 +35,5 @@ export function HomeTicketsMarketScreen() {
       onPressSearch={onPressSearch}
       onPressScan={onPressScan}
     />
-  );
+  )
 }

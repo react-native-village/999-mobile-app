@@ -1,1 +1,1 @@
-export * from './lottie-wrap';
+export * from './lottie-wrap'

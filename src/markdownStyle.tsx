@@ -1,19 +1,19 @@
-import {Theme} from '@react-navigation/native';
-import {StyleProp, StyleSheet, TextStyle} from 'react-native';
-import {RenderRules} from 'react-native-markdown-display';
-import {ms, mvs, s, vs} from 'react-native-size-matters';
+import {Theme} from '@react-navigation/native'
+import {StyleProp, StyleSheet, TextStyle} from 'react-native'
+import {RenderRules} from 'react-native-markdown-display'
+import {ms, mvs, s, vs} from 'react-native-size-matters'
 
-const factor = 0.3;
+const factor = 0.3
 const bodyText = {
   fontSize: ms(14, factor),
   fontFamily: 'Spectral-Medium',
   lineHeight: ms(22, factor),
-};
+}
 
 export const getMarkdownStyle = (theme: Theme) => {
   const {
     colors: {text, border, primary, card, background},
-  } = theme;
+  } = theme
   const paragraph: StyleProp<TextStyle> = {
     flexWrap: 'wrap',
     flexDirection: 'row',
@@ -23,7 +23,7 @@ export const getMarkdownStyle = (theme: Theme) => {
     ...bodyText,
     color: border,
     letterSpacing: ms(0.2, factor),
-  };
+  }
   const styles = StyleSheet.create({
     body: {},
     // Headings
@@ -190,7 +190,7 @@ export const getMarkdownStyle = (theme: Theme) => {
       flex: 1,
       padding: s(5),
     },
-  });
+  })
   const rules: RenderRules = {
     // fence: a => {
     //   // console.log('fence:', a)
@@ -209,9 +209,9 @@ export const getMarkdownStyle = (theme: Theme) => {
     //     <CodeHighlighter key={nanoid()} type={'js'} codeText={a.content} />
     //   );
     // },
-  };
+  }
   return {
     styles,
     rules,
-  };
-};
+  }
+}

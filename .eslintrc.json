@@ -46,6 +46,7 @@
     }
   ],
   "rules": {
+    "prettier/prettier": ["error", { "semi": false }],
     "global-require": 0,
     "no-param-reassign": [
       2,

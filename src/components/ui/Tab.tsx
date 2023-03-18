@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 
-import {Pressable, StyleSheet, useWindowDimensions} from 'react-native';
-import {ms, s} from 'react-native-size-matters';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import {Pressable, StyleSheet, useWindowDimensions} from 'react-native'
+import {ms, s} from 'react-native-size-matters'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
-import {useTheme} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {useTheme} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import {Spacer} from './spacer';
-import {Text} from './text/text';
+import {Spacer} from './spacer'
+import {Text} from './text/text'
 
 interface TabProps {
-  onPress?: () => void;
-  tabId: number;
-  color?: Color;
-  activeColor?: Color;
-  isFocused: boolean;
+  onPress?: () => void
+  tabId: number
+  color?: Color
+  activeColor?: Color
+  isFocused: boolean
 }
 
 const navDataById = [
@@ -29,7 +29,7 @@ const navDataById = [
   },
   {icon: 'landmark', name: 'Governance'},
   {icon: 'glass-cheers', name: 'Dating'},
-];
+]
 
 export function Tab({
   onPress,
@@ -38,8 +38,8 @@ export function Tab({
   color = Color.graphicSecond4,
   activeColor = Color.primary,
 }: TabProps) {
-  const tabWidth = useWindowDimensions().width / 5 - s(2) * 2;
-  const {colors} = useTheme();
+  const tabWidth = useWindowDimensions().width / 5 - s(2) * 2
+  const {colors} = useTheme()
 
   return (
     <Pressable onPress={onPress} style={icoContainer}>
@@ -54,7 +54,7 @@ export function Tab({
         {navDataById[tabId].name}
       </Text>
     </Pressable>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -67,6 +67,6 @@ const styles = StyleSheet.create({
     marginHorizontal: s(2),
     alignItems: 'center',
   },
-});
+})
 
-const {ico, icoContainer} = styles;
+const {ico, icoContainer} = styles
