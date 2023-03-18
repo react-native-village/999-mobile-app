@@ -1,26 +1,26 @@
-import React from 'react';
+import React from 'react'
 
 import {format} from 'date-fns';
 import {StyleSheet, TouchableOpacity, View, useColorScheme} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {formatPriceSmall} from 'src/components/formatPrice';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {TicketInfo} from 'src/types';
+import {formatPriceSmall} from 'src/components/formatPrice'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {TicketInfo} from 'src/types'
 
-import {TicketCardTags} from './TicketCardTags';
+import {TicketCardTags} from './TicketCardTags'
 
-import {Spacer, Text} from './';
-import {dark, light} from '../../../assets/images/cryproCoins/mapping';
+import {Spacer, Text} from './'
+import {dark, light} from '../../../assets/images/cryproCoins/mapping'
 
 export function TicketCardColumn({
   onPress,
   ...itemProps
 }: TicketInfo & {onPress?: (item: TicketInfo) => void}) {
-  const {styles, colors} = useThematicStyles(rawStyles);
-  const isDark = useColorScheme() === 'dark';
+  const {styles, colors} = useThematicStyles(rawStyles)
+  const isDark = useColorScheme() === 'dark'
   const {
     name,
     startData,
@@ -30,11 +30,11 @@ export function TicketCardColumn({
     geoPosition,
     price,
     currencySymbols,
-  } = itemProps;
+  } = itemProps
 
-  const iconName = currencySymbols?.toLowerCase();
+  const iconName = currencySymbols?.toLowerCase()
   // @ts-ignore
-  const SvgIcon = !isDark ? dark[iconName] : light[iconName];
+  const SvgIcon = !isDark ? dark[iconName] : light[iconName]
 
   return (
     <TouchableOpacity activeOpacity={0.6} onPress={() => onPress?.(itemProps)}>
@@ -100,10 +100,10 @@ export function TicketCardColumn({
         </View>
       </View>
     </TouchableOpacity>
-  );
+  )
 }
 
-const borderW = 0.6;
+const borderW = 0.6
 const rawStyles = StyleSheet.create({
   container: {
     width: 200,
@@ -162,4 +162,4 @@ const rawStyles = StyleSheet.create({
   costContainer: {
     flexDirection: 'row',
   },
-});
+})

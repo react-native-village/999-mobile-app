@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleProp, StyleSheet, TouchableOpacity, ViewStyle} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {StyleProp, StyleSheet, TouchableOpacity, ViewStyle} from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
 
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import {Text} from './text/text';
+import {Text} from './text/text'
 
 interface ButtonT {
-  children: string;
-  style?: StyleProp<ViewStyle>;
-  disabled?: boolean;
-  onPress: () => void;
+  children: string
+  style?: StyleProp<ViewStyle>
+  disabled?: boolean
+  onPress: () => void
 }
 export function Button({children, style, onPress, disabled}: ButtonT) {
-  const {styles} = useThematicStyles(rawStyles);
+  const {styles} = useThematicStyles(rawStyles)
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -32,7 +32,7 @@ export function Button({children, style, onPress, disabled}: ButtonT) {
         </Text>
       </LinearGradient>
     </TouchableOpacity>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -46,4 +46,4 @@ const rawStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})

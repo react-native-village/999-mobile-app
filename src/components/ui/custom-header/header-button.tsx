@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {StyleSheet, TouchableOpacity, View} from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
 
-import {IconButton, Text} from 'src/components/ui';
-import {useTheme} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {DEFAULT_HITSLOP} from 'src/variables';
+import {IconButton, Text} from 'src/components/ui'
+import {useTheme} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {DEFAULT_HITSLOP} from 'src/variables'
 
 export type HeaderButtonProps = {
-  onPress?: () => void;
-  disabled?: boolean;
-  iconColor?: Color;
-  icon?: string;
-  text?: string;
+  onPress?: () => void
+  disabled?: boolean
+  iconColor?: Color
+  icon?: string
+  text?: string
   /* i18n?: I18N; */
-};
+}
 
 export function HeaderButton({
   onPress,
@@ -24,7 +24,7 @@ export function HeaderButton({
   icon,
   text,
 }: HeaderButtonProps) {
-  const {colors} = useTheme();
+  const {colors} = useTheme()
   if (icon) {
     return (
       <IconButton
@@ -39,7 +39,7 @@ export function HeaderButton({
           />
         )}
       </IconButton>
-    );
+    )
   }
 
   if (text /*|| i18n*/) {
@@ -49,10 +49,10 @@ export function HeaderButton({
           {text}
         </Text>
       </TouchableOpacity>
-    );
+    )
   }
 
-  return <View style={styles.spacer} />;
+  return <View style={styles.spacer} />
 }
 
 const styles = StyleSheet.create({
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
-});
+})

@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, View} from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
+import {StyleSheet, View} from 'react-native'
+import Entypo from 'react-native-vector-icons/Entypo'
 
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import {Text} from '../ui';
+import {Text} from '../ui'
 
 export function SearchNoResults() {
-  const {styles} = useThematicStyles(rawStyles);
+  const {styles} = useThematicStyles(rawStyles)
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
@@ -20,7 +20,7 @@ export function SearchNoResults() {
       </Text>
       <Text t11>Please try another keyword</Text>
     </View>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -41,4 +41,4 @@ const rawStyles = StyleSheet.create({
     fontSize: 150,
     color: Color.primary,
   },
-});
+})

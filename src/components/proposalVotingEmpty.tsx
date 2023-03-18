@@ -1,15 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, View, useWindowDimensions} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {StyleSheet, View, useWindowDimensions} from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {Text} from 'src/components/ui';
-import {useTheme} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Text} from 'src/components/ui'
+import {useTheme} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
 export function ProposalVotingEmpty() {
-  const height = useWindowDimensions().height / 1.5;
-  const {colors} = useTheme();
+  const height = useWindowDimensions().height / 1.5
+  const {colors} = useTheme()
   return (
     <View style={[styles.container, {height}]}>
       <MaterialCommunityIcons
@@ -21,7 +21,7 @@ export function ProposalVotingEmpty() {
         No proposal of category
       </Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -34,4 +34,4 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     fontSize: 80,
   },
-});
+})

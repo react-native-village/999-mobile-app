@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react'
 
 import {
   Pressable,
@@ -7,7 +7,7 @@ import {
   StyleSheet,
   View,
   useWindowDimensions,
-} from 'react-native';
+} from 'react-native'
 import Animated, {
   WithTimingConfig,
   interpolate,
@@ -15,29 +15,29 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
+} from 'react-native-reanimated'
 
-import {useAndroidStatusBarAnimation, useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {ANIMATION_DURATION, ANIMATION_TYPE} from 'src/variables';
+import {useAndroidStatusBarAnimation, useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {ANIMATION_DURATION, ANIMATION_TYPE} from 'src/variables'
 
 const timingOutAnimationConfig: WithTimingConfig = {
   duration: ANIMATION_DURATION,
   easing: ANIMATION_TYPE,
-};
+}
 
 const timingInAnimationConfig: WithTimingConfig = {
   duration: ANIMATION_DURATION,
   easing: ANIMATION_TYPE,
-};
+}
 
-const AnimatedStatusBar = RNAnimated.createAnimatedComponent(StatusBar);
+const AnimatedStatusBar = RNAnimated.createAnimatedComponent(StatusBar)
 
 interface BottomPopupContainerProps {
-  children: (handleClose: (onEnd?: () => void) => void) => JSX.Element;
-  transparent?: boolean;
-  onPressOutContent?: () => void;
-  closeOnPressOut?: boolean;
+  children: (handleClose: (onEnd?: () => void) => void) => JSX.Element
+  transparent?: boolean
+  onPressOutContent?: () => void
+  closeOnPressOut?: boolean
 }
 
 export function BottomPopupContainer({
@@ -46,42 +46,42 @@ export function BottomPopupContainer({
   onPressOutContent,
   closeOnPressOut,
 }: BottomPopupContainerProps) {
-  const {height: H} = useWindowDimensions();
-  const {styles} = useThematicStyles(rawStyles);
-  const fullyOpen = 0;
-  const fullyClosed = H * 0.85;
+  const {height: H} = useWindowDimensions()
+  const {styles} = useThematicStyles(rawStyles)
+  const fullyOpen = 0
+  const fullyClosed = H * 0.85
   const {toDark, toLight, backgroundColor} = useAndroidStatusBarAnimation({
     animatedValueRange: [fullyOpen, fullyClosed],
-  });
-  const fadeAnim = useSharedValue(fullyClosed);
+  })
+  const fadeAnim = useSharedValue(fullyClosed)
 
   const fadeOut = useCallback(
     (endCallback?: () => void) => {
-      const onEnd = () => endCallback?.();
-      toLight();
+      const onEnd = () => endCallback?.()
+      toLight()
       fadeAnim.value = withTiming(fullyClosed, timingOutAnimationConfig, () =>
         runOnJS(onEnd)(),
-      );
+      )
     },
     [fullyClosed, fadeAnim, toLight],
-  );
+  )
 
   useEffect(() => {
-    toDark();
-    fadeAnim.value = withTiming(fullyOpen, timingInAnimationConfig);
-  }, [fadeAnim, toDark]);
+    toDark()
+    fadeAnim.value = withTiming(fullyOpen, timingInAnimationConfig)
+  }, [fadeAnim, toDark])
 
   const bgAnimation = useAnimatedStyle(() => ({
     opacity: interpolate(fadeAnim.value, [fullyOpen, fullyClosed], [1, 0]),
-  }));
+  }))
 
   const slideFromBottomAnimation = useAnimatedStyle(() => ({
     transform: [{translateY: fadeAnim.value}],
-  }));
+  }))
 
   const handlePressOut = () => {
-    closeOnPressOut && fadeOut(onPressOutContent);
-  };
+    closeOnPressOut && fadeOut(onPressOutContent)
+  }
 
   return (
     <View style={styles.container}>
@@ -95,7 +95,7 @@ export function BottomPopupContainer({
         {children(fadeOut)}
       </Animated.View>
     </View>
-  );
+  )
 }
 const rawStyles = StyleSheet.create({
   container: {flex: 1},
@@ -109,4 +109,4 @@ const rawStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
   },
-});
+})

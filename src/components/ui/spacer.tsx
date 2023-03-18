@@ -1,8 +1,8 @@
-import React, {useMemo} from 'react';
+import React, {useMemo} from 'react'
 
-import {StyleSheet, View, ViewProps} from 'react-native';
+import {StyleSheet, View, ViewProps} from 'react-native'
 
-export type SpacerProps = ViewProps & {height?: number; width?: number};
+export type SpacerProps = ViewProps & {height?: number; width?: number}
 
 export function Spacer({
   children,
@@ -12,19 +12,19 @@ export function Spacer({
   ...props
 }: SpacerProps) {
   const container = useMemo(() => {
-    const hasSizeProp = !!height || !!width;
+    const hasSizeProp = !!height || !!width
     return [hasSizeProp ? {height, width} : styles.flexOne, style].filter(
       Boolean,
-    );
-  }, [style, height, width]);
+    )
+  }, [style, height, width])
 
   return (
     <View style={container} {...props}>
       {children}
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   flexOne: {flex: 1},
-});
+})

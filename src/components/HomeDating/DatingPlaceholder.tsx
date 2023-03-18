@@ -1,20 +1,20 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, View} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import {StyleSheet, View} from 'react-native'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
-import {Background, Button, Text} from 'src/components/ui';
-import {useTheme} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Background, Button, Text} from 'src/components/ui'
+import {useTheme} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import Logo from '../../../assets/images/logo.svg';
+import Logo from '../../../assets/images/logo.svg'
 
 interface DatingPlaceholderProps {
-  setAgree: React.Dispatch<React.SetStateAction<boolean>>;
+  setAgree: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export function DatingPlaceholder({setAgree}: DatingPlaceholderProps) {
-  const {colors} = useTheme();
+  const {colors} = useTheme()
   return (
     <Background style={styles.container}>
       <View style={styles.welcomeContainer}>
@@ -90,7 +90,7 @@ export function DatingPlaceholder({setAgree}: DatingPlaceholderProps) {
         I AGREE
       </Button>
     </Background>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -121,4 +121,4 @@ const styles = StyleSheet.create({
   rowText: {
     marginLeft: 14,
   },
-});
+})

@@ -1,41 +1,41 @@
-import React from 'react';
+import React from 'react'
 
-import {format} from 'date-fns';
-import {Pressable, StyleSheet, View} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {format} from 'date-fns'
+import {Pressable, StyleSheet, View} from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {Spacer, Text} from 'src/components/ui';
-import {useThematicStyles, useTheme} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {votingCardsData} from 'src/variables/temporaryData';
+import {Spacer, Text} from 'src/components/ui'
+import {useThematicStyles, useTheme} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {votingCardsData} from 'src/variables/temporaryData'
 
 export enum VotingCompletedStatuses {
   passed = 'Passed',
   rejected = 'Rejacted',
 }
 
-export type VotingCompletedStatusesKeys = keyof typeof VotingCompletedStatuses;
+export type VotingCompletedStatusesKeys = keyof typeof VotingCompletedStatuses
 type VotingCardCompletedProps = {
-  id: number;
+  id: number
 
-  onPress?: (id: number) => void;
-};
+  onPress?: (id: number) => void
+}
 
 export function VotingCardCompleted({id, onPress}: VotingCardCompletedProps) {
-  const item = votingCardsData[id];
-  const {styles} = useThematicStyles(rawStyles);
-  const {colors} = useTheme();
+  const item = votingCardsData[id]
+  const {styles} = useThematicStyles(rawStyles)
+  const {colors} = useTheme()
 
-  const isVoted = false; // PASS
+  const isVoted = false // PASS
 
   const status =
-    VotingCompletedStatuses[item.status as VotingCompletedStatusesKeys];
+    VotingCompletedStatuses[item.status as VotingCompletedStatusesKeys]
 
-  const isRejected = status === VotingCompletedStatuses.rejected;
-  const iconColor = isRejected ? colors.textRed1 : colors.textGreen1;
-  const textColor = isRejected ? Color.textRed1 : Color.textGreen1;
+  const isRejected = status === VotingCompletedStatuses.rejected
+  const iconColor = isRejected ? colors.textRed1 : colors.textGreen1
+  const textColor = isRejected ? Color.textRed1 : Color.textGreen1
 
-  const handlePress = () => onPress?.(id);
+  const handlePress = () => onPress?.(id)
 
   return (
     <Pressable onPress={handlePress} style={styles.backgroundContainer}>
@@ -87,7 +87,7 @@ export function VotingCardCompleted({id, onPress}: VotingCardCompletedProps) {
         </View>
       </View>
     </Pressable>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -121,4 +121,4 @@ const rawStyles = StyleSheet.create({
   icon: {
     fontSize: 20,
   },
-});
+})

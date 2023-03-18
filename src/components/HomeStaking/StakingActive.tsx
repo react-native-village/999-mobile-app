@@ -1,20 +1,20 @@
-import React, {forwardRef, useImperativeHandle, useRef} from 'react';
+import React, {forwardRef, useImperativeHandle, useRef} from 'react'
 
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native'
 
-import {InfoBlockAmount, Spacer, Text} from 'src/components/ui';
-import {cleanNumber} from 'src/helpers/CleanNumber';
-import {Color} from 'src/themeTypes';
+import {InfoBlockAmount, Spacer, Text} from 'src/components/ui'
+import {cleanNumber} from 'src/helpers/CleanNumber'
+import {Color} from 'src/themeTypes'
 
 interface StakingActiveProps {
-  availableSum: number;
-  rewardSum: number;
-  stakedSum: number;
-  unDelegationSum: number;
+  availableSum: number
+  rewardSum: number
+  stakedSum: number
+  unDelegationSum: number
 }
 
 export interface StakingActiveInterface {
-  getReward: () => void;
+  getReward: () => void
 }
 
 export const StakingActive = forwardRef(
@@ -22,13 +22,13 @@ export const StakingActive = forwardRef(
     {availableSum, rewardSum, stakedSum, unDelegationSum}: StakingActiveProps,
     ref,
   ) => {
-    const isEndRef = useRef<Boolean>(false);
+    const isEndRef = useRef<Boolean>(false)
 
     useImperativeHandle(ref, () => ({
       getReward() {
-        isEndRef.current = false;
+        isEndRef.current = false
       },
-    }));
+    }))
 
     return (
       <View>
@@ -60,13 +60,13 @@ export const StakingActive = forwardRef(
         </View>
         <Spacer height={20} />
       </View>
-    );
+    )
   },
-);
+)
 
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-});
+})

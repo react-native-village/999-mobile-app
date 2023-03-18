@@ -1,2 +1,2 @@
-export * from './error-text';
-export * from './text';
+export * from './error-text'
+export * from './text'

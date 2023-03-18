@@ -1,25 +1,25 @@
-import React from 'react';
+import React from 'react'
 
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native'
 
-import {ProposalVotingEmpty} from 'src/components/proposalVotingEmpty';
-import {Background, CustomHeader, Spacer} from 'src/components/ui';
-import {ProposalsCroppedList, ProposalsTagKeys} from 'src/types';
-import {ProposalsTagType, ProposalsTags} from 'src/variables/proposal';
+import {ProposalVotingEmpty} from 'src/components/proposalVotingEmpty'
+import {Background, CustomHeader, Spacer} from 'src/components/ui'
+import {ProposalsCroppedList, ProposalsTagKeys} from 'src/types'
+import {ProposalsTagType, ProposalsTags} from 'src/variables/proposal'
 
-import {VotingCard} from './VotingCard';
+import {VotingCard} from './VotingCard'
 
-import {GovernanceTag} from '../ui/GovernanceTag';
+import {GovernanceTag} from '../ui/GovernanceTag'
 
 export interface HomeGovernanceProps {
-  proposals: ProposalsCroppedList;
-  statusFilter: ProposalsTagKeys;
-  onPressCard?: (id: number) => void;
-  onRefresh?: () => void;
-  refreshing?: boolean;
-  loading?: boolean;
-  onSelect?: (tag: ProposalsTagType) => () => void;
-  onSearchChange?: (text: string) => void;
+  proposals: ProposalsCroppedList
+  statusFilter: ProposalsTagKeys
+  onPressCard?: (id: number) => void
+  onRefresh?: () => void
+  refreshing?: boolean
+  loading?: boolean
+  onSelect?: (tag: ProposalsTagType) => () => void
+  onSearchChange?: (text: string) => void
 }
 
 export function HomeGovernance({
@@ -31,8 +31,8 @@ export function HomeGovernance({
   loading,
   onSelect,
 }: HomeGovernanceProps) {
-  const listHeader = () => <Spacer height={12} />;
-  const listSeparator = () => <Spacer height={24} />;
+  const listHeader = () => <Spacer height={12} />
+  const listSeparator = () => <Spacer height={24} />
 
   return (
     <Background>
@@ -50,8 +50,8 @@ export function HomeGovernance({
           data={ProposalsTags}
           keyExtractor={item => item[0]}
           renderItem={({item}) => {
-            const [tagKey, tagTitle] = item;
-            const tagVariant = statusFilter === tagKey ? 'active' : 'inactive';
+            const [tagKey, tagTitle] = item
+            const tagVariant = statusFilter === tagKey ? 'active' : 'inactive'
             return (
               <GovernanceTag
                 key={tagKey}
@@ -59,7 +59,7 @@ export function HomeGovernance({
                 onPress={onSelect?.(item)}
                 tagVariant={tagVariant}
               />
-            );
+            )
           }}
         />
       </View>
@@ -86,7 +86,7 @@ export function HomeGovernance({
       )}
       <Spacer height={12} />
     </Background>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     flex: 1,
   },
-});
+})

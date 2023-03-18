@@ -42,7 +42,7 @@ export const light = {
   aywa: require('./white/aywa.svg'),
   bab: require('./white/bab.svg'),
   zlt: require('./white/zlt.svg'),
-};
+}
 
 export const dark = {
   $pac: require('./black/$pac.svg'),
@@ -88,4 +88,4 @@ export const dark = {
   aywa: require('./black/aywa.svg'),
   bab: require('./black/bab.svg'),
   zlt: require('./black/zlt.svg'),
-};
+}

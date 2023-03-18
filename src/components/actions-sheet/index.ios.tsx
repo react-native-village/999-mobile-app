@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect} from 'react'
 
-import {ActionSheetIOS} from 'react-native';
+import {ActionSheetIOS} from 'react-native'
 
-import {ActionsSheetProps} from './index';
+import {ActionsSheetProps} from './index'
 
 export function ActionsSheet({
   onPressDiscard,
@@ -24,12 +24,12 @@ export function ActionsSheet({
       },
       buttonIndex => {
         if (buttonIndex === 0) {
-          onPressKeepEditing?.();
+          onPressKeepEditing?.()
         } else if (buttonIndex === 1) {
-          onPressDiscard?.();
+          onPressDiscard?.()
         }
       },
-    );
-  }, [onPressKeepEditing, onPressDiscard]);
-  return <></>;
+    )
+  }, [onPressKeepEditing, onPressDiscard])
+  return <></>
 }

@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo} from 'react'
 
 import {
   StyleProp,
@@ -6,19 +6,19 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-} from 'react-native';
+} from 'react-native'
 
-import {Text} from 'src/components/ui/text';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Text} from 'src/components/ui/text'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
 export type TagProps = {
-  tagVariant?: 'active' | 'inactive' | undefined;
-  text?: string;
-  style?: StyleProp<ViewStyle>;
-  marginHorizontal?: number;
-  onPress?: () => void;
-};
+  tagVariant?: 'active' | 'inactive' | undefined
+  text?: string
+  style?: StyleProp<ViewStyle>
+  marginHorizontal?: number
+  onPress?: () => void
+}
 
 export const GovernanceTag = memo(
   ({
@@ -28,9 +28,9 @@ export const GovernanceTag = memo(
     marginHorizontal = 4,
     onPress,
   }: TagProps) => {
-    const {styles, colors} = useThematicStyles(rawStyles);
-    const bgColor = tagVariant === 'active' ? colors.primary : colors.bg1;
-    const textColor = tagVariant === 'active' ? Color.textBase3 : Color.primary;
+    const {styles, colors} = useThematicStyles(rawStyles)
+    const bgColor = tagVariant === 'active' ? colors.primary : colors.bg1
+    const textColor = tagVariant === 'active' ? Color.textBase3 : Color.primary
 
     return (
       <TouchableOpacity
@@ -43,9 +43,9 @@ export const GovernanceTag = memo(
           </Text>
         </View>
       </TouchableOpacity>
-    );
+    )
   },
-);
+)
 
 const rawStyles = StyleSheet.create({
   text: {
@@ -60,4 +60,4 @@ const rawStyles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 100,
   },
-});
+})

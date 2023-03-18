@@ -1,29 +1,29 @@
-import React from 'react';
+import React from 'react'
 
-import {ScrollView, StyleSheet, View} from 'react-native';
-import QRCodeGenerator from 'react-native-qrcode-svg';
+import {ScrollView, StyleSheet, View} from 'react-native'
+import QRCodeGenerator from 'react-native-qrcode-svg'
 
-import {useTheme} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {TicketInfo} from 'src/types';
+import {useTheme} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {TicketInfo} from 'src/types'
 
-import {Background, CustomHeader, Text} from '../ui';
+import {Background, CustomHeader, Text} from '../ui'
 
 interface QRCodeProps {
-  onBack: () => void;
-  item: TicketInfo;
+  onBack: () => void
+  item: TicketInfo
 }
 
 function QRCodeGenerate(tickets: number) {
-  const {colors} = useTheme();
-  const ticketsMas = [];
+  const {colors} = useTheme()
+  const ticketsMas = []
   const randomAdress = () => {
-    let adress = '';
+    let adress = ''
     for (let i = 0; i < 10; i++) {
-      adress = adress.concat(String(Math.floor(Math.random() * 10)));
+      adress = adress.concat(String(Math.floor(Math.random() * 10)))
     }
-    return adress;
-  };
+    return adress
+  }
   for (let i = 0; i < tickets; i++) {
     ticketsMas.push(
       <View key={i} style={styles.qr}>
@@ -38,9 +38,9 @@ function QRCodeGenerate(tickets: number) {
           size={300}
         />
       </View>,
-    );
+    )
   }
-  return ticketsMas;
+  return ticketsMas
 }
 
 export function QRCode({onBack, item}: QRCodeProps) {
@@ -56,7 +56,7 @@ export function QRCode({onBack, item}: QRCodeProps) {
         {QRCodeGenerate(item.tickets)}
       </ScrollView>
     </Background>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -70,4 +70,4 @@ const styles = StyleSheet.create({
   scrollContainer: {
     alignItems: 'center',
   },
-});
+})

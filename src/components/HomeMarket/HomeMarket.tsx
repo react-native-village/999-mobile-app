@@ -1,24 +1,24 @@
-import React from 'react';
+import React from 'react'
 
-import {ScrollView, StyleSheet, View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import {ScrollView, StyleSheet, View} from 'react-native'
+import {FlatList} from 'react-native-gesture-handler'
 
-import {Background, Spacer, TicketCardColumn} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
-import {TicketInfo} from 'src/types';
-import {ticketsData} from 'src/variables/temporaryData';
+import {Background, Spacer, TicketCardColumn} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
+import {TicketInfo} from 'src/types'
+import {ticketsData} from 'src/variables/temporaryData'
 
-import {HomeMarketHeader} from './HomeMarketHeader';
+import {HomeMarketHeader} from './HomeMarketHeader'
 
-import {Categories} from '../ui/categories';
-import {HeaderList} from '../ui/headerList';
+import {Categories} from '../ui/categories'
+import {HeaderList} from '../ui/headerList'
 
 interface HomeMarketProps {
-  onPressCard: (item: TicketInfo) => void;
-  onPressProfile: () => void;
-  onPressSettings: () => void;
-  onPressSearch: () => void;
-  onPressScan: () => void;
+  onPressCard: (item: TicketInfo) => void
+  onPressProfile: () => void
+  onPressSettings: () => void
+  onPressSearch: () => void
+  onPressScan: () => void
 }
 
 export function HomeMarket({
@@ -28,7 +28,7 @@ export function HomeMarket({
   onPressSearch,
   onPressScan,
 }: HomeMarketProps) {
-  const {styles} = useThematicStyles(rawStyles);
+  const {styles} = useThematicStyles(rawStyles)
 
   return (
     <Background>
@@ -85,11 +85,11 @@ export function HomeMarket({
         </View>
       </ScrollView>
     </Background>
-  );
+  )
 }
 
 function Separator() {
-  return <Spacer width={12.5} />;
+  return <Spacer width={12.5} />
 }
 
 const rawStyles = StyleSheet.create({
@@ -105,4 +105,4 @@ const rawStyles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: 20,
   },
-});
+})

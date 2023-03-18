@@ -1,12 +1,12 @@
-import {Color, NamedStyles, ThemeColors} from 'src/themeTypes';
+import {Color, NamedStyles, ThemeColors} from 'src/themeTypes'
 
 export function createTheme<T extends NamedStyles<T> | NamedStyles<any>>(
   styles: T | NamedStyles<T>,
   colors: ThemeColors,
 ): T {
-  const style: any = {};
-  const keys = Object.keys(styles);
-  const styled = Object.keys(colors);
+  const style: any = {}
+  const keys = Object.keys(styles)
+  const styled = Object.keys(colors)
 
   keys.forEach(key => {
     // @ts-ignore
@@ -16,9 +16,9 @@ export function createTheme<T extends NamedStyles<T> | NamedStyles<any>>(
         [prop]: styled.includes(value as string)
           ? colors[value as Color]
           : value,
-      };
-    }, {});
-  });
+      }
+    }, {})
+  })
 
-  return style as T;
+  return style as T
 }

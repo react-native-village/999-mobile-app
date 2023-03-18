@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native'
 
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import {Text} from '.';
+import {Text} from '.'
 
 interface TagT {
-  name: string;
-  withMarginLeft?: boolean;
+  name: string
+  withMarginLeft?: boolean
 }
 export function Tag({name, withMarginLeft}: TagT) {
-  const {styles, colors} = useThematicStyles(rawStyles);
+  const {styles, colors} = useThematicStyles(rawStyles)
 
   return (
     <View
@@ -25,7 +25,7 @@ export function Tag({name, withMarginLeft}: TagT) {
         {name}
       </Text>
     </View>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -41,4 +41,4 @@ const rawStyles = StyleSheet.create({
   marginLeft: {
     marginLeft: 5,
   },
-});
+})

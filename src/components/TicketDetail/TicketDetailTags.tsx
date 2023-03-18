@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native'
 
-import {TicketInfo} from 'src/types';
+import {TicketInfo} from 'src/types'
 
-import {Tag} from '../ui/Tag';
+import {Tag} from '../ui/Tag'
 
 interface TicketDetailTagsProps {
-  tags: TicketInfo['tags'];
+  tags: TicketInfo['tags']
 }
 
 function Separator() {
-  return <View style={styles.separator} />;
+  return <View style={styles.separator} />
 }
 
 export function TicketDetailTags({tags}: TicketDetailTagsProps) {
@@ -26,11 +26,11 @@ export function TicketDetailTags({tags}: TicketDetailTagsProps) {
         ItemSeparatorComponent={Separator}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   separator: {
     marginHorizontal: 4,
   },
-});
+})

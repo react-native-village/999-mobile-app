@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-import {ComponentMeta} from '@storybook/react';
+import {ComponentMeta} from '@storybook/react'
 
-import {Text} from './text';
+import {Text} from './text'
 
-import {Spacer} from '../spacer';
+import {Spacer} from '../spacer'
 
 export default {
   title: 'components/Text',
   component: Text,
-} as ComponentMeta<typeof Text>;
+} as ComponentMeta<typeof Text>
 
 const loremIpsum =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 
 export function font_type_01() {
   return (
@@ -21,7 +21,7 @@ export function font_type_01() {
       <Spacer height={15} />
       <Text t1>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_02() {
   return (
@@ -30,7 +30,7 @@ export function font_type_02() {
       <Spacer height={15} />
       <Text t2>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_03() {
   return (
@@ -39,7 +39,7 @@ export function font_type_03() {
       <Spacer height={15} />
       <Text t3>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_04() {
   return (
@@ -48,7 +48,7 @@ export function font_type_04() {
       <Spacer height={15} />
       <Text t4>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_05() {
   return (
@@ -57,7 +57,7 @@ export function font_type_05() {
       <Spacer height={15} />
       <Text t5>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_06() {
   return (
@@ -66,7 +66,7 @@ export function font_type_06() {
       <Spacer height={15} />
       <Text t6>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_07() {
   return (
@@ -75,7 +75,7 @@ export function font_type_07() {
       <Spacer height={15} />
       <Text t7>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_08() {
   return (
@@ -84,7 +84,7 @@ export function font_type_08() {
       <Spacer height={15} />
       <Text t8>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_09() {
   return (
@@ -93,7 +93,7 @@ export function font_type_09() {
       <Spacer height={15} />
       <Text t9>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_10() {
   return (
@@ -102,7 +102,7 @@ export function font_type_10() {
       <Spacer height={15} />
       <Text t10>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_11() {
   return (
@@ -111,7 +111,7 @@ export function font_type_11() {
       <Spacer height={15} />
       <Text t11>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_12() {
   return (
@@ -120,7 +120,7 @@ export function font_type_12() {
       <Spacer height={15} />
       <Text t12>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_13() {
   return (
@@ -129,7 +129,7 @@ export function font_type_13() {
       <Spacer height={15} />
       <Text t13>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_14() {
   return (
@@ -138,7 +138,7 @@ export function font_type_14() {
       <Spacer height={15} />
       <Text t14>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_15() {
   return (
@@ -147,7 +147,7 @@ export function font_type_15() {
       <Spacer height={15} />
       <Text t15>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_16() {
   return (
@@ -156,7 +156,7 @@ export function font_type_16() {
       <Spacer height={15} />
       <Text t16>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_17() {
   return (
@@ -165,7 +165,7 @@ export function font_type_17() {
       <Spacer height={15} />
       <Text t17>{loremIpsum}</Text>
     </>
-  );
+  )
 }
 export function font_type_18() {
   return (
@@ -174,5 +174,5 @@ export function font_type_18() {
       <Spacer height={15} />
       <Text t18>{loremIpsum}</Text>
     </>
-  );
+  )
 }

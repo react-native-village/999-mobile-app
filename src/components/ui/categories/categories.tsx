@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 
-import {FlatList, StyleSheet, View} from 'react-native';
+import {FlatList, StyleSheet, View} from 'react-native'
 
-import {Color} from 'src/themeTypes';
-import {categoriesData} from 'src/variables/temporaryData';
+import {Color} from 'src/themeTypes'
+import {categoriesData} from 'src/variables/temporaryData'
 
-import {CategoryItem} from '.';
-import {Separator} from '..';
-import {HeaderList} from '../headerList';
+import {CategoryItem} from '.'
+import {Separator} from '..'
+import {HeaderList} from '../headerList'
 
 function SeparatorMargin() {
-  return <Separator margin={7.5} />;
+  return <Separator margin={7.5} />
 }
 
 export function Categories() {
-  const [selectItem, setSelectItem] = useState('0');
+  const [selectItem, setSelectItem] = useState('0')
   return (
     <View style={styles.container}>
       <HeaderList title={'Categories'} button={'See all'} />
@@ -34,7 +34,7 @@ export function Categories() {
         ItemSeparatorComponent={SeparatorMargin}
       />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 20,
   },
-});
+})

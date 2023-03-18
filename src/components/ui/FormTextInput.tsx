@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import {Controller, useFormContext} from 'react-hook-form';
+import {Controller, useFormContext} from 'react-hook-form'
 import {
   StyleProp,
   StyleSheet,
@@ -8,20 +8,20 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-} from 'react-native';
+} from 'react-native'
 
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import {Text} from '.';
+import {Text} from '.'
 
 interface FormTextInputProps {
-  style?: StyleProp<ViewStyle>;
-  isPrice: boolean;
-  placeholder?: string;
-  name: string;
-  nextField?: string;
-  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
+  style?: StyleProp<ViewStyle>
+  isPrice: boolean
+  placeholder?: string
+  name: string
+  nextField?: string
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters'
 }
 
 export function FormTextInput({
@@ -32,8 +32,8 @@ export function FormTextInput({
   autoCapitalize,
   placeholder,
 }: FormTextInputProps) {
-  const {styles, colors} = useThematicStyles(rawStyles);
-  const {control, setFocus} = useFormContext();
+  const {styles, colors} = useThematicStyles(rawStyles)
+  const {control, setFocus} = useFormContext()
   return (
     <View style={styles.row}>
       <Controller
@@ -60,7 +60,7 @@ export function FormTextInput({
               placeholderTextColor={colors.primary2}
               returnKeyType={nextField ? 'next' : 'default'}
             />
-          );
+          )
         }}
         control={control}
       />
@@ -72,7 +72,7 @@ export function FormTextInput({
         </TouchableOpacity>
       )}
     </View>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -111,4 +111,4 @@ const rawStyles = StyleSheet.create({
     borderTopRightRadius: 25,
     borderBottomRightRadius: 25,
   },
-});
+})

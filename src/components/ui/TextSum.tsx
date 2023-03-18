@@ -1,21 +1,21 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native'
 
-import {Text} from 'src/components/ui';
-import {cleanNumber} from 'src/helpers/CleanNumber';
-import {Color} from 'src/themeTypes';
+import {Text} from 'src/components/ui'
+import {cleanNumber} from 'src/helpers/CleanNumber'
+import {Color} from 'src/themeTypes'
 
-import {Spacer} from './spacer';
+import {Spacer} from './spacer'
 
 interface TextSumProps {
-  sum: string;
-  rightText?: string;
-  color?: Color;
-  center?: boolean;
-  right?: boolean;
-  suffix?: string;
-  style?: StyleProp<ViewStyle>;
+  sum: string
+  rightText?: string
+  color?: Color
+  center?: boolean
+  right?: boolean
+  suffix?: string
+  style?: StyleProp<ViewStyle>
 }
 
 export function TextSum({
@@ -27,14 +27,14 @@ export function TextSum({
   suffix = '',
   style,
 }: TextSumProps) {
-  const hasRightText = typeof rightText !== 'undefined';
-  const text = hasRightText ? rightText : 'ZLATO' + suffix;
+  const hasRightText = typeof rightText !== 'undefined'
+  const text = hasRightText ? rightText : 'ZLATO' + suffix
 
   const viewStyles = StyleSheet.flatten([
     center && styles.center,
     right && styles.right,
     style,
-  ]);
+  ])
 
   return (
     <View style={[styles.container, viewStyles]}>
@@ -46,7 +46,7 @@ export function TextSum({
         {text}
       </Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
   right: {
     alignSelf: 'flex-end',
   },
-});
+})

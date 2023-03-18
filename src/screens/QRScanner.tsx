@@ -1,16 +1,16 @@
-import React, {useRef} from 'react';
+import React, {useRef} from 'react'
 
-import {QRScanner, QRScannerRefType} from 'src/components/QRScanner';
-import {useTypedNavigation} from 'src/hooks';
+import {QRScanner, QRScannerRefType} from 'src/components/QRScanner'
+import {useTypedNavigation} from 'src/hooks'
 
 export function QRScannerScreen() {
-  const {navigate, goBack} = useTypedNavigation();
-  const scannerRef = useRef<QRScannerRefType>(null);
+  const {navigate, goBack} = useTypedNavigation()
+  const scannerRef = useRef<QRScannerRefType>(null)
 
   const onScanBarcode = (qrValue: string) => {
-    const warningMessage = 'It not QR-event or QR-Ticket';
+    const warningMessage = 'It not QR-event or QR-Ticket'
     try {
-      const qrObject = JSON.parse(qrValue);
+      const qrObject = JSON.parse(qrValue)
       if (
         qrObject.name &&
         qrObject.tags &&
@@ -18,14 +18,14 @@ export function QRScannerScreen() {
         qrObject.endData &&
         qrObject.geoPosition
       ) {
-        navigate('ticketDetail', qrObject);
+        navigate('ticketDetail', qrObject)
       } else {
-        scannerRef.current?.showError(warningMessage);
+        scannerRef.current?.showError(warningMessage)
       }
     } catch (error) {
-      scannerRef.current?.showError(warningMessage);
+      scannerRef.current?.showError(warningMessage)
     }
-  };
+  }
 
   return (
     <QRScanner
@@ -33,5 +33,5 @@ export function QRScannerScreen() {
       onPressBack={goBack}
       onScanBarcode={onScanBarcode}
     />
-  );
+  )
 }

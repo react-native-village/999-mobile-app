@@ -1,22 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import {Image, StyleSheet, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {Image, StyleSheet, View} from 'react-native'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-import {Button, Spacer, Text} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Button, Spacer, Text} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
 // @ts-ignore
-import welcomeImage from '../../../assets/images/welcome.jpg';
+import welcomeImage from '../../../assets/images/welcome.jpg'
 
 interface WelcomeProps {
-  onContinue: () => void;
+  onContinue: () => void
 }
 
 export function Welcome({onContinue}: WelcomeProps) {
-  const {styles} = useThematicStyles(rawStyles);
-  const insets = useSafeAreaInsets();
+  const {styles} = useThematicStyles(rawStyles)
+  const insets = useSafeAreaInsets()
 
   return (
     <>
@@ -38,7 +38,7 @@ export function Welcome({onContinue}: WelcomeProps) {
         <Spacer height={insets.bottom + 16} />
       </View>
     </>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -75,4 +75,4 @@ const rawStyles = StyleSheet.create({
     },
     elevation: 7,
   },
-});
+})

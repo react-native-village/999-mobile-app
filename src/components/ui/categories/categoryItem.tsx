@@ -1,22 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, TouchableHighlight, View} from 'react-native';
+import {StyleSheet, TouchableHighlight, View} from 'react-native'
 
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import {Text} from '..';
+import {Text} from '..'
 
 interface CategoryItemProps {
-  title: string;
-  isSelected: boolean;
-  onPress: () => void;
+  title: string
+  isSelected: boolean
+  onPress: () => void
 }
 
 export function CategoryItem({title, isSelected, onPress}: CategoryItemProps) {
-  const {styles, colors} = useThematicStyles(useStyles);
-  const color = isSelected ? Color.textBase3 : Color.primary;
-  const background = isSelected ? colors.primary : colors.card;
+  const {styles, colors} = useThematicStyles(useStyles)
+  const color = isSelected ? Color.textBase3 : Color.primary
+  const background = isSelected ? colors.primary : colors.card
   return (
     <TouchableHighlight
       underlayColor={'rgba(255, 104, 131, 0.4)'}
@@ -34,7 +34,7 @@ export function CategoryItem({title, isSelected, onPress}: CategoryItemProps) {
         </Text>
       </View>
     </TouchableHighlight>
-  );
+  )
 }
 
 const useStyles = StyleSheet.create({
@@ -50,4 +50,4 @@ const useStyles = StyleSheet.create({
   touchable: {
     borderRadius: 100,
   },
-});
+})

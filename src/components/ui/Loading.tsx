@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native'
 
-import {useTheme} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {useTheme} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
-import {Text} from './text';
+import {Text} from './text'
 
 interface LoadingProps {
-  text?: string;
+  text?: string
 }
 
 export function Loading({text}: LoadingProps) {
-  const {colors} = useTheme();
+  const {colors} = useTheme()
   return (
     <View style={styles.container}>
       <ActivityIndicator size="large" color={colors.primary} />
@@ -20,7 +20,7 @@ export function Loading({text}: LoadingProps) {
         {text}
       </Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})

@@ -1,30 +1,30 @@
-import React from 'react';
+import React from 'react'
 
 import {
   BottomTabBarProps,
   BottomTabNavigationOptions,
   createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs';
-import {RouteProp} from '@react-navigation/native';
+} from '@react-navigation/bottom-tabs'
+import {RouteProp} from '@react-navigation/native'
 
-import {TabBar} from 'src/components/ui';
-import {TabParamList} from 'src/types';
+import {TabBar} from 'src/components/ui'
+import {TabParamList} from 'src/types'
 
-import {HomeDatingScreen} from './HomeDating';
-import {HomeGovernanceScreen} from './HomeGovernance';
-import {HomeStakingScreen} from './HomeStakingScreen';
-import {HomeTicketsMarketScreen} from './HomeTicketsMarket';
+import {HomeDatingScreen} from './HomeDating'
+import {HomeGovernanceScreen} from './HomeGovernance'
+import {HomeStakingScreen} from './HomeStakingScreen'
+import {HomeTicketsMarketScreen} from './HomeTicketsMarket'
 
-const Tab = createBottomTabNavigator<TabParamList>();
+const Tab = createBottomTabNavigator<TabParamList>()
 
 export const screenOptions = ({}: {
-  route: RouteProp<TabParamList>;
-  navigation: any;
+  route: RouteProp<TabParamList>
+  navigation: any
 }): BottomTabNavigationOptions => ({
   headerShadowVisible: false,
-});
+})
 
-const renderTabBar = (props: BottomTabBarProps) => <TabBar {...props} />;
+const renderTabBar = (props: BottomTabBarProps) => <TabBar {...props} />
 
 export function Home() {
   return (
@@ -50,5 +50,5 @@ export function Home() {
         options={screenOptions}
       />
     </Tab.Navigator>
-  );
+  )
 }

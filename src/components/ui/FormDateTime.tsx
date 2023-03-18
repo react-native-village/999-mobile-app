@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 
 import DateTimePicker, {
   DateTimePickerEvent,
-} from '@react-native-community/datetimepicker';
-import {format} from 'date-fns';
-import {Controller} from 'react-hook-form';
-import {Pressable, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+} from '@react-native-community/datetimepicker'
+import {format} from 'date-fns'
+import {Controller} from 'react-hook-form'
+import {Pressable, StyleProp, StyleSheet, View, ViewStyle} from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {Text} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Text} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
 interface FormDateTimeProps {
-  style?: StyleProp<ViewStyle>;
-  placeholder?: string;
-  name: string;
-  isTime: boolean;
+  style?: StyleProp<ViewStyle>
+  placeholder?: string
+  name: string
+  isTime: boolean
 }
 
 export function FormDateTime({
@@ -25,10 +25,10 @@ export function FormDateTime({
   placeholder,
   isTime,
 }: FormDateTimeProps) {
-  const [showPicker, setShowPicker] = useState(false);
-  const [hasChanges, setHasChanges] = useState(false);
+  const [showPicker, setShowPicker] = useState(false)
+  const [hasChanges, setHasChanges] = useState(false)
 
-  const {styles, colors} = useThematicStyles(rawStyles);
+  const {styles, colors} = useThematicStyles(rawStyles)
 
   return (
     <>
@@ -39,26 +39,26 @@ export function FormDateTime({
             event: DateTimePickerEvent,
             date: Date | undefined,
           ) => {
-            const {type} = event;
+            const {type} = event
             if (type === 'set' && date) {
-              if (!hasChanges) setHasChanges(true);
-              onChange(date);
+              if (!hasChanges) setHasChanges(true)
+              onChange(date)
             } else if (type === 'dismissed') {
-              setShowPicker(false);
+              setShowPicker(false)
             }
-          };
+          }
           const onPickTime = (
             event: DateTimePickerEvent,
             date: Date | undefined,
           ) => {
-            const {type} = event;
+            const {type} = event
             if (type === 'set' && date) {
-              if (!hasChanges) setHasChanges(true);
-              onChange(date);
+              if (!hasChanges) setHasChanges(true)
+              onChange(date)
             } else if (type === 'dismissed') {
-              setShowPicker(false);
+              setShowPicker(false)
             }
-          };
+          }
           return (
             <>
               <View style={styles.dateContainer}>
@@ -117,11 +117,11 @@ export function FormDateTime({
                 />
               )}
             </>
-          );
+          )
         }}
       />
     </>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -174,4 +174,4 @@ const rawStyles = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
-});
+})

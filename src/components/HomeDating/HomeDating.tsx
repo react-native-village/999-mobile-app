@@ -1,28 +1,28 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 
 import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import {Background, CustomHeader, Text} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {DatingData} from 'src/variables';
+import {Background, CustomHeader, Text} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {DatingData} from 'src/variables'
 
-import {DatingPlaceholder} from './DatingPlaceholder';
+import {DatingPlaceholder} from './DatingPlaceholder'
 
-const width = Dimensions.get('window').width;
+const width = Dimensions.get('window').width
 
 export function HomeDating() {
-  const [personId, setPersonId] = useState(0);
-  const [isAgree, setIsAgree] = useState(false);
-  const {colors, styles} = useThematicStyles(rawStyles);
+  const [personId, setPersonId] = useState(0)
+  const [isAgree, setIsAgree] = useState(false)
+  const {colors, styles} = useThematicStyles(rawStyles)
   const next = () => {
-    if (personId < 5) setPersonId(personId + 1);
-    else setPersonId(0);
-  };
-  if (!isAgree) return <DatingPlaceholder setAgree={setIsAgree} />;
+    if (personId < 5) setPersonId(personId + 1)
+    else setPersonId(0)
+  }
+  if (!isAgree) return <DatingPlaceholder setAgree={setIsAgree} />
   return (
     <Background style={styles.container}>
       <CustomHeader
@@ -75,7 +75,7 @@ export function HomeDating() {
         </View>
       </View>
     </Background>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -132,4 +132,4 @@ const rawStyles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 16,
   },
-});
+})

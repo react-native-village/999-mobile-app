@@ -1,20 +1,20 @@
-import React, {useMemo} from 'react';
+import React, {useMemo} from 'react'
 
-import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import {Spacer, Text} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Spacer, Text} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
 export type BadgeProps = {
-  iconLeftName?: string;
-  labelColor?: Color | string;
-  textColor?: Color;
-  style?: StyleProp<ViewStyle>;
-  center?: boolean;
-  text: string;
-};
+  iconLeftName?: string
+  labelColor?: Color | string
+  textColor?: Color
+  style?: StyleProp<ViewStyle>
+  center?: boolean
+  text: string
+}
 export function Badge({
   text,
   center,
@@ -23,7 +23,7 @@ export function Badge({
   textColor = Color.textBase3,
   style,
 }: BadgeProps) {
-  const {styles, colors} = useThematicStyles(rawStyles);
+  const {styles, colors} = useThematicStyles(rawStyles)
   const container = useMemo(
     () => [
       styles.container,
@@ -31,14 +31,14 @@ export function Badge({
       style,
     ],
     [labelColor, style],
-  );
+  )
 
   const iconColor =
     text === 'Rejected'
       ? colors.textRed1
       : text === 'Passed'
       ? colors.textGreen1
-      : colors.textBase3;
+      : colors.textBase3
 
   return (
     <View style={[container, center && styles.center]}>
@@ -56,7 +56,7 @@ export function Badge({
         {text}
       </Text>
     </View>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -78,4 +78,4 @@ const rawStyles = StyleSheet.create({
   icon: {
     fontSize: 20,
   },
-});
+})

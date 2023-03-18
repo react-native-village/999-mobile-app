@@ -1,3 +1,3 @@
-export * from './common';
-export * from './proposal';
-export * from './temporaryData';
+export * from './common'
+export * from './proposal'
+export * from './temporaryData'

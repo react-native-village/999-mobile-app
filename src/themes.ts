@@ -1,7 +1,7 @@
-import {ThemeColors} from 'src/themeTypes';
+import {ThemeColors} from 'src/themeTypes'
 
-export const TRANSPARENT = 'transparent';
-export const SHADOW_COLOR = '#000';
+export const TRANSPARENT = 'transparent'
+export const SHADOW_COLOR = '#000'
 
 export const LIGHT_THEME: ThemeColors = {
   primary: '#FFA1CD',
@@ -41,7 +41,7 @@ export const LIGHT_THEME: ThemeColors = {
   graphicSecond2: '#CFD1DB',
   graphicSecond3: '#CCCDD2',
   graphicSecond4: '#AAABB2',
-};
+}
 
 export const DARK_THEME: ThemeColors = {
   primary: '#FFA1CD',
@@ -81,4 +81,4 @@ export const DARK_THEME: ThemeColors = {
   graphicSecond2: '#56575C',
   graphicSecond3: '#454647',
   graphicSecond4: '#616266',
-};
+}

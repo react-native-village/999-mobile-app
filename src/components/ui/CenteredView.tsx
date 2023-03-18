@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native'
 
 export function CenteredView({children}: {children: React.ReactNode}) {
-  return <View style={styles.main}>{children}</View>;
+  return <View style={styles.main}>{children}</View>
 }
 
 const styles = StyleSheet.create({
@@ -12,4 +12,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-});
+})

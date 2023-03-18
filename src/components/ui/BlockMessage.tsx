@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
-import Svg, {Path, SvgProps} from 'react-native-svg';
+import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native'
+import Svg, {Path, SvgProps} from 'react-native-svg'
 
-import {Text} from 'src/components/ui';
-import {useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
+import {Text} from 'src/components/ui'
+import {useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
 
 const Icons = {
   error: {
@@ -23,14 +23,14 @@ const Icons = {
     color: Color.textBlue1,
     bgColor: Color.opacityBlue1,
   },
-};
+}
 
 interface BlockMessageProps {
-  blockType?: keyof typeof Icons;
-  hideIcon?: boolean;
-  style?: StyleProp<ViewStyle>;
-  children?: React.ReactNode;
-  numberOfLines?: number;
+  blockType?: keyof typeof Icons
+  hideIcon?: boolean
+  style?: StyleProp<ViewStyle>
+  children?: React.ReactNode
+  numberOfLines?: number
 }
 
 export function BlockMessage({
@@ -40,11 +40,11 @@ export function BlockMessage({
   children,
   numberOfLines,
 }: BlockMessageProps) {
-  const {styles, colors} = useThematicStyles(rawStyles);
-  const {component: IconComponent, color, bgColor} = Icons[blockType];
+  const {styles, colors} = useThematicStyles(rawStyles)
+  const {component: IconComponent, color, bgColor} = Icons[blockType]
 
-  const textStyle = [styles.text, !hideIcon ? styles.iconText : null];
-  const containerStyle = [styles.container, {backgroundColor: colors[bgColor]}];
+  const textStyle = [styles.text, !hideIcon ? styles.iconText : null]
+  const containerStyle = [styles.container, {backgroundColor: colors[bgColor]}]
 
   return (
     <View style={[containerStyle, style]}>
@@ -59,7 +59,7 @@ export function BlockMessage({
         </Text>
       </View>
     </View>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -75,9 +75,9 @@ const rawStyles = StyleSheet.create({
   },
   iconText: {marginLeft: 6},
   text: {},
-});
+})
 
-export type SvgIconProps = SvgProps & {size?: number};
+export type SvgIconProps = SvgProps & {size?: number}
 
 export function InfoIcon({
   size = 16,
@@ -95,7 +95,7 @@ export function InfoIcon({
         fill={color}
       />
     </Svg>
-  );
+  )
 }
 
 export function WarningIcon({
@@ -112,7 +112,7 @@ export function WarningIcon({
         fill={color}
       />
     </Svg>
-  );
+  )
 }
 
 export function ErrorIcon({
@@ -135,5 +135,5 @@ export function ErrorIcon({
         fill={color}
       />
     </Svg>
-  );
+  )
 }

@@ -1,27 +1,27 @@
-import React, {memo} from 'react';
+import React, {memo} from 'react'
 
 import {StyleSheet, View, useWindowDimensions} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {s} from 'react-native-size-matters';
 
-import {useImageAspect} from 'src/hooks';
+import {useImageAspect} from 'src/hooks'
 
 interface ImgT {
-  maxHeight?: number;
-  uri: string;
-  widthCoefficient?: number;
+  maxHeight?: number
+  uri: string
+  widthCoefficient?: number
 }
 
 export const Img = memo<ImgT>(
   ({maxHeight = 370, uri = '', widthCoefficient = 1}) => {
-    const aspect = useImageAspect(uri);
-    const {width: W} = useWindowDimensions();
+    const aspect = useImageAspect(uri)
+    const {width: W} = useWindowDimensions()
 
-    let width = W * widthCoefficient;
-    const height = width / aspect;
+    let width = W * widthCoefficient
+    const height = width / aspect
 
     if (maxHeight && height > maxHeight) {
-      width = maxHeight * aspect;
+      width = maxHeight * aspect
     }
 
     return (
@@ -39,9 +39,9 @@ export const Img = memo<ImgT>(
           source={{uri}}
         />
       </View>
-    );
+    )
   },
-);
+)
 
 const styles = StyleSheet.create({
   img: {
@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-});
+})
 
-const {img, mainBlock} = styles;
+const {img, mainBlock} = styles

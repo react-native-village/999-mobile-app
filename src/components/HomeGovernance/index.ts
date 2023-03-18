@@ -1,1 +1,1 @@
-export * from './HomeGovernance';
+export * from './HomeGovernance'

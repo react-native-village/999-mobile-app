@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react'
 
 import {
   Animated as RNAnimated,
@@ -7,12 +7,12 @@ import {
   TouchableWithoutFeedback,
   View,
   useWindowDimensions,
-} from 'react-native';
+} from 'react-native'
 import {
   Gesture,
   GestureDetector,
   PanGestureHandlerEventPayload,
-} from 'react-native-gesture-handler';
+} from 'react-native-gesture-handler'
 import Animated, {
   interpolate,
   runOnJS,
@@ -20,24 +20,24 @@ import Animated, {
   useDerivedValue,
   useSharedValue,
   withTiming,
-} from 'react-native-reanimated';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+} from 'react-native-reanimated'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-import {Spacer, Text} from 'src/components/ui';
-import {useAndroidStatusBarAnimation, useThematicStyles} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {sheetPointsT} from 'src/types';
-import {ANIMATION_DURATION, ANIMATION_TYPE} from 'src/variables';
+import {Spacer, Text} from 'src/components/ui'
+import {useAndroidStatusBarAnimation, useThematicStyles} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {sheetPointsT} from 'src/types'
+import {ANIMATION_DURATION, ANIMATION_TYPE} from 'src/variables'
 
 export type BottomSheetProps = {
-  children: React.ReactNode;
-  title?: string;
-  onClose?: () => void;
-  closeDistance?: number;
-  scrollable?: boolean;
-};
+  children: React.ReactNode
+  title?: string
+  onClose?: () => void
+  closeDistance?: number
+  scrollable?: boolean
+}
 
-const AnimatedStatusBar = RNAnimated.createAnimatedComponent(StatusBar);
+const AnimatedStatusBar = RNAnimated.createAnimatedComponent(StatusBar)
 
 export function BottomSheet({
   children,
@@ -45,53 +45,53 @@ export function BottomSheet({
   title,
   closeDistance,
 }: BottomSheetProps) {
-  const {styles} = useThematicStyles(rawStyles);
-  const {height} = useWindowDimensions();
-  const {bottom: bottomInsets, top: topInsets} = useSafeAreaInsets();
+  const {styles} = useThematicStyles(rawStyles)
+  const {height} = useWindowDimensions()
+  const {bottom: bottomInsets, top: topInsets} = useSafeAreaInsets()
 
-  const bottomSheetHeight = height - (topInsets + 12);
-  const snapPointFromTop: sheetPointsT = [0, bottomSheetHeight];
+  const bottomSheetHeight = height - (topInsets + 12)
+  const snapPointFromTop: sheetPointsT = [0, bottomSheetHeight]
 
-  const fullyOpenSnapPoint = snapPointFromTop[0];
-  const closedSnapPoint = snapPointFromTop[snapPointFromTop.length - 1];
+  const fullyOpenSnapPoint = snapPointFromTop[0]
+  const closedSnapPoint = snapPointFromTop[snapPointFromTop.length - 1]
   const mockedSnapPointFromTop: sheetPointsT = [
     fullyOpenSnapPoint,
     closeDistance ? closeDistance * 2 : closedSnapPoint,
-  ];
+  ]
 
-  const panGestureRef = useRef(Gesture.Pan());
-  const blockScrollUntilAtTheTopRef = useRef(Gesture.Tap());
-  const [snapPoint, setSnapPoint] = useState(closedSnapPoint);
-  const translationY = useSharedValue(0);
-  const scrollOffset = useSharedValue(0);
-  const bottomSheetTranslateY = useSharedValue(closedSnapPoint);
+  const panGestureRef = useRef(Gesture.Pan())
+  const blockScrollUntilAtTheTopRef = useRef(Gesture.Tap())
+  const [snapPoint, setSnapPoint] = useState(closedSnapPoint)
+  const translationY = useSharedValue(0)
+  const scrollOffset = useSharedValue(0)
+  const bottomSheetTranslateY = useSharedValue(closedSnapPoint)
 
   const onHandlerEndOnJS = (point: number) => {
-    setSnapPoint(point);
-  };
+    setSnapPoint(point)
+  }
 
   const onHandlerEnd = ({velocityY}: PanGestureHandlerEventPayload) => {
-    'worklet';
-    const dragToss = 0.05;
+    'worklet'
+    const dragToss = 0.05
     const endOffsetY =
-      bottomSheetTranslateY.value + translationY.value + velocityY * dragToss;
+      bottomSheetTranslateY.value + translationY.value + velocityY * dragToss
 
-    let destSnapPoint = fullyOpenSnapPoint;
+    let destSnapPoint = fullyOpenSnapPoint
 
     if (snapPoint === fullyOpenSnapPoint && endOffsetY < fullyOpenSnapPoint) {
-      return;
+      return
     }
 
     mockedSnapPointFromTop.forEach((point, id) => {
-      const distFromSnap = Math.abs(point - endOffsetY);
+      const distFromSnap = Math.abs(point - endOffsetY)
       if (distFromSnap < Math.abs(destSnapPoint - endOffsetY)) {
-        destSnapPoint = snapPointFromTop[id];
+        destSnapPoint = snapPointFromTop[id]
       }
-    });
+    })
 
     bottomSheetTranslateY.value =
-      bottomSheetTranslateY.value + translationY.value;
-    translationY.value = 0;
+      bottomSheetTranslateY.value + translationY.value
+    translationY.value = 0
 
     bottomSheetTranslateY.value = withTiming(
       destSnapPoint,
@@ -100,52 +100,52 @@ export function BottomSheet({
       },
       success => {
         if (destSnapPoint === closedSnapPoint && success) {
-          onClose && runOnJS(onClose)();
+          onClose && runOnJS(onClose)()
         }
       },
-    );
-    runOnJS(onHandlerEndOnJS)(destSnapPoint);
-  };
+    )
+    runOnJS(onHandlerEndOnJS)(destSnapPoint)
+  }
 
   const clampedTranslateY = useDerivedValue(() => {
-    const translateY = bottomSheetTranslateY.value + translationY.value;
+    const translateY = bottomSheetTranslateY.value + translationY.value
 
-    const minTranslateY = Math.max(fullyOpenSnapPoint, translateY);
-    return Math.min(closedSnapPoint, minTranslateY);
-  });
+    const minTranslateY = Math.max(fullyOpenSnapPoint, translateY)
+    return Math.min(closedSnapPoint, minTranslateY)
+  })
   const {toDark, toLight, backgroundColor} = useAndroidStatusBarAnimation({
     animatedValueRange: snapPointFromTop,
-  });
+  })
 
   const panGesture = Gesture.Pan()
     .onUpdate(e => {
       if (snapPoint === fullyOpenSnapPoint) {
-        translationY.value = e.translationY - scrollOffset.value;
+        translationY.value = e.translationY - scrollOffset.value
       } else {
-        translationY.value = e.translationY;
+        translationY.value = e.translationY
       }
     })
     .onEnd(onHandlerEnd)
-    .withRef(panGestureRef);
+    .withRef(panGestureRef)
 
   const blockScrollUntilAtTheTop = Gesture.Tap()
     .maxDeltaY(snapPoint - fullyOpenSnapPoint)
     .maxDuration(100000)
     .simultaneousWithExternalGesture(panGesture)
-    .withRef(blockScrollUntilAtTheTopRef);
+    .withRef(blockScrollUntilAtTheTopRef)
 
   const headerGesture = Gesture.Pan()
     .onUpdate(e => {
-      translationY.value = e.translationY;
+      translationY.value = e.translationY
     })
-    .onEnd(onHandlerEnd);
+    .onEnd(onHandlerEnd)
 
   const scrollViewGesture = Gesture.Native().requireExternalGestureToFail(
     blockScrollUntilAtTheTop,
-  );
+  )
 
   const onClosePopup = useCallback(() => {
-    toLight();
+    toLight()
     bottomSheetTranslateY.value = withTiming(
       closedSnapPoint,
       {
@@ -153,38 +153,38 @@ export function BottomSheet({
         easing: ANIMATION_TYPE,
       },
       () => onClose && runOnJS(onClose)(),
-    );
-  }, [bottomSheetTranslateY, closedSnapPoint, onClose, toLight]);
+    )
+  }, [bottomSheetTranslateY, closedSnapPoint, onClose, toLight])
 
   const onOpenPopup = useCallback(() => {
-    toDark();
+    toDark()
     bottomSheetTranslateY.value = withTiming(fullyOpenSnapPoint, {
       duration: ANIMATION_DURATION,
       easing: ANIMATION_TYPE,
-    });
-  }, [bottomSheetTranslateY, fullyOpenSnapPoint, toDark]);
+    })
+  }, [bottomSheetTranslateY, fullyOpenSnapPoint, toDark])
 
   useEffect(() => {
-    onOpenPopup();
-  }, [onOpenPopup]);
+    onOpenPopup()
+  }, [onOpenPopup])
 
   const backgroundAnimatedStyle = useAnimatedStyle(() => {
     const opacity = interpolate(
       clampedTranslateY.value,
       snapPointFromTop,
       [1, 0],
-    );
+    )
     return {
       opacity,
-    };
-  });
+    }
+  })
 
   const bottomSheetStyle = useAnimatedStyle(() => {
     return {
       maxHeight: bottomSheetHeight,
       transform: [{translateY: clampedTranslateY.value}],
-    };
-  });
+    }
+  })
 
   return (
     <View style={[StyleSheet.absoluteFill, styles.container]}>
@@ -218,7 +218,7 @@ export function BottomSheet({
             showsVerticalScrollIndicator={false}
             scrollEventThrottle={1}
             onScrollBeginDrag={e => {
-              scrollOffset.value = e.nativeEvent.contentOffset.y;
+              scrollOffset.value = e.nativeEvent.contentOffset.y
             }}>
             {children}
             <Spacer style={{height: bottomInsets}} />
@@ -226,7 +226,7 @@ export function BottomSheet({
         </GestureDetector>
       </Animated.View>
     </View>
-  );
+  )
 }
 
 const rawStyles = StyleSheet.create({
@@ -260,4 +260,4 @@ const rawStyles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
   },
-});
+})

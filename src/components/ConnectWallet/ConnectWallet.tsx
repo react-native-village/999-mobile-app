@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-import {ScrollView, StyleSheet} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {ScrollView, StyleSheet} from 'react-native'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
-import {useWalletConnectMethods} from 'src/hooks';
+import {useWalletConnectMethods} from 'src/hooks'
 
-import {ConnectWalletButton} from './ConnectWalletButton';
+import {ConnectWalletButton} from './ConnectWalletButton'
 
-import Logo from '../../../assets/images/logo.svg';
-import {Background, Spacer, Text} from '../ui';
+import Logo from '../../../assets/images/logo.svg'
+import {Background, Spacer, Text} from '../ui'
 
 export function ConnectWallet() {
-  const methodsList = useWalletConnectMethods();
-  const {top} = useSafeAreaInsets();
+  const methodsList = useWalletConnectMethods()
+  const {top} = useSafeAreaInsets()
 
   return (
     <Background>
@@ -35,11 +35,11 @@ export function ConnectWallet() {
               {...item}
               key={id}
             />
-          );
+          )
         })}
       </ScrollView>
     </Background>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   buttonMargin: {
     marginVertical: 18,
   },
-});
+})

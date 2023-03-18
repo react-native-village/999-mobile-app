@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from 'react'
 
 import {
   Text as RNText,
@@ -7,11 +7,11 @@ import {
   StyleSheet,
   View,
   ViewStyle,
-} from 'react-native';
+} from 'react-native'
 
-import {useTheme} from 'src/hooks';
-import {Color} from 'src/themeTypes';
-import {IS_IOS} from 'src/variables';
+import {useTheme} from 'src/hooks'
+import {Color} from 'src/themeTypes'
+import {IS_IOS} from 'src/variables'
 
 //will be changed to i18next
 /*export type TextValue =
@@ -20,39 +20,39 @@ import {IS_IOS} from 'src/variables';
 */
 
 export type TextProps = Omit<RNTextProps, 'style' | 'children'> & {
-  t1?: boolean;
-  t2?: boolean;
-  t3?: boolean;
-  t4?: boolean;
-  t5?: boolean;
-  t6?: boolean;
-  t7?: boolean;
-  t8?: boolean;
-  t9?: boolean;
-  t10?: boolean;
-  t11?: boolean;
-  t12?: boolean;
-  t13?: boolean;
-  t14?: boolean;
-  t15?: boolean;
-  t16?: boolean;
-  t17?: boolean;
-  t18?: boolean;
-  t19?: boolean;
-  t20?: boolean;
-  t21?: boolean;
-  ibm1?: boolean;
-  ibm2?: boolean;
-  ibm3?: boolean;
-  l1?: boolean;
-  klmn1?: boolean;
-  center?: boolean;
-  right?: boolean;
-  color?: Color;
-  shadow?: boolean;
-  style?: StyleProp<ViewStyle>;
-  children?: React.ReactNode;
-};
+  t1?: boolean
+  t2?: boolean
+  t3?: boolean
+  t4?: boolean
+  t5?: boolean
+  t6?: boolean
+  t7?: boolean
+  t8?: boolean
+  t9?: boolean
+  t10?: boolean
+  t11?: boolean
+  t12?: boolean
+  t13?: boolean
+  t14?: boolean
+  t15?: boolean
+  t16?: boolean
+  t17?: boolean
+  t18?: boolean
+  t19?: boolean
+  t20?: boolean
+  t21?: boolean
+  ibm1?: boolean
+  ibm2?: boolean
+  ibm3?: boolean
+  l1?: boolean
+  klmn1?: boolean
+  center?: boolean
+  right?: boolean
+  color?: Color
+  shadow?: boolean
+  style?: StyleProp<ViewStyle>
+  children?: React.ReactNode
+}
 
 /**
  * @param t1 - 34 B
@@ -110,7 +110,7 @@ export function Text({
   shadow,
   ...props
 }: TextProps) {
-  const textColor = useTheme().colors[color ?? 'textBase1'];
+  const textColor = useTheme().colors[color ?? 'textBase1']
   return (
     <View>
       <RNText
@@ -153,14 +153,14 @@ export function Text({
         {children}
       </RNText>
     </View>
-  );
+  )
 }
 
-const shadowColor = 'black';
-const aquaShadow = 'black';
-const ibm = IS_IOS ? 'IBM 3270' : '3270';
-const editUndo = IS_IOS ? 'Edit Undo Line BRK' : 'edit-undo-line';
-const KLMN = IS_IOS ? 'KLMN-Flash-Pix' : 'KLMN_Flash_Pix';
+const shadowColor = 'black'
+const aquaShadow = 'black'
+const ibm = IS_IOS ? 'IBM 3270' : '3270'
+const editUndo = IS_IOS ? 'Edit Undo Line BRK' : 'edit-undo-line'
+const KLMN = IS_IOS ? 'KLMN-Flash-Pix' : 'KLMN_Flash_Pix'
 
 const styles = StyleSheet.create({
   shadow: {
@@ -308,4 +308,4 @@ const styles = StyleSheet.create({
     fontSize: 30,
     lineHeight: 38,
   },
-});
+})
