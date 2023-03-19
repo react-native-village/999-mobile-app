@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 
-import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native'
+import FastImage from 'react-native-fast-image'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import {Background, CustomHeader, Text} from 'src/components/ui'
 import {useThematicStyles} from 'src/hooks'
@@ -14,12 +14,14 @@ import {DatingPlaceholder} from './DatingPlaceholder'
 
 const width = Dimensions.get('window').width
 
+const length = DatingData.length - 1
+
 export function HomeDating() {
   const [personId, setPersonId] = useState(0)
   const [isAgree, setIsAgree] = useState(false)
   const {colors, styles} = useThematicStyles(rawStyles)
   const next = () => {
-    if (personId < 5) setPersonId(personId + 1)
+    if (personId < length) setPersonId(personId + 1)
     else setPersonId(0)
   }
   if (!isAgree) return <DatingPlaceholder setAgree={setIsAgree} />

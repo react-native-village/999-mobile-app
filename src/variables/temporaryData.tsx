@@ -60,6 +60,16 @@ export const DatingData: PersonInfo[] = [
       'https://avatars.dzeninfra.ru/get-zen_doc/198359/pub_5af30052799d9ddc1ed569ed_5af3015ba815f14484527e0e/scale_1200',
     description: '',
   },
+  {
+    id: '6',
+    name: 'Dmitry',
+    age: 42,
+    geo: 'Phangan',
+    distance: '3074 meters',
+    photoUrl:
+      'https://i.pinimg.com/564x/f5/88/49/f588498882ac739fd2d7003b935c3cbe.jpg',
+    description: '',
+  },
 ]
 
 export const categoriesData = [
