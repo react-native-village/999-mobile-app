@@ -1,7 +1,12 @@
 import React, {useState} from 'react'
 
-import {Dimensions, StyleSheet, TouchableOpacity, View} from 'react-native'
-import FastImage from 'react-native-fast-image'
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
@@ -35,7 +40,7 @@ export function HomeDating() {
         colorRight={Color.primary}
       />
       <View style={styles.imageContainer}>
-        <FastImage
+        <Image
           style={styles.image}
           source={{uri: DatingData[personId].photoUrl}}
         />

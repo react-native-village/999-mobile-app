@@ -3,6 +3,16 @@ import {PersonInfo, TicketInfo} from 'src/types'
 export const DatingData: PersonInfo[] = [
   {
     id: '0',
+    name: 'Dmitry',
+    age: 42,
+    geo: 'Phangan',
+    distance: '3074 meters',
+    photoUrl:
+      'https://i.pinimg.com/564x/f5/88/49/f588498882ac739fd2d7003b935c3cbe.jpg',
+    description: '',
+  },
+  {
+    id: '1',
     name: 'Diego',
     age: 26,
     geo: 'Nai Wok',
@@ -12,7 +22,7 @@ export const DatingData: PersonInfo[] = [
     description: '',
   },
   {
-    id: '1',
+    id: '2',
     name: 'Michelle',
     age: 27,
     geo: 'Nai Wok',
@@ -22,7 +32,7 @@ export const DatingData: PersonInfo[] = [
     description: '',
   },
   {
-    id: '2',
+    id: '3',
     name: 'Alex',
     age: 30,
     geo: 'Wok Tum',
@@ -31,7 +41,7 @@ export const DatingData: PersonInfo[] = [
     description: '',
   },
   {
-    id: '3',
+    id: '4',
     name: 'Ulia',
     age: 27,
     geo: 'Nai Suan',
@@ -41,7 +51,7 @@ export const DatingData: PersonInfo[] = [
     description: '',
   },
   {
-    id: '4',
+    id: '5',
     name: 'Max',
     age: 23,
     geo: 'Ban Wok',
@@ -51,23 +61,13 @@ export const DatingData: PersonInfo[] = [
     description: '',
   },
   {
-    id: '5',
+    id: '6',
     name: 'Timotei',
     age: 30,
     geo: 'Ban Tai',
     distance: '4996 meters',
     photoUrl:
       'https://avatars.dzeninfra.ru/get-zen_doc/198359/pub_5af30052799d9ddc1ed569ed_5af3015ba815f14484527e0e/scale_1200',
-    description: '',
-  },
-  {
-    id: '6',
-    name: 'Dmitry',
-    age: 42,
-    geo: 'Phangan',
-    distance: '3074 meters',
-    photoUrl:
-      'https://i.pinimg.com/564x/f5/88/49/f588498882ac739fd2d7003b935c3cbe.jpg',
     description: '',
   },
 ]
