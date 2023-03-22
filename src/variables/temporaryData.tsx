@@ -102,7 +102,8 @@ export const categoriesData = [
 export const ticketsData: TicketInfo[] = [
   {
     id: '0',
-    imageUrl: 'https://ghashtag.s3.eu-west-1.amazonaws.com/Cover+1x1.png',
+    imageUrl:
+      'https://i.pinimg.com/564x/ad/17/c9/ad17c9419100fdb5d1e4a1777806bc8c.jpg',
     name: "999 Kingdom Phangan party for Women's Day",
     tags: [
       '8March',
