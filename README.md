@@ -8,3 +8,34 @@
 6. [React native vector icons directory](https://oblador.github.io/react-native-vector-icons/)
 7. [Faraway kingdom](https://faraway-kingdom.vercel.app/) next js
 8. [999 docs](https://faraway-kingdom-liard.vercel.app) site
+
+# 999 Screens
+
+### Market
+
+<img src="https://github.com/react-native-village/999-mobile-app/raw/main/assets/images/gitREADME/market.png" width="300">
+
+### ticketDetails
+
+<img src="https://github.com/react-native-village/999-mobile-app/blob/main/assets/images/gitREADME/ticketDetails.png" width="300">
+
+### Staking
+
+<img src="https://github.com/react-native-village/999-mobile-app/blob/main/assets/images/gitREADME/staking.png" width="300">
+
+### Governance
+
+<img src="https://github.com/react-native-village/999-mobile-app/blob/main/assets/images/gitREADME/governance.png" width="300">
+
+### Dating
+
+<img src="https://github.com/react-native-village/999-mobile-app/blob/main/assets/images/gitREADME/dating.png" width="300">
+
+### Search
+
+<img src="https://github.com/react-native-village/999-mobile-app/blob/main/assets/images/gitREADME/search.png" width="300">
+
+### Profile
+
+<img src="https://github.com/react-native-village/999-mobile-app/blob/main/assets/images/gitREADME/profile.png" width="300">
+ 
