@@ -29,6 +29,7 @@ const navDataById = [
   },
   {icon: 'landmark', name: 'Governance'},
   {icon: 'glass-cheers', name: 'Dating'},
+  {icon: 'clock', name: 'Time'},
 ]
 
 export function Tab({

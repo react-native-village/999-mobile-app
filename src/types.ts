@@ -8,6 +8,7 @@ export type TabParamList = {
   homeGovernance: undefined
   homeTicketsMarket: undefined
   homeDating: undefined
+  homeTime: undefined
 }
 export type RootStackParamList = {
   home?: NavigatorScreenParams<TabParamList>
