@@ -7,6 +7,7 @@ import {
 } from '@react-navigation/bottom-tabs'
 import {RouteProp} from '@react-navigation/native'
 
+import {HomeTime} from 'src/components/HomeTime'
 import {TabBar} from 'src/components/ui'
 import {TabParamList} from 'src/types'
 
@@ -47,6 +48,11 @@ export function Home() {
       <Tab.Screen
         name="homeDating"
         component={HomeDatingScreen}
+        options={screenOptions}
+      />
+      <Tab.Screen
+        name="homeTime"
+        component={HomeTime}
         options={screenOptions}
       />
     </Tab.Navigator>
