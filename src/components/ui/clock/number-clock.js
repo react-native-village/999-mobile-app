@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import {ScrollView, StyleSheet, Text, View} from 'react-native'
+import {ScrollView, StyleSheet, View} from 'react-native'
 import Svg, {Line, Path, Polygon} from 'react-native-svg'
 
 // import Axis from './axis'
@@ -13,6 +13,7 @@ import {
 } from './costants'
 
 import {Background} from '../Background'
+import {Text} from '../text'
 
 function Poly({
   stroke = STROKE_COLOR,
@@ -43,8 +44,9 @@ function Axis({startPoint = ['0,0', '0,0'], endPoint = ['0,0', '0,0']}) {
   )
 }
 
+let result = {}
+
 const setActivePolys = (num = 0) => {
-  let result = {}
   const till = 27
 
   for (let i = 0; i <= till; i++) {
@@ -52,7 +54,7 @@ const setActivePolys = (num = 0) => {
   }
   return result
 }
-export default class Clock extends Component {
+export default class ClockNumber extends Component {
   constructor() {
     super()
     this.state = Object.assign({hover: true}, setActivePolys())
@@ -68,6 +70,65 @@ export default class Clock extends Component {
     return (
       <Background>
         <View style={styles.container}>
+          <View>
+            <Text ibm1>
+              {result.fill0027 === '#FFA1CD'
+                ? 27
+                : result.fill0026 === '#FFA1CD'
+                ? 26
+                : result.fill0025 === '#FFA1CD'
+                ? 25
+                : result.fill0024 === '#FFA1CD'
+                ? 24
+                : result.fill0023 === '#FFA1CD'
+                ? 23
+                : result.fill0022 === '#FFA1CD'
+                ? 22
+                : result.fill0021 === '#FFA1CD'
+                ? 21
+                : result.fill0020 === '#FFA1CD'
+                ? 20
+                : result.fill0019 === '#FFA1CD'
+                ? 19
+                : result.fill0018 === '#FFA1CD'
+                ? 18
+                : result.fill0017 === '#FFA1CD'
+                ? 17
+                : result.fill0016 === '#FFA1CD'
+                ? 16
+                : result.fill0015 === '#FFA1CD'
+                ? 15
+                : result.fill0014 === '#FFA1CD'
+                ? 14
+                : result.fill0013 === '#FFA1CD'
+                ? 13
+                : result.fill0012 === '#FFA1CD'
+                ? 12
+                : result.fill0011 === '#FFA1CD'
+                ? 11
+                : result.fill0010 === '#FFA1CD'
+                ? 10
+                : result.fill009 === '#FFA1CD'
+                ? 9
+                : result.fill008 === '#FFA1CD'
+                ? 8
+                : result.fill007 === '#FFA1CD'
+                ? 7
+                : result.fill006 === '#FFA1CD'
+                ? 6
+                : result.fill005 === '#FFA1CD'
+                ? 5
+                : result.fill004 === '#FFA1CD'
+                ? 4
+                : result.fill003 === '#FFA1CD'
+                ? 3
+                : result.fill002 === '#FFA1CD'
+                ? 2
+                : result.fill001 === '#FFA1CD'
+                ? 1
+                : 0}
+            </Text>
+          </View>
           <View>
             <Svg height={SVG_HEIGHT} width={SVG_WIDTH}>
               {/* Axis 1 */}
@@ -641,7 +702,7 @@ export default class Clock extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   header: {
