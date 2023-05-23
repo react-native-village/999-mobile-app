@@ -12,11 +12,13 @@ import {Spacer} from '../ui'
 interface HomeMarketHeaderProps {
   onPressNumbers?: () => void
   onPressLetter?: () => void
+  onPressSunset?: () => void
 }
 
 export function HomeTimeHeader({
   onPressNumbers,
   onPressLetter,
+  onPressSunset,
 }: HomeMarketHeaderProps) {
   const {colors} = useTheme()
   const {top} = useSafeAreaInsets()
@@ -42,6 +44,14 @@ export function HomeTimeHeader({
             <MaterialCommunityIcons
               color={colors.primary}
               name="numeric"
+              size={30}
+            />
+          </TouchableOpacity>
+          <Spacer width={10} />
+          <TouchableOpacity onPress={onPressSunset} activeOpacity={0.7}>
+            <MaterialCommunityIcons
+              color={colors.primary}
+              name="weather-sunset"
               size={30}
             />
           </TouchableOpacity>
