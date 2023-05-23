@@ -73,41 +73,41 @@ export default class ClockNumber extends Component {
           <View>
             <Text ibm1>
               {result.fill0027 === '#FFA1CD'
-                ? 27
+                ? 999
                 : result.fill0026 === '#FFA1CD'
-                ? 26
+                ? 899
                 : result.fill0025 === '#FFA1CD'
-                ? 25
+                ? 799
                 : result.fill0024 === '#FFA1CD'
-                ? 24
+                ? 699
                 : result.fill0023 === '#FFA1CD'
-                ? 23
+                ? 599
                 : result.fill0022 === '#FFA1CD'
-                ? 22
+                ? 499
                 : result.fill0021 === '#FFA1CD'
-                ? 21
+                ? 399
                 : result.fill0020 === '#FFA1CD'
-                ? 20
+                ? 299
                 : result.fill0019 === '#FFA1CD'
-                ? 19
+                ? 199
                 : result.fill0018 === '#FFA1CD'
-                ? 18
+                ? 99
                 : result.fill0017 === '#FFA1CD'
-                ? 17
+                ? 89
                 : result.fill0016 === '#FFA1CD'
-                ? 16
+                ? 79
                 : result.fill0015 === '#FFA1CD'
-                ? 15
+                ? 69
                 : result.fill0014 === '#FFA1CD'
-                ? 14
+                ? 59
                 : result.fill0013 === '#FFA1CD'
-                ? 13
+                ? 49
                 : result.fill0012 === '#FFA1CD'
-                ? 12
+                ? 39
                 : result.fill0011 === '#FFA1CD'
-                ? 11
+                ? 29
                 : result.fill0010 === '#FFA1CD'
-                ? 10
+                ? 19
                 : result.fill009 === '#FFA1CD'
                 ? 9
                 : result.fill008 === '#FFA1CD'
