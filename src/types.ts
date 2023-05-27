@@ -9,6 +9,7 @@ export type TabParamList = {
   homeTicketsMarket: undefined
   homeDating: undefined
   homeTime: undefined
+  homeMarket: undefined
 }
 export type RootStackParamList = {
   home?: NavigatorScreenParams<TabParamList>
@@ -45,6 +46,18 @@ export interface TicketInfo {
   tickets: number
   currencySymbols?: string
   description?: string
+}
+
+export interface MarketInfo {
+  id: string
+  name: string
+  tags: string[]
+  imageUrl: string
+  price?: number
+  currencySymbols?: string
+  description?: string
+  rating: number[]
+  brand?: string
 }
 
 export interface PersonInfo {

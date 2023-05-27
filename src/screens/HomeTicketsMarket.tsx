@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {HomeMarket} from 'src/components/HomeMarket'
+import {HomeTickets} from 'src/components/HomeTickets'
 import {useTypedNavigation} from 'src/hooks'
 import {TicketInfo} from 'src/types'
 
@@ -28,7 +28,7 @@ export function HomeTicketsMarketScreen() {
   }
 
   return (
-    <HomeMarket
+    <HomeTickets
       onPressSettings={onPressSettings}
       onPressProfile={onPressProfile}
       onPressCard={onPressCard}

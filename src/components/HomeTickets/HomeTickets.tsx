@@ -3,35 +3,36 @@ import React from 'react'
 import {ScrollView, StyleSheet, View} from 'react-native'
 import {FlatList} from 'react-native-gesture-handler'
 
-import {Background, Spacer} from 'src/components/ui'
+import {Background, Spacer, TicketCardColumn} from 'src/components/ui'
 import {useThematicStyles} from 'src/hooks'
-import {MarketInfo} from 'src/types'
-import {marketData} from 'src/variables/temporaryData'
+import {TicketInfo} from 'src/types'
+import {ticketsData} from 'src/variables/temporaryData'
 
-import {HomeMarketHeader} from './HomeMarketHeader'
+import {HomeTicketsHeader} from './HomeTicketsHeader'
 
+import {Categories} from '../ui/categories'
 import {HeaderList} from '../ui/headerList'
-import {MarketCardColumn} from '../ui/MarketCardColumn'
 
-interface HomeMarketT {
-  onPressCard: (item: MarketInfo) => void
-  onPressSettings?: () => void
-  onPressProfile?: () => void
-  onPressSearch?: () => void
-  onPressScan?: () => void
+interface HomeMarketProps {
+  onPressCard: (item: TicketInfo) => void
+  onPressProfile: () => void
+  onPressSettings: () => void
+  onPressSearch: () => void
+  onPressScan: () => void
 }
 
-export function HomeMarket({
+export function HomeTickets({
   onPressCard,
-  onPressSettings,
   onPressProfile,
+  onPressSettings,
   onPressSearch,
   onPressScan,
-}: HomeMarketT) {
+}: HomeMarketProps) {
   const {styles} = useThematicStyles(rawStyles)
+
   return (
     <Background>
-      <HomeMarketHeader
+      <HomeTicketsHeader
         onPressSettings={onPressSettings}
         onPressProfile={onPressProfile}
         onPressSearch={onPressSearch}
@@ -39,29 +40,43 @@ export function HomeMarket({
       />
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
+          <Categories />
           <View style={styles.flatListContainer}>
-            <HeaderList title="NEW COLLECTION" button="See all" />
             <FlatList
               horizontal
-              data={marketData}
+              data={ticketsData}
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.contentContainer}
               renderItem={({item}) => (
-                <MarketCardColumn onPress={onPressCard} {...item} />
+                <TicketCardColumn onPress={onPressCard} {...item} />
               )}
               keyExtractor={item => item.id}
               ItemSeparatorComponent={Separator}
             />
           </View>
+          <HeaderList title="Newest Events" button="See all" />
           <View style={styles.flatListContainer}>
-            <HeaderList title="Thailand symbols" button="See all" />
             <FlatList
               horizontal
-              data={marketData}
+              data={ticketsData}
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.contentContainer}
               renderItem={({item}) => (
-                <MarketCardColumn onPress={onPressCard} {...item} />
+                <TicketCardColumn onPress={onPressCard} {...item} />
+              )}
+              keyExtractor={item => item.id}
+              ItemSeparatorComponent={Separator}
+            />
+          </View>
+          <HeaderList title="Expiring Soon" button="See all" />
+          <View style={styles.flatListContainer}>
+            <FlatList
+              horizontal
+              data={ticketsData}
+              contentContainerStyle={styles.contentContainer}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item}) => (
+                <TicketCardColumn onPress={onPressCard} {...item} />
               )}
               keyExtractor={item => item.id}
               ItemSeparatorComponent={Separator}

@@ -7,6 +7,7 @@ import {
 } from '@react-navigation/bottom-tabs'
 import {RouteProp} from '@react-navigation/native'
 
+import {HomeMarket} from 'src/components/HomeMarket'
 import {HomeTime} from 'src/components/HomeTime'
 import {TabBar} from 'src/components/ui'
 import {TabParamList} from 'src/types'
@@ -31,10 +32,16 @@ export function Home() {
   return (
     <Tab.Navigator tabBar={renderTabBar} screenOptions={{headerShown: false}}>
       <Tab.Screen
+        name="homeMarket"
+        component={HomeMarket}
+        options={screenOptions}
+      />
+      <Tab.Screen
         name="homeTicketsMarket"
         component={HomeTicketsMarketScreen}
         options={screenOptions}
       />
+
       <Tab.Screen
         name="homeStaking"
         component={HomeStakingScreen}
