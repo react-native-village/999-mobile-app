@@ -1,4 +1,4 @@
-import {PersonInfo, TicketInfo} from 'src/types'
+import {MarketInfo, PersonInfo, TicketInfo} from 'src/types'
 
 export const DatingData: PersonInfo[] = [
   {
@@ -99,6 +99,88 @@ export const categoriesData = [
   },
 ]
 
+export const marketData: MarketInfo[] = [
+  {
+    id: '0',
+    name: '999 Thailand 1',
+    tags: ['New', 'Hot', '999'],
+    price: 999,
+    currencySymbols: 'ZLT',
+    rating: [5, 5, 5, 5, 5, 5],
+    brand: '999 DAO',
+    imageUrl: 'https://leelachakra.com/resource/999Ticket/ring1.png',
+  },
+  {
+    id: '1',
+    name: '999 Thailand 2',
+    tags: ['New', 'Hot', '999'],
+    price: 999,
+    rating: [5, 5, 5, 5, 5, 4],
+    brand: '999 DAO',
+    currencySymbols: 'ZLT',
+    imageUrl: 'https://leelachakra.com/resource/999Ticket/ring2.png',
+  },
+  {
+    id: '2',
+    name: '999 Thailand 3',
+    tags: ['New', 'Hot', '999'],
+    price: 999,
+    rating: [5, 5, 5, 5, 5, 4],
+    brand: '999 DAO',
+    currencySymbols: 'ZLT',
+    imageUrl: 'https://leelachakra.com/resource/999Ticket/ring3.png',
+  },
+  {
+    id: '3',
+    name: '999 Thailand 4',
+    tags: ['New', 'Hot', '999'],
+    price: 999,
+    rating: [5, 5, 5, 5, 5, 5],
+    brand: '999 DAO',
+    currencySymbols: 'ZLT',
+    imageUrl: 'https://leelachakra.com/resource/999Ticket/ring4.png',
+  },
+  {
+    id: '4',
+    name: '999 Thailand 5',
+    tags: ['New', 'Hot', '999'],
+    price: 999,
+    rating: [5, 5, 5, 5, 5, 5],
+    brand: '999 DAO',
+    currencySymbols: 'ZLT',
+    imageUrl: 'https://leelachakra.com/resource/999Ticket/ring5.png',
+  },
+  {
+    id: '5',
+    name: '999 Thailand 6',
+    tags: ['New', 'Hot', '999'],
+    price: 999,
+    rating: [5, 5, 5, 5, 5, 5],
+    brand: '999 DAO',
+    currencySymbols: 'ZLT',
+    imageUrl: 'https://leelachakra.com/resource/999Ticket/ring6.png',
+  },
+  {
+    id: '6',
+    name: '999 Thailand 7',
+    tags: ['New', 'Hot', '999'],
+    price: 999,
+    rating: [5, 5, 5, 5, 5, 5],
+    brand: '999 DAO',
+    currencySymbols: 'ZLT',
+    imageUrl: 'https://leelachakra.com/resource/999Ticket/ring7.png',
+  },
+  {
+    id: '7',
+    name: '999 Thailand 8',
+    tags: ['New', 'Hot', '999'],
+    price: 999,
+    rating: [5, 5, 5, 5, 5, 5],
+    brand: '999 DAO',
+    currencySymbols: 'ZLT',
+    imageUrl: 'https://leelachakra.com/resource/999Ticket/ring8.png',
+  },
+]
 export const ticketsData: TicketInfo[] = [
   {
     id: '0',

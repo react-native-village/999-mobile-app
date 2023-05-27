@@ -23,6 +23,7 @@ const navDataById = [
     icon: 'store',
     name: 'Market',
   },
+  {icon: 'ticket-alt', name: 'Tickets'},
   {
     icon: 'coins', // or 'seedling'
     name: 'Staking',
@@ -39,7 +40,7 @@ export function Tab({
   color = Color.graphicSecond4,
   activeColor = Color.primary,
 }: TabProps) {
-  const tabWidth = useWindowDimensions().width / 5 - s(2) * 2
+  const tabWidth = useWindowDimensions().width / 6 - s(2) * 2
   const {colors} = useTheme()
 
   return (

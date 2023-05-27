@@ -1,41 +1,34 @@
 import React from 'react'
 
-import {format} from 'date-fns'
 import {StyleSheet, TouchableOpacity, View, useColorScheme} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import {formatPriceSmall} from 'src/components/formatPrice'
+import {round10} from 'src/helpers/decimalAdjust'
 import {useThematicStyles} from 'src/hooks'
 import {Color} from 'src/themeTypes'
-import {TicketInfo} from 'src/types'
+import {MarketInfo} from 'src/types'
 
 import {TicketCardTags} from './TicketCardTags'
 
 import {Spacer, Text} from './'
 import {dark, light} from '../../../assets/images/cryproCoins/mapping'
 
-export function TicketCardColumn({
+export function MarketCardColumn({
   onPress,
   ...itemProps
-}: TicketInfo & {onPress?: (item: TicketInfo) => void}) {
+}: MarketInfo & {onPress?: (item: MarketInfo) => void}) {
   const {styles, colors} = useThematicStyles(rawStyles)
   const isDark = useColorScheme() === 'dark'
-  const {
-    name,
-    startData,
-    endData,
-    tags,
-    imageUrl,
-    geoPosition,
-    price,
-    currencySymbols,
-  } = itemProps
+  const {name, tags, imageUrl, price, rating, currencySymbols, brand} =
+    itemProps
 
   const iconName = currencySymbols?.toLowerCase()
   // @ts-ignore
   const SvgIcon = !isDark ? dark[iconName] : light[iconName]
 
+  const ratingText = round10(rating.reduce((a, b) => a + b) / rating.length, -1)
   return (
     <TouchableOpacity activeOpacity={0.6} onPress={() => onPress?.(itemProps)}>
       <View style={styles.container}>
@@ -73,27 +66,21 @@ export function TicketCardColumn({
           <Spacer height={8} />
           <View style={styles.iconWithTextContainer}>
             <MaterialCommunityIcons
-              name="map-marker-outline"
+              name="card-account-details-star-outline"
               style={styles.iconStyle}
             />
             <View style={styles.textContainer}>
               <Text numberOfLines={2} t11>
-                {geoPosition}
+                {brand}
               </Text>
             </View>
           </View>
           <Spacer height={6} />
           <View style={styles.iconWithTextContainer}>
-            <MaterialCommunityIcons
-              name="ticket-confirmation-outline"
-              style={styles.iconStyle}
-            />
+            <MaterialCommunityIcons name="star" style={styles.iconStyle} />
             <View style={styles.textContainer}>
-              <Text numberOfLines={1} t11>
-                Start: {format(startData, 'MMM d, y')}
-              </Text>
-              <Text numberOfLines={1} t11>
-                End: {format(endData, 'MMM d, y')}
+              <Text numberOfLines={2} t11>
+                {ratingText.toString()}
               </Text>
             </View>
           </View>
@@ -107,7 +94,7 @@ const borderW = 0.6
 const rawStyles = StyleSheet.create({
   container: {
     width: 200,
-    height: 380,
+    height: 350,
     borderRadius: 16,
     overflow: 'hidden',
     alignSelf: 'flex-start',

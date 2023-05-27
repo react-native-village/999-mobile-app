@@ -17,7 +17,7 @@ interface HomeMarketHeaderProps {
   onPressScan?: () => void
 }
 
-export function HomeMarketHeader({
+export function HomeTicketsHeader({
   onPressSettings,
   onPressProfile,
   onPressSearch,
@@ -34,7 +34,7 @@ export function HomeMarketHeader({
           <Logo width={36} height={36} />
           <Spacer width={8} />
           <Text t5 color={Color.textBase1}>
-            999 Market
+            DAO 999 NFT
           </Text>
         </View>
         <View style={styles.rightButtons}>
