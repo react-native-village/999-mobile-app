@@ -16,6 +16,7 @@ export type RootStackParamList = {
   welcome: undefined
   settings: undefined
   ticketDetail: TicketInfo
+  marketDetail: MarketInfo
   profile: undefined
   search: undefined
   scan: undefined
@@ -56,8 +57,7 @@ export interface MarketInfo {
   price?: number
   currencySymbols?: string
   description?: string
-  rating: number[]
-  brand?: string
+  tickets: number
 }
 
 export interface PersonInfo {

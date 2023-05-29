@@ -1,9 +1,9 @@
 import React from 'react'
 
-import {StyleSheet, View, ViewStyle} from 'react-native';
-import {StyleProp} from 'react-native';
-import Animated from 'react-native-reanimated';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {StyleSheet, View, ViewStyle} from 'react-native'
+import {StyleProp} from 'react-native'
+import Animated from 'react-native-reanimated'
+import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
 import {Color} from 'src/themeTypes'
 
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
   textContainer: {
     maxWidth: '70%',
   },
-});
+})

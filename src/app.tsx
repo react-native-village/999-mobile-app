@@ -15,6 +15,7 @@ import {RootStackParamList} from 'src/types'
 import {useTheme} from './hooks'
 import {ConnectWalletScreen} from './screens/ConnectWallet'
 import {CreateEventScreen} from './screens/CreateEvent'
+import {MarketDetailScreen} from './screens/MarketDetail'
 import {ProfileScreen} from './screens/Profile'
 import {ProposalScreen} from './screens/Proposal'
 import {QRCodeScreen} from './screens/QRCodeScreen'
@@ -63,6 +64,7 @@ export function App() {
           <Stack.Screen name="connectWallet" component={ConnectWalletScreen} />
           <Stack.Screen name="settings" component={SettingsScreen} />
           <Stack.Screen name="ticketDetail" component={TicketDetailScreen} />
+          <Stack.Screen name="marketDetail" component={MarketDetailScreen} />
           <Stack.Screen name="profile" component={ProfileScreen} />
           <Stack.Screen name="search" component={SearchScreen} />
           <Stack.Screen name="proposal" component={ProposalScreen} />

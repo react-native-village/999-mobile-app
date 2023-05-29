@@ -1,8 +1,8 @@
 import React, {memo} from 'react'
 
-import {StyleSheet, View, useWindowDimensions} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import {s} from 'react-native-size-matters';
+import {StyleSheet, View, useWindowDimensions} from 'react-native'
+import FastImage from 'react-native-fast-image'
+import {s} from 'react-native-size-matters'
 
 import {useImageAspect} from 'src/hooks'
 
