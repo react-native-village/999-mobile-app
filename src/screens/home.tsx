@@ -7,13 +7,13 @@ import {
 } from '@react-navigation/bottom-tabs'
 import {RouteProp} from '@react-navigation/native'
 
-import {HomeMarket} from 'src/components/HomeMarket'
 import {HomeTime} from 'src/components/HomeTime'
 import {TabBar} from 'src/components/ui'
 import {TabParamList} from 'src/types'
 
 import {HomeDatingScreen} from './HomeDating'
 import {HomeGovernanceScreen} from './HomeGovernance'
+import {HomeMarketScreen} from './HomeMarket'
 import {HomeStakingScreen} from './HomeStakingScreen'
 import {HomeTicketsMarketScreen} from './HomeTicketsMarket'
 
@@ -33,7 +33,7 @@ export function Home() {
     <Tab.Navigator tabBar={renderTabBar} screenOptions={{headerShown: false}}>
       <Tab.Screen
         name="homeMarket"
-        component={HomeMarket}
+        component={HomeMarketScreen}
         options={screenOptions}
       />
       <Tab.Screen

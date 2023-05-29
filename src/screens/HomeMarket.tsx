@@ -1,34 +1,30 @@
 import React from 'react'
 
 import {HomeMarket} from 'src/components/HomeMarket'
-// import {useTypedNavigation} from 'src/hooks'
-// import {TicketInfo} from 'src/types'
+import {useTypedNavigation} from 'src/hooks'
+import {MarketInfo} from 'src/types'
 
 export function HomeMarketScreen() {
-  //   const {navigate} = useTypedNavigation()
+  const {navigate} = useTypedNavigation()
 
-  const onPressCard = (
-    {
-      //item: TicketInfo
-    },
-  ) => {
-    // navigate('ticketDetail', item)
+  const onPressCard = (item: MarketInfo) => {
+    navigate('marketDetail', item)
   }
 
   const onPressProfile = () => {
-    // navigate('profile')
+    navigate('profile')
   }
 
   const onPressSettings = () => {
-    // navigate('settings')
+    navigate('settings')
   }
 
   const onPressSearch = () => {
-    // navigate('search')
+    navigate('search')
   }
 
   const onPressScan = () => {
-    // navigate('scan')
+    navigate('scan')
   }
 
   return (

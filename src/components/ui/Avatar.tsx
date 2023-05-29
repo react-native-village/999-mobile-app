@@ -1,7 +1,7 @@
 import React, {memo, useState} from 'react'
 
-import {StyleProp, StyleSheet, TouchableOpacity, ViewStyle} from 'react-native';
-import FastImage from 'react-native-fast-image';
+import {StyleProp, StyleSheet, TouchableOpacity, ViewStyle} from 'react-native'
+import FastImage from 'react-native-fast-image'
 
 import {Loading} from '../loading'
 

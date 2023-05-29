@@ -1,34 +1,30 @@
 import React, {useState} from 'react'
 
-import {format} from 'date-fns'
 import {ScrollView, StyleSheet, View, useColorScheme} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import {formatPrice} from 'src/components/formatPrice'
 import {Button, CustomHeader, Spacer, Text} from 'src/components/ui'
 import {Background} from 'src/components/ui/Background'
 import {useThematicStyles} from 'src/hooks'
 import {Color} from 'src/themeTypes'
-import {TicketInfo} from 'src/types'
-
-import {TicketDetailBuy} from './TicketDetailBuy'
-import {TicketDetailTags} from './TicketDetailTags'
+import {MarketInfo} from 'src/types'
 
 import {dark, light} from '../../../assets/images/cryproCoins/mapping'
-interface TicketDetailProps extends TicketInfo {
+import {TicketDetailBuy} from '../TicketDetail/TicketDetailBuy'
+import {TicketDetailTags} from '../TicketDetail/TicketDetailTags'
+
+interface MarketDetailProps extends MarketInfo {
   onBack?: () => void
-  onQRCode: () => void
   priceInDollars?: number
 }
 
-export function TicketDetail({
+export function MarketDetail({
   onBack,
-  onQRCode,
   priceInDollars = 100,
   ...item
-}: TicketDetailProps) {
+}: MarketDetailProps) {
   const [showBuy, setShowBuy] = useState(false)
   const insets = useSafeAreaInsets()
   const {styles, colors} = useThematicStyles(rawStyles)
@@ -54,13 +50,7 @@ export function TicketDetail({
             {item.name}
           </Text>
           <View style={styles.row}>
-            <View style={styles.rowTicket}>
-              <MaterialCommunityIcons
-                name="ticket-confirmation-outline"
-                style={styles.iconStyle1}
-              />
-              <Text t11>One time usage</Text>
-            </View>
+            <View style={styles.rowTicket} />
             <View style={styles.price}>
               {item.price && item.currencySymbols && (
                 <View style={styles.priceContainer}>
@@ -94,62 +84,6 @@ export function TicketDetail({
               </View>
             </View>
           </View>
-          <View style={styles.rowInfo}>
-            <View style={styles.circle}>
-              <MaterialCommunityIcons
-                name="calendar-check"
-                style={styles.iconStyle2}
-              />
-            </View>
-            <View style={styles.flexOne}>
-              <Text t7 style={styles.dateText}>
-                Start Date: {format(item.startData, 'MMM d, y')}
-              </Text>
-              <Text t9 style={styles.dateText}>
-                {format(item.startData, 'EEEE, hh:mm a')}
-              </Text>
-              <Spacer height={10} />
-              <Text t7 style={styles.dateText}>
-                End Date: {format(item.endData, 'MMM d, y')}
-              </Text>
-              <Text t9 style={styles.dateText}>
-                {format(item.endData, 'EEEE, hh:mm a')}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.rowInfo}>
-            <View style={styles.circle}>
-              <MaterialCommunityIcons
-                name="map-marker-outline"
-                style={styles.iconStyle2}
-              />
-            </View>
-            <View>
-              <Text t7 style={styles.dateText}>
-                Location
-              </Text>
-              <Text t9>{item.geoPosition}</Text>
-            </View>
-          </View>
-          <View style={styles.rowInfo}>
-            <View style={styles.circle}>
-              <MaterialCommunityIcons
-                name="account"
-                style={styles.iconStyle2}
-              />
-            </View>
-            <View>
-              <Text t7 style={styles.dateText}>
-                Ticket Provider
-              </Text>
-              <Text t9>0x0da46c783f8cxv85x6z5cxhxv12382</Text>
-              <Spacer height={8} />
-              <Text t7 style={styles.dateText}>
-                Ticket Approval
-              </Text>
-              <Text t9>0x0cd46a783f8cxv45x6z5cxhxv13782</Text>
-            </View>
-          </View>
           {item.description && (
             <>
               <Text t7 style={styles.dateText}>
@@ -163,13 +97,8 @@ export function TicketDetail({
           {item.tickets > 0 && (
             <View>
               <Text t11 style={styles.ticketText} color={Color.primary}>
-                Tickets available: {item.tickets}
+                Available: {item.tickets}
               </Text>
-              <Button style={styles.ticketButton} onPress={onQRCode}>
-                {item.tickets > 1
-                  ? 'Show QR-code of the tickets'
-                  : 'Show QR-codes of ticket'}
-              </Button>
             </View>
           )}
           <Button style={styles.button} onPress={() => setShowBuy(true)}>
