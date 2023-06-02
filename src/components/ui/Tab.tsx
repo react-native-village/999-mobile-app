@@ -52,7 +52,7 @@ export function Tab({
         color={colors[isFocused ? activeColor : color]}
       />
       <Spacer height={s(2.5)} />
-      <Text color={isFocused ? activeColor : color} t16>
+      <Text color={isFocused ? activeColor : color} t18>
         {navDataById[tabId].name}
       </Text>
     </Pressable>
