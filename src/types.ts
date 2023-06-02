@@ -53,7 +53,7 @@ export interface MarketInfo {
   id: string
   name: string
   tags: string[]
-  imageUrl: string
+  imageUrl: number | undefined
   price?: number
   currencySymbols?: string
   description?: string

@@ -13,12 +13,14 @@ interface HomeMarketHeaderProps {
   onPressNumbers?: () => void
   onPressLetter?: () => void
   onPressSunset?: () => void
+  onPressClock?: () => void
 }
 
 export function HomeTimeHeader({
   onPressNumbers,
   onPressLetter,
   onPressSunset,
+  onPressClock,
 }: HomeMarketHeaderProps) {
   const {colors} = useTheme()
   const {top} = useSafeAreaInsets()
@@ -32,7 +34,10 @@ export function HomeTimeHeader({
           <Spacer width={8} />
         </View>
         <View style={styles.rightButtons}>
-          <TouchableOpacity onPress={onPressLetter} activeOpacity={0.7}>
+          <TouchableOpacity
+            onPress={onPressLetter}
+            activeOpacity={0.7}
+            style={styles.alphabetIconContainer}>
             <MaterialCommunityIcons
               color={colors.primary}
               name="alphabet-latin"
@@ -52,6 +57,14 @@ export function HomeTimeHeader({
             <MaterialCommunityIcons
               color={colors.primary}
               name="weather-sunset"
+              size={30}
+            />
+          </TouchableOpacity>
+          <Spacer width={10} />
+          <TouchableOpacity onPress={onPressClock} activeOpacity={0.7}>
+            <MaterialCommunityIcons
+              color={colors.primary}
+              name="clock-digital"
               size={30}
             />
           </TouchableOpacity>
@@ -77,5 +90,8 @@ const styles = StyleSheet.create({
   },
   rightButtons: {
     flexDirection: 'row',
+  },
+  alphabetIconContainer: {
+    bottom: 0.8,
   },
 })
