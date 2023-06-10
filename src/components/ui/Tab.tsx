@@ -20,6 +20,10 @@ interface TabProps {
 
 const navDataById = [
   {
+    icon: 'robot',
+    name: 'AI',
+  },
+  {
     icon: 'store',
     name: 'Market',
   },
@@ -40,7 +44,7 @@ export function Tab({
   color = Color.graphicSecond4,
   activeColor = Color.primary,
 }: TabProps) {
-  const tabWidth = useWindowDimensions().width / 6 - s(2) * 2
+  const tabWidth = useWindowDimensions().width / 7 - s(2) * 2
   const {colors} = useTheme()
 
   return (
