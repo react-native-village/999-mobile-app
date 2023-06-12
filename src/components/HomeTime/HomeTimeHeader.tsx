@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import {StyleSheet, TouchableOpacity, View} from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
@@ -10,20 +10,35 @@ import Logo from '../../../assets/images/logo.svg'
 import {Spacer} from '../ui'
 
 interface HomeMarketHeaderProps {
-  onPressNumbers?: () => void
-  onPressLetter?: () => void
-  onPressSunset?: () => void
-  onPressClock?: () => void
+  onPressNumbers: () => void
+  onPressLetter: () => void
+  onPressSunset: () => void
 }
 
 export function HomeTimeHeader({
   onPressNumbers,
   onPressLetter,
   onPressSunset,
-  onPressClock,
 }: HomeMarketHeaderProps) {
   const {colors} = useTheme()
   const {top} = useSafeAreaInsets()
+
+  const [activeButton, setActiveButton] = useState(1)
+
+  const handlePressNumbers = () => {
+    setActiveButton(2)
+    onPressNumbers()
+  }
+
+  const handlePressLetter = () => {
+    setActiveButton(1)
+    onPressLetter()
+  }
+
+  const handlePressSunset = () => {
+    setActiveButton(3)
+    onPressSunset()
+  }
 
   return (
     <>
@@ -35,36 +50,28 @@ export function HomeTimeHeader({
         </View>
         <View style={styles.rightButtons}>
           <TouchableOpacity
-            onPress={onPressLetter}
+            onPress={handlePressLetter}
             activeOpacity={0.7}
             style={styles.alphabetIconContainer}>
             <MaterialCommunityIcons
-              color={colors.primary}
+              color={activeButton === 1 ? colors.primary : colors.primary2}
               name="alphabet-latin"
               size={30}
             />
           </TouchableOpacity>
           <Spacer width={10} />
-          <TouchableOpacity onPress={onPressNumbers} activeOpacity={0.7}>
+          <TouchableOpacity onPress={handlePressNumbers} activeOpacity={0.7}>
             <MaterialCommunityIcons
-              color={colors.primary}
+              color={activeButton === 2 ? colors.primary : colors.primary2}
               name="numeric"
               size={30}
             />
           </TouchableOpacity>
           <Spacer width={10} />
-          <TouchableOpacity onPress={onPressSunset} activeOpacity={0.7}>
+          <TouchableOpacity onPress={handlePressSunset} activeOpacity={0.7}>
             <MaterialCommunityIcons
-              color={colors.primary}
+              color={activeButton === 3 ? colors.primary : colors.primary2}
               name="weather-sunset"
-              size={30}
-            />
-          </TouchableOpacity>
-          <Spacer width={10} />
-          <TouchableOpacity onPress={onPressClock} activeOpacity={0.7}>
-            <MaterialCommunityIcons
-              color={colors.primary}
-              name="clock-digital"
               size={30}
             />
           </TouchableOpacity>

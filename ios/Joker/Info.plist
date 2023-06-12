@@ -92,6 +92,12 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+<string>Your location is required to provide accurate data.</string>
+<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+<string>Your location is required to provide accurate data.</string>
+<key>NSLocationAlwaysUsageDescription</key>
+<string>Your location is required to provide accurate data.</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

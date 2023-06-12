@@ -32,7 +32,7 @@ const navDataById = [
     icon: 'coins', // or 'seedling'
     name: 'Staking',
   },
-  {icon: 'landmark', name: 'Governance'},
+  {icon: 'landmark', name: 'Gov'},
   {icon: 'glass-cheers', name: 'Dating'},
   {icon: 'clock', name: 'Time'},
 ]

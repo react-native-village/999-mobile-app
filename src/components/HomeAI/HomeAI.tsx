@@ -1,16 +1,14 @@
 /* eslint-disable react/function-component-definition */
-/* eslint-disable no-lone-blocks */
 import React, {useEffect, useState} from 'react'
 
 // @ts-expect-error
 import {OPEN_AI_KEY} from '@env'
 import axios from 'axios'
-import {ActivityIndicator, StyleSheet, View} from 'react-native'
+import {ActivityIndicator, StyleSheet, View, useColorScheme} from 'react-native'
 import {Bubble, GiftedChat, IMessage} from 'react-native-gifted-chat'
 
 import {CustomHeader} from '../ui'
 
-const primary = '#FFA1CD'
 const LEELA_AI =
   'https://leelachakra.com/resource/LeelaChakra/PhotoLeela/kosheyAI.jpg'
 
@@ -22,6 +20,8 @@ interface IContextSummary {
 const LOADING_MESSAGE_ID = 'loading-message-id'
 
 export const HomeAI: React.FC = () => {
+  const isDark = useColorScheme() === 'dark'
+  const primary = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
   {
     const [messages, setMessages] = useState<IMessage[]>([])
     const [contextSummary, setContextSummary] = useState<IContextSummary>({
