@@ -43,7 +43,7 @@ export function MarketDetail({
         onPressLeft={onBack}
       />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        <FastImage source={{uri: item.imageUrl}} style={styles.image} />
+        <FastImage source={item.imageUrl} style={styles.image} />
         <View style={styles.details}>
           <TicketDetailTags tags={item.tags} />
           <Text t19 style={styles.name}>
