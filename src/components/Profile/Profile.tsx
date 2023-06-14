@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react'
 
 import {
   SectionList,
-  // TouchableOpacity,
+  TouchableOpacity,
   View,
   useWindowDimensions,
 } from 'react-native'
@@ -21,7 +21,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
-// import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import {useThematicStyles} from 'src/hooks'
 import {SHADOW_COLOR} from 'src/themes'
@@ -31,6 +31,8 @@ import {ANIMATION_DURATION} from 'src/variables'
 
 import {Avatar, Background, Button, CustomHeader, Spacer, Text} from '../ui'
 import {TicketCardRow} from '../ui/TicketCardRow'
+import { useNavigation } from '@react-navigation/native';
+
 
 const imageSize = 220
 
@@ -74,6 +76,7 @@ export function Profile({
   const translationY = useSharedValue(0)
   const scrollOffset = useSharedValue(closedSnapPoint)
   const sheetTranslateY = useSharedValue(closedSnapPoint)
+  const navigation = useNavigation()
 
   // ANIMATIONS
 
@@ -174,6 +177,11 @@ export function Profile({
     transform: [{scale: interpolate(headerState.value, [0, 1], [1, 0.6])}],
   }))
 
+
+  function OnPressCart(){
+    navigation.navigate('cart')
+  }
+
   // JSX
   return (
     <>
@@ -218,11 +226,18 @@ export function Profile({
                 <Spacer height={20} /> */}
               </View>
             </GestureDetector>
-            <Button
-              onPress={onPressCreateEvent}
-              style={styles.createEventButton}>
-              Create Event
-            </Button>
+            <View style={styles.buttonicart}>
+              <Button 
+                  onPress={onPressCreateEvent}
+                  style={styles.createEventButton}>
+                  Create Event
+                </Button>
+              <TouchableOpacity onPress={OnPressCart}>
+                <View style={styles.cartIco}>
+                  <Icon name="ios-cart" style={styles.iconStyle} />
+                </View>
+              </TouchableOpacity>
+            </View>
             <GestureDetector
               gesture={Gesture.Simultaneous(panGesture, scrollViewGesture)}>
               <Animated.ScrollView
@@ -268,7 +283,6 @@ const rawStyles = StyleSheet.create({
   },
   createEventButton: {
     width: '80%',
-    alignSelf: 'center',
     marginBottom: 20,
   },
   sectionListContainer: {
@@ -322,5 +336,23 @@ const rawStyles = StyleSheet.create({
   },
   posterContainer: {
     justifyContent: 'flex-end',
+  },
+  cartIco: {
+    width: 50,
+    height: 50,
+    borderRadius:10,
+    right:56,
+    backgroundColor: Color.primary1,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  buttonicart:{
+    marginHorizontal:22,
+    height:75,
+    flexDirection:'row'
+  },
+  iconStyle: {
+    fontSize: 40,
+    color: Color.primary,
   },
 })

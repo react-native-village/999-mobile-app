@@ -20,6 +20,7 @@ export type RootStackParamList = {
   profile: undefined
   search: undefined
   scan: undefined
+  cart: undefined
   qr: TicketInfo
   result: {
     isSuccessfully: boolean

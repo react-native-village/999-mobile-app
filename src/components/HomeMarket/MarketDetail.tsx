@@ -12,12 +12,22 @@ import {Color} from 'src/themeTypes'
 import {MarketInfo} from 'src/types'
 
 import {dark, light} from '../../../assets/images/cryproCoins/mapping'
-import {TicketDetailBuy} from '../TicketDetail/TicketDetailBuy'
+import {TicketDetailBuy, TicketDetailBuyCart} from '../TicketDetail/TicketDetailBuy'
 import {TicketDetailTags} from '../TicketDetail/TicketDetailTags'
+import { OvalMessage } from 'src/components/ui/OvalMessageBottom'
 
 interface MarketDetailProps extends MarketInfo {
   onBack?: () => void
   priceInDollars?: number
+  
+}
+
+type CartData = {
+  price: number;
+  currencySymbols: string;
+  count: number;
+  imageUrl: string;
+  name: string;
 }
 
 export function MarketDetail({
@@ -26,14 +36,26 @@ export function MarketDetail({
   ...item
 }: MarketDetailProps) {
   const [showBuy, setShowBuy] = useState(false)
+  const [showBuyCart, setShowBuyCart] = useState(false)
+  const [showOvalMessage, setShowOvalMessage] = useState(false)
   const insets = useSafeAreaInsets()
   const {styles, colors} = useThematicStyles(rawStyles)
-
+  const obj_details = 
+  { name: item.name,
+    url: item.imageUrl,
+    
+    
+  }
   const isDark = useColorScheme() === 'dark'
 
   const iconName = item.currencySymbols?.toLowerCase()
   // @ts-ignore
   const SvgIcon = !isDark ? dark[iconName] : light[iconName]
+
+  const handleClose = () => {
+    setShowBuyCart(false);
+    setShowOvalMessage(true);
+  };
 
   return (
     <Background>
@@ -101,9 +123,16 @@ export function MarketDetail({
               </Text>
             </View>
           )}
-          <Button style={styles.button} onPress={() => setShowBuy(true)}>
-            {item.tickets > 0 ? 'Buy more' : 'Buy'}
-          </Button>
+          <View style={styles.buttonContainer}>
+            <View style={{ marginRight:5}}>
+              <Button style={styles.button} onPress={() => setShowBuy(true)}>
+                {item.tickets > 0 ? 'Buy more' : 'Buy'}
+              </Button>
+            </View >
+            <Button style={styles.button} onPress={() => setShowBuyCart(true)}>
+              Add to cart
+            </Button>
+          </View>
         </View>
         <Spacer height={insets.bottom} />
       </ScrollView>
@@ -113,11 +142,27 @@ export function MarketDetail({
           currencySymbols={item.currencySymbols}
           priceInDollars={priceInDollars}
           onClose={() => setShowBuy(false)}
+          
         />
       )}
+      {showBuyCart && (
+        <TicketDetailBuyCart
+          price={item.price}
+          currencySymbols={item.currencySymbols}
+          priceInDollars={priceInDollars}
+          onClose={handleClose}
+          obj_details = {obj_details}
+        />
+      )}
+      {showOvalMessage && ( <OvalMessage
+      message={'Product successfully added to cart'}
+      onClose={() => setShowOvalMessage(false)}
+      />)}
     </Background>
   )
 }
+
+
 
 const rawStyles = StyleSheet.create({
   container: {
@@ -131,7 +176,8 @@ const rawStyles = StyleSheet.create({
     alignSelf: 'center',
   },
   button: {
-    marginVertical: 20,
+    marginVertical: 10,
+    width: 170
   },
   image: {
     aspectRatio: 1 / 1,
@@ -198,4 +244,17 @@ const rawStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  buttonContainer:{
+    width: '100%',
+    height:'auto',
+    flexDirection:'row',
+    
+    justifyContent: 'space-between',
+
+  },
+  button1: {
+    width: 170,
+    height:'auto',
+    
+  }
 })
