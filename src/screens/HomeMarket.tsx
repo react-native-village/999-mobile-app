@@ -1,39 +1,45 @@
 import React from 'react'
 
-import {HomeMarket} from 'src/components/HomeMarket'
-import {useTypedNavigation} from 'src/hooks'
-import {MarketInfo} from 'src/types'
+// import {HomeMarket} from 'src/components/HomeMarket'
+import {MarketDetail} from 'src/components/HomeMarket/MarketDetail'
+import {useTypedNavigation, useTypedRoute} from 'src/hooks'
+// import {MarketInfo} from 'src/types'
+
+// import {MarketDetailScreen} from './MarketDetail'
 
 export function HomeMarketScreen() {
-  const {navigate} = useTypedNavigation()
+  // const {navigate} = useTypedNavigation()
 
-  const onPressCard = (item: MarketInfo) => {
-    navigate('marketDetail', item)
+  const item = {
+    id: '0',
+    name: '999 Thailand 1',
+    tags: ['New', 'Hot', '999'],
+    price: 999,
+    currencySymbols: 'ZLT',
+    imageUrl: {uri: 'https://leelachakra.com/resource/999dao/ringnft.gif'},
+    tickets: 10,
+    description: 'Gold ring',
   }
 
-  const onPressProfile = () => {
-    navigate('profile')
-  }
+  // const onPressCard = (item: MarketInfo) => {
+  //   navigate('marketDetail', item)
+  // }
 
-  const onPressSettings = () => {
-    navigate('settings')
-  }
+  // const onPressProfile = () => {
+  //   navigate('profile')
+  // }
 
-  const onPressSearch = () => {
-    navigate('search')
-  }
+  // const onPressSettings = () => {
+  //   navigate('settings')
+  // }
 
-  const onPressScan = () => {
-    navigate('scan')
-  }
+  // const onPressSearch = () => {
+  //   navigate('search')
+  // }
 
-  return (
-    <HomeMarket
-      onPressSettings={onPressSettings}
-      onPressProfile={onPressProfile}
-      onPressCard={onPressCard}
-      onPressSearch={onPressSearch}
-      onPressScan={onPressScan}
-    />
-  )
+  // const onPressScan = () => {
+  //   navigate('scan')
+  // }
+
+  return <MarketDetail onBack={() => {}} {...item} />
 }
