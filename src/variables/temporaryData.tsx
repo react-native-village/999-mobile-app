@@ -106,7 +106,7 @@ export const marketData: MarketInfo[] = [
     tags: ['New', 'Hot', '999'],
     price: 999,
     currencySymbols: 'ZLT',
-    imageUrl: require('../../assets/images/rings/ring1.png'),
+    imageUrl: {uri: 'https://leelachakra.com/resource/999dao/ringnft.gif'},
     tickets: 10,
     description: 'Gold ring',
   },
