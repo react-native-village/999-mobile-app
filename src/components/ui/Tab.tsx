@@ -20,6 +20,10 @@ interface TabProps {
 
 const navDataById = [
   {
+    icon: 'robot',
+    name: 'AI',
+  },
+  {
     icon: 'store',
     name: 'Market',
   },
@@ -28,7 +32,7 @@ const navDataById = [
     icon: 'coins', // or 'seedling'
     name: 'Staking',
   },
-  {icon: 'landmark', name: 'Governance'},
+  {icon: 'landmark', name: 'Gov'},
   {icon: 'glass-cheers', name: 'Dating'},
   {icon: 'clock', name: 'Time'},
 ]
@@ -40,7 +44,7 @@ export function Tab({
   color = Color.graphicSecond4,
   activeColor = Color.primary,
 }: TabProps) {
-  const tabWidth = useWindowDimensions().width / 6 - s(2) * 2
+  const tabWidth = useWindowDimensions().width / 7 - s(2) * 2
   const {colors} = useTheme()
 
   return (
@@ -52,7 +56,7 @@ export function Tab({
         color={colors[isFocused ? activeColor : color]}
       />
       <Spacer height={s(2.5)} />
-      <Text color={isFocused ? activeColor : color} t16>
+      <Text color={isFocused ? activeColor : color} t18>
         {navDataById[tabId].name}
       </Text>
     </Pressable>
