@@ -102,7 +102,7 @@ export const categoriesData = [
 export const marketData: MarketInfo[] = [
   {
     id: '0',
-    name: '999 Thailand 1',
+    name: 'Ring of Knowledge WEB3',
     tags: ['New', 'Hot', '999'],
     price: 999,
     currencySymbols: 'ZLT',
