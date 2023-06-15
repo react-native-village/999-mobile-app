@@ -39,8 +39,9 @@ export function MarketDetail({
     <Background>
       <CustomHeader
         title={item.name}
-        iconLeft="arrow-back"
-        onPressLeft={onBack}
+        // iconLeft="arrow-back"
+        // onPressLeft={onBack}
+        // uncommit on realese
       />
       <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
         <FastImage source={item.imageUrl} style={styles.image} />
@@ -87,7 +88,7 @@ export function MarketDetail({
           {item.description && (
             <>
               <Text t7 style={styles.dateText}>
-                Desciption
+                Description
               </Text>
               <Spacer height={20} />
               <Text t9>{item.description}</Text>
