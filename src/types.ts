@@ -20,6 +20,7 @@ export type RootStackParamList = {
   marketDetail: MarketInfo
   profile: undefined
   search: undefined
+  cart: undefined
   scan: undefined
   qr: TicketInfo
   result: {
