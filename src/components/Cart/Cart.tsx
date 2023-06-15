@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 import { Text, CustomHeader } from 'src/components/ui'
 import { Background } from 'src/components/ui/Background'
 import { CartCard } from 'src/components/ui/CartCard'
@@ -17,7 +18,7 @@ export function Cart({
   onPressBack
  }: CartProps) {
   
-  console.log(datacart)
+  const navigation = useNavigation
   
   
 
