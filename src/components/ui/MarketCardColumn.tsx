@@ -29,7 +29,7 @@ export function MarketCardColumn({
     <TouchableOpacity activeOpacity={0.6} onPress={() => onPress?.(itemProps)}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <FastImage style={styles.image} source={imageUrl} />
+          <FastImage style={styles.image} source={{uri: imageUrl}} />
         </View>
         <View style={styles.infoContainer}>
           <Text t6 numberOfLines={1}>

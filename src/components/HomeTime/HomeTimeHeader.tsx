@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 import {StyleSheet, TouchableOpacity, View} from 'react-native'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
@@ -10,9 +10,9 @@ import Logo from '../../../assets/images/logo.svg'
 import {Spacer} from '../ui'
 
 interface HomeMarketHeaderProps {
-  onPressNumbers: () => void
-  onPressLetter: () => void
-  onPressSunset: () => void
+  onPressNumbers?: () => void
+  onPressLetter?: () => void
+  onPressSunset?: () => void
 }
 
 export function HomeTimeHeader({
@@ -23,23 +23,6 @@ export function HomeTimeHeader({
   const {colors} = useTheme()
   const {top} = useSafeAreaInsets()
 
-  const [activeButton, setActiveButton] = useState(1)
-
-  const handlePressNumbers = () => {
-    setActiveButton(2)
-    onPressNumbers()
-  }
-
-  const handlePressLetter = () => {
-    setActiveButton(1)
-    onPressLetter()
-  }
-
-  const handlePressSunset = () => {
-    setActiveButton(3)
-    onPressSunset()
-  }
-
   return (
     <>
       <Spacer height={top} />
@@ -49,28 +32,25 @@ export function HomeTimeHeader({
           <Spacer width={8} />
         </View>
         <View style={styles.rightButtons}>
-          <TouchableOpacity
-            onPress={handlePressLetter}
-            activeOpacity={0.7}
-            style={styles.alphabetIconContainer}>
+          <TouchableOpacity onPress={onPressLetter} activeOpacity={0.7}>
             <MaterialCommunityIcons
-              color={activeButton === 1 ? colors.primary : colors.primary2}
+              color={colors.primary}
               name="alphabet-latin"
               size={30}
             />
           </TouchableOpacity>
           <Spacer width={10} />
-          <TouchableOpacity onPress={handlePressNumbers} activeOpacity={0.7}>
+          <TouchableOpacity onPress={onPressNumbers} activeOpacity={0.7}>
             <MaterialCommunityIcons
-              color={activeButton === 2 ? colors.primary : colors.primary2}
+              color={colors.primary}
               name="numeric"
               size={30}
             />
           </TouchableOpacity>
           <Spacer width={10} />
-          <TouchableOpacity onPress={handlePressSunset} activeOpacity={0.7}>
+          <TouchableOpacity onPress={onPressSunset} activeOpacity={0.7}>
             <MaterialCommunityIcons
-              color={activeButton === 3 ? colors.primary : colors.primary2}
+              color={colors.primary}
               name="weather-sunset"
               size={30}
             />
@@ -97,8 +77,5 @@ const styles = StyleSheet.create({
   },
   rightButtons: {
     flexDirection: 'row',
-  },
-  alphabetIconContainer: {
-    bottom: 0.8,
   },
 })

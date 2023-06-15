@@ -10,7 +10,6 @@ export type TabParamList = {
   homeDating: undefined
   homeTime: undefined
   homeMarket: undefined
-  homeAI: undefined
 }
 export type RootStackParamList = {
   home?: NavigatorScreenParams<TabParamList>
@@ -55,7 +54,7 @@ export interface MarketInfo {
   id: string
   name: string
   tags: string[]
-  imageUrl: number | undefined
+  imageUrl: string
   price?: number
   currencySymbols?: string
   description?: string

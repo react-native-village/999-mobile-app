@@ -44,9 +44,9 @@ export const LIGHT_THEME: ThemeColors = {
 }
 
 export const DARK_THEME: ThemeColors = {
-  primary: '#34C9FC',
-  primary1: 'rgba(52, 201, 252, 0.15)',
-  primary2: 'rgba(52, 201, 252, 0.6)',
+  primary: '#FFA1CD',
+  primary1: 'rgba(255, 161, 205, 0.15)',
+  primary2: 'rgba(255, 161, 205, 0.6)',
   // MESSAGE MEANING
   textRed1: '#FF3C2E',
   textGreen1: '#3EEF21',
