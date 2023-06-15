@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 import {
   StyleSheet,
@@ -14,12 +15,18 @@ import {useThematicStyles} from 'src/hooks'
 import {Color} from 'src/themeTypes'
 import {TicketInfo} from 'src/types'
 
+
+
+
 interface TicketDetailBuyProps {
   onClose: () => void
   currencySymbols?: TicketInfo['currencySymbols']
   price?: TicketInfo['price']
   priceInDollars?: number
+  obj_details: object
 }
+
+
 
 export function TicketDetailBuy({
   onClose,
@@ -28,6 +35,7 @@ export function TicketDetailBuy({
   priceInDollars,
 }: TicketDetailBuyProps) {
   const [count, setCount] = useState(1)
+  const [ShowInfoBottomSheet, setShowInfoBottomSheet] = useState(false)
   const {styles} = useThematicStyles(rawStyles)
   const {height: H} = useWindowDimensions()
 
@@ -41,6 +49,9 @@ export function TicketDetailBuy({
     if (count === 99) return
     else setCount(count + 1)
   }
+
+  
+  
   return (
     <BottomSheet onClose={onClose} closeDistance={closeDistance}>
       <View style={styles.rowAmount}>
@@ -83,6 +94,107 @@ export function TicketDetailBuy({
     </BottomSheet>
   )
 }
+
+interface datacartType {
+  amount: number;
+  currencySymbols: string;
+  name: string;
+  price: number;
+  
+}
+
+export let datacart:datacartType[] = []
+
+
+
+export function TicketDetailBuyCart({
+  onClose,
+  currencySymbols,
+  price,
+  priceInDollars,
+  obj_details,
+}: TicketDetailBuyProps) {
+  const [count, setCount] = useState(1)
+  const {styles} = useThematicStyles(rawStyles)
+  const {height: H} = useWindowDimensions()
+  const navigation = useNavigation()
+  const closeDistance = H / 5
+  const [ShowOvalMessageBottom, setShowOvalMessageBottom] = useState(false)
+  
+
+  const pressMinus = () => {
+    if (count === 1) return
+    else setCount(count - 1)
+  }
+  const pressPlus = () => {
+    if (count === 99) return
+    else setCount(count + 1)
+  }
+
+  const obj_details_buy = {
+    amount: count,
+    price: price * count,
+    currencySymbols: currencySymbols,
+  }
+
+  const objTicketForCart = obj_details  || obj_details_buy ? Object.assign(obj_details, obj_details_buy) : {}
+
+  
+
+  const handleButtonClick = () => {
+    datacart.push(objTicketForCart)
+    
+    onClose()
+  
+  };
+
+  
+  
+  return (
+    <BottomSheet onClose={onClose} closeDistance={closeDistance}>
+      <View style={styles.rowAmount}>
+        <Text t7>Amount</Text>
+        <View style={styles.count}>
+          <TouchableOpacity
+            style={styles.cube}
+            activeOpacity={0.7}
+            onPress={pressMinus}>
+            <MaterialCommunityIcons name={'minus'} style={styles.iconStyle} />
+          </TouchableOpacity>
+          <Text t4>{count}</Text>
+          <TouchableOpacity
+            style={styles.cube}
+            activeOpacity={0.7}
+            onPress={pressPlus}>
+            <MaterialCommunityIcons name={'plus'} style={styles.iconStyle} />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.rowTotal}>
+        <Text t7>Total</Text>
+
+        <View style={styles.price}>
+          {price && currencySymbols && (
+            <Text t3 color={Color.primary}>
+              {`${(price * count).toLocaleString()} ${currencySymbols}`}
+            </Text>
+          )}
+          {priceInDollars && (
+            <Text t12 color={Color.graphicSecond4}>
+              {priceInDollars.toLocaleString()} $
+            </Text>
+          )}
+        </View>
+      </View>
+      <Button onPress={handleButtonClick} style={styles.button}>
+        Add to cart
+      </Button>
+      
+    </BottomSheet>
+  )
+}
+
+
 
 const rawStyles = StyleSheet.create({
   rowAmount: {

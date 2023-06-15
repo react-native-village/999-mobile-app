@@ -14,6 +14,7 @@ import {RootStackParamList} from 'src/types'
 
 import {useTheme} from './hooks'
 import {ConnectWalletScreen} from './screens/ConnectWallet'
+import { CartScreen } from './screens/Cart'
 import {CreateEventScreen} from './screens/CreateEvent'
 import {MarketDetailScreen} from './screens/MarketDetail'
 import {ProfileScreen} from './screens/Profile'
@@ -62,6 +63,7 @@ export function App() {
 
         <Stack.Group screenOptions={gestureEnabled}>
           <Stack.Screen name="connectWallet" component={ConnectWalletScreen} />
+          <Stack.Screen name="cart" component={CartScreen} />
           <Stack.Screen name="settings" component={SettingsScreen} />
           <Stack.Screen name="ticketDetail" component={TicketDetailScreen} />
           <Stack.Screen name="marketDetail" component={MarketDetailScreen} />
