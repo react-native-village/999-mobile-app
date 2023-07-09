@@ -1,20 +1,29 @@
 import React, {useState} from 'react'
 
-import {ScrollView, StyleSheet, View, useColorScheme} from 'react-native'
+import {
+  Linking,
+  ScrollView,
+  StyleSheet,
+  View,
+  useColorScheme,
+} from 'react-native'
 import FastImage from 'react-native-fast-image'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 
 import {formatPrice} from 'src/components/formatPrice'
 import {Button, CustomHeader, Spacer, Text} from 'src/components/ui'
 import {Background} from 'src/components/ui/Background'
+import {OvalMessage} from 'src/components/ui/OvalMessageBottom'
 import {useThematicStyles} from 'src/hooks'
 import {Color} from 'src/themeTypes'
 import {MarketInfo} from 'src/types'
 
 import {dark, light} from '../../../assets/images/cryproCoins/mapping'
-import {TicketDetailBuy, TicketDetailBuyCart} from '../TicketDetail/TicketDetailBuy'
+import {
+  TicketDetailBuy,
+  TicketDetailBuyCart,
+} from '../TicketDetail/TicketDetailBuy'
 import {TicketDetailTags} from '../TicketDetail/TicketDetailTags'
-import { OvalMessage } from 'src/components/ui/OvalMessageBottom'
 
 interface MarketDetailProps extends MarketInfo {
   onBack?: () => void
@@ -31,10 +40,7 @@ export function MarketDetail({
   const [showOvalMessage, setShowOvalMessage] = useState(false)
   const insets = useSafeAreaInsets()
   const {styles, colors} = useThematicStyles(rawStyles)
-  const obj_details = 
-  { name: item.name,
-    url: item.imageUrl,
-  }
+  const obj_details = {name: item.name, url: item.imageUrl}
 
   const isDark = useColorScheme() === 'dark'
 
@@ -43,10 +49,16 @@ export function MarketDetail({
   const SvgIcon = !isDark ? dark[iconName] : light[iconName]
 
   const handleClose = () => {
-    setShowBuyCart(false);
-    setShowOvalMessage(true);
-  };
+    setShowBuyCart(false)
+    setShowOvalMessage(true)
+  }
 
+  const onClose = () => {
+    setShowBuy(false)
+    Linking.openURL(
+      'https://opensea.io/assets/ethereum/0x495f947276749ce646f68ac8c248420045cb7b5e/4779901461043521251650643766164585910345101587726362605061919731785628910567',
+    )
+  }
   return (
     <Background>
       <CustomHeader
@@ -115,11 +127,11 @@ export function MarketDetail({
             </View>
           )}
           <View style={styles.buttonContainer}>
-            <View style={{ marginRight:5}}>
+            <View style={styles.marginRight}>
               <Button style={styles.button} onPress={() => setShowBuy(true)}>
                 {item.tickets > 0 ? 'Buy more' : 'Buy'}
               </Button>
-            </View >
+            </View>
             <Button style={styles.button} onPress={() => setShowBuyCart(true)}>
               Add to cart
             </Button>
@@ -132,8 +144,8 @@ export function MarketDetail({
           price={item.price}
           currencySymbols={item.currencySymbols}
           priceInDollars={priceInDollars}
-          onClose={() => setShowBuy(false)}
-          
+          onClose={onClose}
+          obj_details={obj_details}
         />
       )}
       {showBuyCart && (
@@ -142,13 +154,15 @@ export function MarketDetail({
           currencySymbols={item.currencySymbols}
           priceInDollars={priceInDollars}
           onClose={handleClose}
-          obj_details = {obj_details}
+          obj_details={obj_details}
         />
       )}
-      {showOvalMessage && ( <OvalMessage
-      message={'Product successfully added to cart'}
-      onClose={() => setShowOvalMessage(false)}
-      />)}
+      {showOvalMessage && (
+        <OvalMessage
+          message={'Product successfully added to cart'}
+          onClose={() => setShowOvalMessage(false)}
+        />
+      )}
     </Background>
   )
 }
@@ -156,6 +170,9 @@ export function MarketDetail({
 const rawStyles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  marginRight: {
+    marginRight: 5,
   },
   ticketText: {
     marginBottom: 10,
@@ -166,7 +183,7 @@ const rawStyles = StyleSheet.create({
   },
   button: {
     marginVertical: 10,
-    width: 170
+    width: 170,
   },
   image: {
     aspectRatio: 1 / 1,
@@ -233,17 +250,15 @@ const rawStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  buttonContainer:{
+  buttonContainer: {
     width: '100%',
-    height:'auto',
-    flexDirection:'row',
-    
-    justifyContent: 'space-between',
+    height: 'auto',
+    flexDirection: 'row',
 
+    justifyContent: 'space-between',
   },
   button1: {
     width: 170,
-    height:'auto',
-    
-  }
+    height: 'auto',
+  },
 })
