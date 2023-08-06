@@ -40,27 +40,18 @@ export default function ClockSunset() {
       .then(resultCheck => {
         switch (resultCheck) {
           case RESULTS.UNAVAILABLE:
-            console.log(
-              'This feature is not available (on this device / in this context)',
-            )
             break
           case RESULTS.DENIED:
-            console.log(
-              'The permission has not been requested / is denied but requestable',
-            )
             request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(
               resultRequest => {
                 if (resultRequest === RESULTS.GRANTED) {
-                  console.log('The permission is granted')
                 }
               },
             )
             break
           case RESULTS.GRANTED:
-            console.log('The permission is granted')
             break
           case RESULTS.BLOCKED:
-            console.log('The permission is denied and not requestable anymore')
             break
         }
       })
@@ -75,7 +66,7 @@ export default function ClockSunset() {
     return () => clearInterval(intervalId)
   }, [])
 
-  const pos = Geolocation.getCurrentPosition(
+  Geolocation.getCurrentPosition(
     position => {
       const latitude = position.coords.latitude
       const longitude = position.coords.longitude
@@ -90,9 +81,9 @@ export default function ClockSunset() {
     },
     {enableHighAccuracy: false, timeout: 15000, maximumAge: 10000},
   )
-  console.log('pos', pos)
+  console.log('lat', lat)
+  console.log('lon', lon)
   const solarTime = getSolarNoon(lat, lon)
-  console.log('solarTime', solarTime)
   const isDark = useColorScheme() === 'dark'
   const DISABLED_COLOR = isDark ? '#0B0B0B' : '#F5F5F5'
   const STROKE_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
@@ -153,6 +144,7 @@ export default function ClockSunset() {
   const SVG_HEIGHT = 320.49
   const SVG_WIDTH = 276.95
 
+  console.log('solarTime', solarTime)
   return (
     <Background>
       <View style={styles.container}>

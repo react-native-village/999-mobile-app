@@ -1,4 +1,4 @@
-import {getSunPosition} from 'suncalc'
+import SunCalc from 'suncalc'
 
 export function getCurrentTime(): string {
   const now = new Date()
@@ -13,6 +13,8 @@ export function padNumber(num: number): string {
 
 export function getSolarNoon({lat, lon}: any) {
   const now = new Date()
-  const sunPos = getSunPosition(now, lat, lon)
-  return sunPos.altitude
+  const sunPos = SunCalc.getTimes(now, lat, lon)
+  console.log('now', now)
+  console.log('Sun Position:', sunPos)
+  return sunPos.solarNoon
 }
