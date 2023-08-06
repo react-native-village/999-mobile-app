@@ -1,13 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react'
 
+import Geolocation from '@react-native-community/geolocation'
 import {StyleSheet, View, useColorScheme} from 'react-native'
-import Geolocation from 'react-native-geolocation-service'
+import {PERMISSIONS, RESULTS, check, request} from 'react-native-permissions'
 import Svg, {Line, Polygon} from 'react-native-svg'
-import SunCalc from 'sunrise-sunset-js'
 
 import {useThematicStyles} from 'src/hooks'
 
 import {STROKE_WIDTH} from './costants'
+import {getCurrentTime, getSolarNoon} from './timeUtils'
 
 import {Background} from '../Background'
 import {Text} from '../text'
@@ -25,42 +26,77 @@ function Poly({fill = 'none', strokeWidth = STROKE_WIDTH, points = '0.0'}) {
   )
 }
 
-export default function ClockAlphabet() {
-  const isDark = useColorScheme() === 'dark'
-  const DISABLED_COLOR = isDark ? '#0B0B0B' : '#F5F5F5'
-  const STROKE_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
-  const CHOSEN_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
+export default function ClockSunset() {
   const [hover, setHover] = useState(true)
   const [polyColors, setPolyColors] = useState(
     Array.from({length: 28}, () => DISABLED_COLOR),
   )
-
-  const [latitude, setLatitude] = useState(null)
-  const [longitude, setLongitude] = useState(null)
-
-  Geolocation.requestAuthorization('whenInUse')
+  const [time, setTime] = useState(getCurrentTime())
+  const [lat, setLat] = useState(' ')
+  const [lon, setLon] = useState(' ')
 
   useEffect(() => {
-    Geolocation.requestAuthorization('whenInUse')
-    Geolocation.getCurrentPosition(
-      position => {
-        const {latitudeL, longitudeL} = position.coords
-        setLatitude(latitudeL)
-        setLongitude(longitudeL)
-      },
-      error => {
-        console.log('Ошибка получения геолокации:', error)
-      },
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-    )
+    check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
+      .then(resultCheck => {
+        switch (resultCheck) {
+          case RESULTS.UNAVAILABLE:
+            console.log(
+              'This feature is not available (on this device / in this context)',
+            )
+            break
+          case RESULTS.DENIED:
+            console.log(
+              'The permission has not been requested / is denied but requestable',
+            )
+            request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE).then(
+              resultRequest => {
+                if (resultRequest === RESULTS.GRANTED) {
+                  console.log('The permission is granted')
+                }
+              },
+            )
+            break
+          case RESULTS.GRANTED:
+            console.log('The permission is granted')
+            break
+          case RESULTS.BLOCKED:
+            console.log('The permission is denied and not requestable anymore')
+            break
+        }
+      })
+      .catch(() => {
+        // handle error
+      })
+
+    const intervalId = setInterval(() => {
+      setTime(getCurrentTime())
+    }, 1000)
+
+    return () => clearInterval(intervalId)
   }, [])
 
-  const date = new Date()
-  const times =
-    latitude && longitude
-      ? SunCalc.getTimes(date, latitude, longitude)
-      : "We didn't get your location"
-  const noon = times.noon
+  const pos = Geolocation.getCurrentPosition(
+    position => {
+      const latitude = position.coords.latitude
+      const longitude = position.coords.longitude
+
+      // Теперь вы можете использовать широту и долготу
+      setLat(latitude)
+      setLon(longitude)
+    },
+    error => {
+      // Обработка ошибок
+      console.error(error)
+    },
+    {enableHighAccuracy: false, timeout: 15000, maximumAge: 10000},
+  )
+  console.log('pos', pos)
+  const solarTime = getSolarNoon(lat, lon)
+  console.log('solarTime', solarTime)
+  const isDark = useColorScheme() === 'dark'
+  const DISABLED_COLOR = isDark ? '#0B0B0B' : '#F5F5F5'
+  const STROKE_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
+  const CHOSEN_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
 
   polyColors[0] = CHOSEN_COLOR
   const {styles} = useThematicStyles(rawStyles)
@@ -121,63 +157,7 @@ export default function ClockAlphabet() {
     <Background>
       <View style={styles.container}>
         <View>
-          <Text ibm1>
-            {polyColors[27] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[26] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[25] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[24] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[23] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[22] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[21] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[20] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[19] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[18] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[17] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[16] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[15] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[14] === CHOSEN_COLOR
-              ? 'Zenit'
-              : polyColors[13] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[12] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[11] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[10] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[9] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[8] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[7] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[6] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[5] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[4] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[3] === CHOSEN_COLOR
-              ? 'Nadir'
-              : polyColors[2] === CHOSEN_COLOR
-              ? noon
-              : polyColors[1] === CHOSEN_COLOR
-              ? noon
-              : noon}
-          </Text>
+          <Text ibm1>{time}</Text>
         </View>
         <View>
           <Svg height={SVG_HEIGHT} width={SVG_WIDTH}>
