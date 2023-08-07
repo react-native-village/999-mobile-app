@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 
 import Geolocation from '@react-native-community/geolocation'
+import axios from 'axios'
 import {StyleSheet, View, useColorScheme} from 'react-native'
 import {PERMISSIONS, RESULTS, check, request} from 'react-native-permissions'
 import Svg, {Line, Polygon} from 'react-native-svg'
@@ -8,7 +9,7 @@ import Svg, {Line, Polygon} from 'react-native-svg'
 import {useThematicStyles} from 'src/hooks'
 
 import {STROKE_WIDTH} from './costants'
-import {getCurrentTime, getSolarNoon} from './timeUtils'
+import {getCurrentTime} from './timeUtils'
 
 import {Background} from '../Background'
 import {Text} from '../text'
@@ -34,7 +35,47 @@ export default function ClockSunset() {
   const [time, setTime] = useState(getCurrentTime())
   const [lat, setLat] = useState(' ')
   const [lon, setLon] = useState(' ')
+  const [solarNoon, getSolarNoon] = useState(' ')
 
+  const response = axios
+    .get(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}`)
+    .then(locResponse => {
+      if (locResponse.data && locResponse.data.results) {
+        getSolarNoon(locResponse.data.results.solar_noon)
+      } else {
+        console.log('No data received')
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching data: ', error)
+    })
+
+  const solarNoonStringToMinutes = solarNoonString => {
+    const [timeLoc, period] = solarNoonString.split(' ')
+    const [hours, minutes] = timeLoc.split(':').map(Number)
+    let hoursIn24HourFormat = hours
+
+    if (period === 'PM' && hours !== 12) {
+      hoursIn24HourFormat += 12
+    } else if (period === 'AM' && hours === 12) {
+      hoursIn24HourFormat = 0
+    }
+
+    return hoursIn24HourFormat * 60 + minutes
+  }
+
+  const timeStringToMinutes = timeString => {
+    const [hours, minutes] = timeString.split(':').map(Number)
+    return hours * 60 + minutes
+  }
+
+  const utcDate = new Date(solarNoon + 'Z') // преобразование строки UTC-времени в объект Date
+  const localDate = new Date(
+    utcDate.getTime() + utcDate.getTimezoneOffset() * 60000,
+  ) // перевод времени в локальный часовой пояс
+  const SOLAR_TIME = solarNoonStringToMinutes(localDate)
+  const MIN_TIME = timeStringToMinutes(time)
+  console.log('time', time)
   useEffect(() => {
     check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
       .then(resultCheck => {
@@ -60,7 +101,21 @@ export default function ClockSunset() {
       })
 
     const intervalId = setInterval(() => {
+      const endOfDay = 24 * 60
       setTime(getCurrentTime())
+      let numPolysToColor
+      if (MIN_TIME <= solarNoon) {
+        numPolysToColor = Math.round((MIN_TIME / SOLAR_TIME) * 27)
+      } else {
+        numPolysToColor = Math.round(
+          ((endOfDay - MIN_TIME) / (endOfDay - SOLAR_TIME)) * 27,
+        )
+      }
+      setPolyColors(prevColors =>
+        prevColors.map((color, i) =>
+          i < numPolysToColor ? CHOSEN_COLOR : DISABLED_COLOR,
+        ),
+      )
     }, 1000)
 
     return () => clearInterval(intervalId)
@@ -81,9 +136,7 @@ export default function ClockSunset() {
     },
     {enableHighAccuracy: false, timeout: 15000, maximumAge: 10000},
   )
-  console.log('lat', lat)
-  console.log('lon', lon)
-  const solarTime = getSolarNoon(lat, lon)
+
   const isDark = useColorScheme() === 'dark'
   const DISABLED_COLOR = isDark ? '#0B0B0B' : '#F5F5F5'
   const STROKE_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
@@ -144,7 +197,6 @@ export default function ClockSunset() {
   const SVG_HEIGHT = 320.49
   const SVG_WIDTH = 276.95
 
-  console.log('solarTime', solarTime)
   return (
     <Background>
       <View style={styles.container}>

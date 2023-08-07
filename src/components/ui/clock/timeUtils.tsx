@@ -14,7 +14,5 @@ export function padNumber(num: number): string {
 export function getSolarNoon({lat, lon}: any) {
   const now = new Date()
   const sunPos = SunCalc.getTimes(now, lat, lon)
-  console.log('now', now)
-  console.log('Sun Position:', sunPos)
   return sunPos.solarNoon
 }
