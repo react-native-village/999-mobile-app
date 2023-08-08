@@ -28,27 +28,20 @@ function Poly({fill = 'none', strokeWidth = STROKE_WIDTH, points = '0.0'}) {
 }
 
 export default function ClockSunset() {
+  const isDark = useColorScheme() === 'dark'
+  const DISABLED_COLOR = isDark ? '#0B0B0B' : '#F5F5F5'
+  const STROKE_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
+  const CHOSEN_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
+
   const [hover, setHover] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
+  const [time, setTime] = useState(getCurrentTime())
   const [polyColors, setPolyColors] = useState(
     Array.from({length: 28}, () => DISABLED_COLOR),
   )
-  const [time, setTime] = useState(getCurrentTime())
-  const [lat, setLat] = useState(' ')
-  const [lon, setLon] = useState(' ')
-  const [solarNoon, getSolarNoon] = useState(' ')
-
-  const response = axios
-    .get(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}`)
-    .then(locResponse => {
-      if (locResponse.data && locResponse.data.results) {
-        getSolarNoon(locResponse.data.results.solar_noon)
-      } else {
-        console.log('No data received')
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching data: ', error)
-    })
+  const [lat, setLat] = useState('')
+  const [lon, setLon] = useState('')
+  const [solarNoon, setSolarNoon] = useState('')
 
   const solarNoonStringToMinutes = solarNoonString => {
     const [timeLoc, period] = solarNoonString.split(' ')
@@ -64,18 +57,85 @@ export default function ClockSunset() {
     return hoursIn24HourFormat * 60 + minutes
   }
 
+  const computePolysToColor = (SOLAR_TIME, MIN_TIME) => {
+    const endOfDay = 24 * 60
+    let numPolysToColor
+
+    if (MIN_TIME <= SOLAR_TIME) {
+      numPolysToColor = Math.round((MIN_TIME / SOLAR_TIME) * 27)
+    } else {
+      numPolysToColor = Math.round(
+        ((endOfDay - MIN_TIME) / (endOfDay - SOLAR_TIME)) * 27,
+      )
+    }
+
+    return numPolysToColor
+  }
+
   const timeStringToMinutes = timeString => {
     const [hours, minutes] = timeString.split(':').map(Number)
     return hours * 60 + minutes
   }
 
-  const utcDate = new Date(solarNoon + 'Z') // преобразование строки UTC-времени в объект Date
-  const localDate = new Date(
-    utcDate.getTime() + utcDate.getTimezoneOffset() * 60000,
-  ) // перевод времени в локальный часовой пояс
-  const SOLAR_TIME = solarNoonStringToMinutes(localDate)
-  const MIN_TIME = timeStringToMinutes(time)
-  console.log('time', time)
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime(getCurrentTime())
+    }, 60000) // Обновляем каждую минуту
+
+    return () => clearInterval(intervalId)
+  }, [])
+
+  useEffect(() => {
+    axios
+      .get(`https://api.sunrise-sunset.org/json?lat=${lat}&lng=${lon}`)
+      .then(locResponse => {
+        if (locResponse.data && locResponse.data.results) {
+          setSolarNoon(locResponse.data.results.solar_noon)
+          const SOLAR_TIME = solarNoonStringToMinutes(
+            locResponse.data.results.solar_noon,
+          )
+          const MIN_TIME = timeStringToMinutes(getCurrentTime())
+          let numPolysToColor = computePolysToColor(SOLAR_TIME, MIN_TIME) // функция для вычисления количества закрашенных полигонов
+          setPolyColors(
+            Array(28)
+              .fill()
+              .map((_, i) =>
+                i < numPolysToColor ? CHOSEN_COLOR : DISABLED_COLOR,
+              ),
+          )
+          setIsLoading(false)
+        } else {
+          console.log('No data received')
+        }
+      })
+  }, [lat, lon])
+
+  useEffect(() => {
+    const SOLAR_TIME = solarNoonStringToMinutes(solarNoon)
+    const MIN_TIME = timeStringToMinutes(time)
+
+    const endOfDay = 24 * 60
+    let numPolysToColor
+
+    if (MIN_TIME <= SOLAR_TIME) {
+      numPolysToColor = Math.round((MIN_TIME / SOLAR_TIME) * 27)
+    } else {
+      numPolysToColor =
+        27 - Math.round(((endOfDay - MIN_TIME) / (endOfDay - SOLAR_TIME)) * 27)
+    }
+
+    setPolyColors(prevColors =>
+      prevColors.map((color, i) =>
+        i < numPolysToColor ? CHOSEN_COLOR : DISABLED_COLOR,
+      ),
+    )
+  }, [solarNoon, time])
+
+  // don't delete(use for debug)
+  const toggle = () => {
+    setHover(prevHover => !prevHover)
+  }
+
   useEffect(() => {
     check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
       .then(resultCheck => {
@@ -99,27 +159,7 @@ export default function ClockSunset() {
       .catch(() => {
         // handle error
       })
-
-    const intervalId = setInterval(() => {
-      const endOfDay = 24 * 60
-      setTime(getCurrentTime())
-      let numPolysToColor
-      if (MIN_TIME <= solarNoon) {
-        numPolysToColor = Math.round((MIN_TIME / SOLAR_TIME) * 27)
-      } else {
-        numPolysToColor = Math.round(
-          ((endOfDay - MIN_TIME) / (endOfDay - SOLAR_TIME)) * 27,
-        )
-      }
-      setPolyColors(prevColors =>
-        prevColors.map((color, i) =>
-          i < numPolysToColor ? CHOSEN_COLOR : DISABLED_COLOR,
-        ),
-      )
-    }, 1000)
-
-    return () => clearInterval(intervalId)
-  }, [])
+  }, []) // Закрывающая скобка добавлена здесь, и пустой массив в качестве зависимости указан, чтобы этот useEffect выполнился только один раз.
 
   Geolocation.getCurrentPosition(
     position => {
@@ -137,21 +177,10 @@ export default function ClockSunset() {
     {enableHighAccuracy: false, timeout: 15000, maximumAge: 10000},
   )
 
-  const isDark = useColorScheme() === 'dark'
-  const DISABLED_COLOR = isDark ? '#0B0B0B' : '#F5F5F5'
-  const STROKE_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
-  const CHOSEN_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
-
   polyColors[0] = CHOSEN_COLOR
   const {styles} = useThematicStyles(rawStyles)
 
-  const toggle = () => {
-    if (hover === false) {
-      setHover(true)
-    }
-    setHover(!hover)
-  }
-
+  // don't delete(use for debug)
   const handlePolygonPress = index => {
     setPolyColors(prevColors => {
       const newColors = prevColors.map((color, i) => {
@@ -349,9 +378,10 @@ export default function ClockSunset() {
               points="93.75 238.88 103.92 221.39 137.48 279.64 137.48 314.5 93.75 238.88"
               fill={polyColors[1]}
               strokeWidth="0"
-              onPress={() => {
-                handlePolygonPress(1)
-              }}
+              // onPress={() => {
+              //   handlePolygonPress(1)
+              // }}
+              // uncommit this for debug
             />
 
             {/* Polygon002 Shakti */}
@@ -360,9 +390,9 @@ export default function ClockSunset() {
               points="48.47 160.65 68.99 160.65 102.78 219.38 92.61 236.97 48.47 160.65"
               fill={polyColors[2]}
               strokeWidth="0"
-              onPress={() => {
-                handlePolygonPress(2)
-              }}
+              // onPress={() => {
+              //   handlePolygonPress(2)
+              // }}
             />
             {/* Polygon003 Shakti */}
             <Polygon
@@ -370,9 +400,9 @@ export default function ClockSunset() {
               points="3.63 83.07 34.66 100.96 67.84 158.64 47.32 158.65 3.63 83.07"
               fill={polyColors[3]}
               strokeWidth="0"
-              onPress={() => {
-                handlePolygonPress(3)
-              }}
+              // onPress={() => {
+              //   handlePolygonPress(3)
+              // }}
             />
             {/* Polygon004 Shakti */}
             <Polygon
@@ -381,12 +411,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[4]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(4)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(4)
+              // }}
             />
             {/* Polygon005 Shakti */}
             <Polygon
@@ -395,12 +425,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[5]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(5)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(5)
+              // }}
             />
             {/* Polygon006 Shakti */}
             <Polygon
@@ -409,12 +439,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[6]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(6)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(6)
+              // }}
             />
             {/* Polygon007 Shakti */}
             <Polygon
@@ -423,12 +453,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[7]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(7)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(7)
+              // }}
             />
             {/* Polygon008 Shakti */}
             <Polygon
@@ -437,12 +467,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[8]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(8)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(8)
+              // }}
             />
             {/* Polygon009 Shakti */}
             <Polygon
@@ -452,11 +482,11 @@ export default function ClockSunset() {
               fill={polyColors[9]}
               strokeWidth="0"
               delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(9)
-              }}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(9)
+              // }}
             />
             {/* Polygon010 Shakti */}
             <Polygon
@@ -465,12 +495,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[10]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(10)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(10)
+              // }}
             />
             {/* Polygon020  Shiakti */}
             <Polygon
@@ -480,11 +510,11 @@ export default function ClockSunset() {
               fill={polyColors[11]}
               strokeWidth="0"
               delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(11)
-              }}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(11)
+              // }}
             />
             {/* Polygon030 Shakti */}
             <Polygon
@@ -493,12 +523,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[12]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(12)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(12)
+              // }}
             />
             {/* Polygon040  Shakti */}
             <Polygon
@@ -507,12 +537,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[13]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={this.toggle}
-              onPressOut={this.toggle}
-              onPress={() => {
-                handlePolygonPress(13)
-              }}
+              // delayPressIn={0}
+              // onPressIn={this.toggle}
+              // onPressOut={this.toggle}
+              // onPress={() => {
+              //   handlePolygonPress(13)
+              // }}
             />
             {/* Polygon050  Shakti */}
             <Polygon
@@ -521,12 +551,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[14]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(14)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(14)
+              // }}
             />
             {/* Polygon060 Shakti */}
             <Polygon
@@ -535,12 +565,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[15]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(15)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(15)
+              // }}
             />
             {/* Polygon070 Shakti */}
             <Polygon
@@ -549,12 +579,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[16]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(16)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(16)
+              // }}
             />
             {/* Polygon080 Shakti */}
             <Polygon
@@ -563,12 +593,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[17]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(17)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(17)
+              // }}
             />
             {/* Polygon090  Shakti */}
             <Polygon
@@ -577,12 +607,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[18]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(18)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(18)
+              // }}
             />
             {/* Polygon100  Shakti */}
             <Polygon
@@ -592,11 +622,11 @@ export default function ClockSunset() {
               fill={polyColors[19]}
               strokeWidth="0"
               delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(19)
-              }}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(19)
+              // }}
             />
             {/* Polygon200 Shikti */}
             <Polygon
@@ -605,12 +635,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[20]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(20)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(20)
+              // }}
             />
             {/* Polygon300 Shakti */}
             <Polygon
@@ -619,12 +649,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[21]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(21)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(21)
+              // }}
             />
             {/* Polygon400 Shakti */}
             <Polygon
@@ -633,12 +663,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[22]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(22)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(22)
+              // }}
             />
             {/* Polygon500 Shakti */}
             <Polygon
@@ -647,12 +677,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[23]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(23)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(23)
+              // }}
             />
             {/* Polygon600 Shakti */}
             <Polygon
@@ -661,12 +691,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[24]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(24)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(24)
+              // }}
             />
             {/* Polygon700 Shakti */}
             <Polygon
@@ -675,12 +705,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[25]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(25)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(25)
+              // }}
             />
             {/* Polygon800 Shakti*/}
             <Polygon
@@ -689,12 +719,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[26]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(26)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(26)
+              // }}
             />
             {/* Polygon900 Shakti */}
             <Polygon
@@ -703,12 +733,12 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[27]}
               strokeWidth="0"
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress(27)
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress(27)
+              // }}
             />
             {/* Polygon0 Shakti */}
             <Polygon
@@ -717,41 +747,41 @@ export default function ClockSunset() {
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
               fill={polyColors[0]}
               strokeWidth={STROKE_WIDTH}
-              delayPressIn={0}
-              onPressIn={toggle}
-              onPressOut={toggle}
-              onPress={() => {
-                handlePolygonPress({
-                  fill001: DISABLED_COLOR,
-                  fill002: DISABLED_COLOR,
-                  fill003: DISABLED_COLOR,
-                  fill004: DISABLED_COLOR,
-                  fill005: DISABLED_COLOR,
-                  fill006: DISABLED_COLOR,
-                  fill007: DISABLED_COLOR,
-                  fill008: DISABLED_COLOR,
-                  fill009: DISABLED_COLOR,
-                  fill0010: DISABLED_COLOR,
-                  fill0011: DISABLED_COLOR,
-                  fill0012: DISABLED_COLOR,
-                  fill0013: DISABLED_COLOR,
-                  fill0014: DISABLED_COLOR,
-                  fill0015: DISABLED_COLOR,
-                  fill0016: DISABLED_COLOR,
-                  fill0017: DISABLED_COLOR,
-                  fill0018: DISABLED_COLOR,
-                  fill0019: DISABLED_COLOR,
-                  fill0020: DISABLED_COLOR,
-                  fill0021: DISABLED_COLOR,
-                  fill0022: DISABLED_COLOR,
-                  fill0023: DISABLED_COLOR,
-                  fill0024: DISABLED_COLOR,
-                  fill0025: DISABLED_COLOR,
-                  fill0026: DISABLED_COLOR,
-                  fill0027: DISABLED_COLOR,
-                  fill000: DISABLED_COLOR,
-                })
-              }}
+              // delayPressIn={0}
+              // onPressIn={toggle}
+              // onPressOut={toggle}
+              // onPress={() => {
+              //   handlePolygonPress({
+              //     fill001: DISABLED_COLOR,
+              //     fill002: DISABLED_COLOR,
+              //     fill003: DISABLED_COLOR,
+              //     fill004: DISABLED_COLOR,
+              //     fill005: DISABLED_COLOR,
+              //     fill006: DISABLED_COLOR,
+              //     fill007: DISABLED_COLOR,
+              //     fill008: DISABLED_COLOR,
+              //     fill009: DISABLED_COLOR,
+              //     fill0010: DISABLED_COLOR,
+              //     fill0011: DISABLED_COLOR,
+              //     fill0012: DISABLED_COLOR,
+              //     fill0013: DISABLED_COLOR,
+              //     fill0014: DISABLED_COLOR,
+              //     fill0015: DISABLED_COLOR,
+              //     fill0016: DISABLED_COLOR,
+              //     fill0017: DISABLED_COLOR,
+              //     fill0018: DISABLED_COLOR,
+              //     fill0019: DISABLED_COLOR,
+              //     fill0020: DISABLED_COLOR,
+              //     fill0021: DISABLED_COLOR,
+              //     fill0022: DISABLED_COLOR,
+              //     fill0023: DISABLED_COLOR,
+              //     fill0024: DISABLED_COLOR,
+              //     fill0025: DISABLED_COLOR,
+              //     fill0026: DISABLED_COLOR,
+              //     fill0027: DISABLED_COLOR,
+              //     fill000: DISABLED_COLOR,
+              //   })
+              // }}
             />
           </Svg>
         </View>
