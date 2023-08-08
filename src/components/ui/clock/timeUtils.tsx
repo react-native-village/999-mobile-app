@@ -1,5 +1,3 @@
-import SunCalc from 'suncalc'
-
 export function getCurrentTime(): string {
   const now = new Date()
   const hours = padNumber(now.getHours())
@@ -9,10 +7,4 @@ export function getCurrentTime(): string {
 
 export function padNumber(num: number): string {
   return num < 10 ? `0${num}` : num.toString()
-}
-
-export function getSolarNoon({lat, lon}: any) {
-  const now = new Date()
-  const sunPos = SunCalc.getTimes(now, lat, lon)
-  return sunPos.solarNoon
 }
