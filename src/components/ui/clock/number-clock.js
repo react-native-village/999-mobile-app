@@ -29,11 +29,20 @@ export default function ClockAlphabet() {
   const STROKE_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
   const CHOSEN_COLOR = isDark ? 'rgb(52, 201, 252)' : '#FFA1CD'
   const [hover, setHover] = useState(true)
-  const [polyColors, setPolyColors] = useState(
-    Array.from({length: 28}, () => DISABLED_COLOR),
+  const [units, setUnits] = useState(0)
+  const [tens, setTens] = useState(0)
+  const [hundreds, setHundreds] = useState(0)
+  const [unitColors, setUnitColors] = useState(
+    Array.from({length: 9}, () => DISABLED_COLOR),
   )
+  const [tensColors, setTensColors] = useState(
+    Array.from({length: 9}, () => DISABLED_COLOR),
+  )
+  const [hundredsColors, setHundredsColors] = useState(
+    Array.from({length: 9}, () => DISABLED_COLOR),
+  )
+  const [zeroPolygonColor, setZeroPolygonColor] = useState(CHOSEN_COLOR)
 
-  polyColors[0] = CHOSEN_COLOR
   const {styles} = useThematicStyles(rawStyles)
 
   const toggle = () => {
@@ -44,15 +53,40 @@ export default function ClockAlphabet() {
   }
 
   const handlePolygonPress = index => {
-    setPolyColors(prevColors => {
-      const newColors = prevColors.map((color, i) => {
-        if (i <= index) {
-          return CHOSEN_COLOR // Цвет выбранного полигона
-        }
-        return DISABLED_COLOR // Цвет выключенного полигона
-      })
-      return newColors
-    })
+    if (index === 0) {
+      setZeroPolygonColor(CHOSEN_COLOR)
+      setUnitColors(Array.from({length: 9}, () => DISABLED_COLOR))
+      setTensColors(Array.from({length: 9}, () => DISABLED_COLOR))
+      setHundredsColors(Array.from({length: 9}, () => DISABLED_COLOR))
+      setUnits(0)
+      setTens(0)
+      setHundreds(0)
+    } else {
+      setZeroPolygonColor(CHOSEN_COLOR)
+
+      if (index >= 1 && index <= 9) {
+        setUnits(index)
+        setUnitColors(prevColors =>
+          prevColors.map((color, i) =>
+            i < index ? CHOSEN_COLOR : DISABLED_COLOR,
+          ),
+        )
+      } else if (index >= 10 && index <= 18) {
+        setTens(index - 9)
+        setTensColors(prevColors =>
+          prevColors.map((color, i) =>
+            i < index - 9 ? CHOSEN_COLOR : DISABLED_COLOR,
+          ),
+        )
+      } else {
+        setHundreds(index - 18)
+        setHundredsColors(prevColors =>
+          prevColors.map((color, i) =>
+            i < index - 18 ? CHOSEN_COLOR : DISABLED_COLOR,
+          ),
+        )
+      }
+    }
   }
 
   const refs = {
@@ -92,63 +126,7 @@ export default function ClockAlphabet() {
     <Background>
       <View style={styles.container}>
         <View>
-          <Text ibm1>
-            {polyColors[27] === CHOSEN_COLOR
-              ? 999
-              : polyColors[26] === CHOSEN_COLOR
-              ? 899
-              : polyColors[25] === CHOSEN_COLOR
-              ? 799
-              : polyColors[24] === CHOSEN_COLOR
-              ? 699
-              : polyColors[23] === CHOSEN_COLOR
-              ? 599
-              : polyColors[22] === CHOSEN_COLOR
-              ? 499
-              : polyColors[21] === CHOSEN_COLOR
-              ? 399
-              : polyColors[20] === CHOSEN_COLOR
-              ? 299
-              : polyColors[19] === CHOSEN_COLOR
-              ? 199
-              : polyColors[18] === CHOSEN_COLOR
-              ? 99
-              : polyColors[17] === CHOSEN_COLOR
-              ? 89
-              : polyColors[16] === CHOSEN_COLOR
-              ? 79
-              : polyColors[15] === CHOSEN_COLOR
-              ? 69
-              : polyColors[14] === CHOSEN_COLOR
-              ? 59
-              : polyColors[13] === CHOSEN_COLOR
-              ? 49
-              : polyColors[12] === CHOSEN_COLOR
-              ? 39
-              : polyColors[11] === CHOSEN_COLOR
-              ? 29
-              : polyColors[10] === CHOSEN_COLOR
-              ? 19
-              : polyColors[9] === CHOSEN_COLOR
-              ? 9
-              : polyColors[8] === CHOSEN_COLOR
-              ? 8
-              : polyColors[7] === CHOSEN_COLOR
-              ? 7
-              : polyColors[6] === CHOSEN_COLOR
-              ? 6
-              : polyColors[5] === CHOSEN_COLOR
-              ? 5
-              : polyColors[4] === CHOSEN_COLOR
-              ? 4
-              : polyColors[3] === CHOSEN_COLOR
-              ? 3
-              : polyColors[2] === CHOSEN_COLOR
-              ? 2
-              : polyColors[1] === CHOSEN_COLOR
-              ? 1
-              : 0}
-          </Text>
+          <Text ibm1>{hundreds * 100 + tens * 10 + units || 0}</Text>
         </View>
         <View>
           <Svg height={SVG_HEIGHT} width={SVG_WIDTH}>
@@ -294,7 +272,7 @@ export default function ClockAlphabet() {
             <Polygon
               ref={refs[1]}
               points="93.75 238.88 103.92 221.39 137.48 279.64 137.48 314.5 93.75 238.88"
-              fill={polyColors[1]}
+              fill={unitColors[0]}
               strokeWidth="0"
               onPress={() => {
                 handlePolygonPress(1)
@@ -305,7 +283,7 @@ export default function ClockAlphabet() {
             <Polygon
               ref={refs[2]}
               points="48.47 160.65 68.99 160.65 102.78 219.38 92.61 236.97 48.47 160.65"
-              fill={polyColors[2]}
+              fill={unitColors[1]}
               strokeWidth="0"
               onPress={() => {
                 handlePolygonPress(2)
@@ -315,7 +293,7 @@ export default function ClockAlphabet() {
             <Polygon
               ref={refs[3]}
               points="3.63 83.07 34.66 100.96 67.84 158.64 47.32 158.65 3.63 83.07"
-              fill={polyColors[3]}
+              fill={unitColors[2]}
               strokeWidth="0"
               onPress={() => {
                 handlePolygonPress(3)
@@ -326,7 +304,7 @@ export default function ClockAlphabet() {
               ref={refs[4]}
               points="35.62 99.14 4.66 81.35 92.13 81.33 102.43 99.2 35.62 99.14"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[4]}
+              fill={unitColors[3]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -340,7 +318,7 @@ export default function ClockAlphabet() {
               ref={refs[5]}
               points="104.74 99.2 94.5 81.35 182.72 81.33 172.32 99.26 104.74 99.2"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[5]}
+              fill={unitColors[4]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -354,7 +332,7 @@ export default function ClockAlphabet() {
               ref={refs[6]}
               points="174.63 99.27 185.02 81.33 272.27 81.32 241.06 99.33 174.63 99.27"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[6]}
+              fill={unitColors[5]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -368,7 +346,7 @@ export default function ClockAlphabet() {
               ref={refs[7]}
               points="208.96 158.61 241.93 101.15 273.21 83.15 229.59 158.64 208.96 158.61"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[7]}
+              fill={unitColors[6]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -382,7 +360,7 @@ export default function ClockAlphabet() {
               ref={refs[8]}
               points="174.12 219.32 207.79 160.65 228.43 160.65 184.3 236.99 174.12 219.32"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[8]}
+              fill={unitColors[7]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -396,7 +374,7 @@ export default function ClockAlphabet() {
               ref={refs[9]}
               points="139.49 279.67 172.93 221.39 183.15 238.99 139.49 314.53 139.49 279.67"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[9]}
+              fill={unitColors[8]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -410,7 +388,7 @@ export default function ClockAlphabet() {
               ref={refs[10]}
               points="105.08 219.38 115.69 201.04 137.48 238.76 137.48 275.62 105.08 219.38"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[10]}
+              fill={tensColors[0]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -424,7 +402,7 @@ export default function ClockAlphabet() {
               ref={refs[20]}
               points="71.3 160.65 92.35 160.65 114.55 199.06 103.94 217.32 71.3 160.65"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[11]}
+              fill={tensColors[1]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -438,7 +416,7 @@ export default function ClockAlphabet() {
               ref={refs[30]}
               points="70.14 158.65 38.11 102.95 69.31 120.94 91.2 158.65 70.14 158.65"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[12]}
+              fill={tensColors[2]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -452,11 +430,11 @@ export default function ClockAlphabet() {
               ref={refs[40]}
               points="38.99 101.14 103.6 101.19 113.97 119.2 70.31 119.2 38.99 101.14"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[13]}
+              fill={tensColors[3]}
               strokeWidth="0"
               delayPressIn={0}
-              onPressIn={this.toggle}
-              onPressOut={this.toggle}
+              onPressIn={toggle}
+              onPressOut={toggle}
               onPress={() => {
                 handlePolygonPress(13)
               }}
@@ -466,7 +444,7 @@ export default function ClockAlphabet() {
               ref={refs[50]}
               points="116.29 119.2 105.91 101.2 171.15 101.25 160.75 119.22 116.29 119.2"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[14]}
+              fill={tensColors[4]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -480,7 +458,7 @@ export default function ClockAlphabet() {
               ref={refs[60]}
               points="163.05 119.22 173.5 101.28 237.6 101.33 206.54 119.23 163.05 119.22"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[15]}
+              fill={tensColors[5]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -494,7 +472,7 @@ export default function ClockAlphabet() {
               ref={refs[70]}
               points="185.7 158.65 207.42 121.04 238.49 103.13 206.65 158.65 185.7 158.65"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[16]}
+              fill={tensColors[6]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -508,7 +486,7 @@ export default function ClockAlphabet() {
               ref={refs[80]}
               points="162.38 199.04 184.55 160.65 205.48 160.65 172.95 217.34 162.38 199.04"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[17]}
+              fill={tensColors[7]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -522,7 +500,7 @@ export default function ClockAlphabet() {
               ref={refs[90]}
               points="139.37 238.9 161.23 201.04 171.79 219.36 139.48 275.63 139.37 238.9"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[18]}
+              fill={tensColors[8]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -536,7 +514,7 @@ export default function ClockAlphabet() {
               ref={refs[100]}
               points="116.83 199.06 127.24 181.08 137.48 198.69 137.47 234.74 116.83 199.06"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[19]}
+              fill={hundredsColors[0]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -550,7 +528,7 @@ export default function ClockAlphabet() {
               ref={refs[200]}
               points="94.47 160.65 115.5 160.65 126.08 179.07 115.67 197.08 94.47 160.65"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[20]}
+              fill={hundredsColors[1]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -564,7 +542,7 @@ export default function ClockAlphabet() {
               ref={refs[300]}
               points="93.44 158.64 72.78 122.94 104.28 141.09 114.36 158.65 93.44 158.64"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[21]}
+              fill={hundredsColors[2]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -578,7 +556,7 @@ export default function ClockAlphabet() {
               ref={refs[400]}
               points="73.79 121.2 115.14 121.22 125.46 139.14 104.91 139.16 73.79 121.2"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[22]}
+              fill={hundredsColors[3]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -592,7 +570,7 @@ export default function ClockAlphabet() {
               ref={refs[500]}
               points="117.43 121.2 159.58 121.23 149.2 139.13 127.82 139.19 117.43 121.2"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[23]}
+              fill={hundredsColors[4]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -606,7 +584,7 @@ export default function ClockAlphabet() {
               ref={refs[600]}
               points="151.54 139.11 161.93 121.2 203.04 121.26 172.1 139.11 151.54 139.11"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[24]}
+              fill={hundredsColors[5]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -620,7 +598,7 @@ export default function ClockAlphabet() {
               ref={refs[700]}
               points="162.54 158.64 172.57 141.15 203.94 123.05 183.41 158.65 162.54 158.64"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[25]}
+              fill={hundredsColors[6]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -634,7 +612,7 @@ export default function ClockAlphabet() {
               ref={refs[800]}
               points="150.8 179.02 161.39 160.65 182.15 160.65 161.22 197.04 150.8 179.02"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[26]}
+              fill={hundredsColors[7]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -648,7 +626,7 @@ export default function ClockAlphabet() {
               ref={refs[900]}
               points="139.45 198.75 149.63 180.99 160.07 199.03 139.46 234.63 139.45 198.75"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[27]}
+              fill={hundredsColors[8]}
               strokeWidth="0"
               delayPressIn={0}
               onPressIn={toggle}
@@ -662,42 +640,43 @@ export default function ClockAlphabet() {
               ref={refs[0]}
               points="130.37 155.23 133.14 160.12 130.37 165.04 136.02 165.18 138.6 169.71 141.21 165.18 147.05 165.18 144.13 160.12 146.94 155.24 141.31 155.23 138.58 150.48 135.9 155.23 130.37 155.23"
               stroke={hover ? DISABLED_COLOR : CHOSEN_COLOR}
-              fill={polyColors[0]}
+              fill={zeroPolygonColor}
               strokeWidth={STROKE_WIDTH}
               delayPressIn={0}
               onPressIn={toggle}
               onPressOut={toggle}
               onPress={() => {
-                handlePolygonPress({
-                  fill001: DISABLED_COLOR,
-                  fill002: DISABLED_COLOR,
-                  fill003: DISABLED_COLOR,
-                  fill004: DISABLED_COLOR,
-                  fill005: DISABLED_COLOR,
-                  fill006: DISABLED_COLOR,
-                  fill007: DISABLED_COLOR,
-                  fill008: DISABLED_COLOR,
-                  fill009: DISABLED_COLOR,
-                  fill0010: DISABLED_COLOR,
-                  fill0011: DISABLED_COLOR,
-                  fill0012: DISABLED_COLOR,
-                  fill0013: DISABLED_COLOR,
-                  fill0014: DISABLED_COLOR,
-                  fill0015: DISABLED_COLOR,
-                  fill0016: DISABLED_COLOR,
-                  fill0017: DISABLED_COLOR,
-                  fill0018: DISABLED_COLOR,
-                  fill0019: DISABLED_COLOR,
-                  fill0020: DISABLED_COLOR,
-                  fill0021: DISABLED_COLOR,
-                  fill0022: DISABLED_COLOR,
-                  fill0023: DISABLED_COLOR,
-                  fill0024: DISABLED_COLOR,
-                  fill0025: DISABLED_COLOR,
-                  fill0026: DISABLED_COLOR,
-                  fill0027: DISABLED_COLOR,
-                  fill000: DISABLED_COLOR,
-                })
+                handlePolygonPress(
+                  // fill001: DISABLED_COLOR,
+                  // fill002: DISABLED_COLOR,
+                  // fill003: DISABLED_COLOR,
+                  // fill004: DISABLED_COLOR,
+                  // fill005: DISABLED_COLOR,
+                  // fill006: DISABLED_COLOR,
+                  // fill007: DISABLED_COLOR,
+                  // fill008: DISABLED_COLOR,
+                  // fill009: DISABLED_COLOR,
+                  // fill0010: DISABLED_COLOR,
+                  // fill0011: DISABLED_COLOR,
+                  // fill0012: DISABLED_COLOR,
+                  // fill0013: DISABLED_COLOR,
+                  // fill0014: DISABLED_COLOR,
+                  // fill0015: DISABLED_COLOR,
+                  // fill0016: DISABLED_COLOR,
+                  // fill0017: DISABLED_COLOR,
+                  // fill0018: DISABLED_COLOR,
+                  // fill0019: DISABLED_COLOR,
+                  // fill0020: DISABLED_COLOR,
+                  // fill0021: DISABLED_COLOR,
+                  // fill0022: DISABLED_COLOR,
+                  // fill0023: DISABLED_COLOR,
+                  // fill0024: DISABLED_COLOR,
+                  // fill0025: DISABLED_COLOR,
+                  // fill0026: DISABLED_COLOR,
+                  // fill0027: DISABLED_COLOR,
+                  // fill000: DISABLED_COLOR,
+                  0,
+                )
               }}
             />
           </Svg>
