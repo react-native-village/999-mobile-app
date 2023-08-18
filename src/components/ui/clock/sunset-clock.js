@@ -102,7 +102,9 @@ export default function ClockSunset() {
               Array(28)
                 .fill()
                 .map((_, i) =>
-                  i < numPolysToColor ? CHOSEN_COLOR : DISABLED_COLOR,
+                  i === 0 || i >= 28 - numPolysToColor
+                    ? CHOSEN_COLOR
+                    : DISABLED_COLOR,
                 ),
             )
             setIsLoading(false)
@@ -234,7 +236,10 @@ export default function ClockSunset() {
         {isLoading ? (
           <Loading />
         ) : (
-          <View>
+          <View
+            style={{
+              transform: [{scaleX: -1}],
+            }}>
             <Svg height={SVG_HEIGHT} width={SVG_WIDTH}>
               {/* Axis 1 */}
               <Line
