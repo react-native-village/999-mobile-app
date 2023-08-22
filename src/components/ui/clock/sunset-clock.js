@@ -58,6 +58,25 @@ export default function ClockSunset() {
     return hoursIn24HourFormat * 60 + minutes
   }
 
+  const solarNoonStringToHHMM = solarNoonString => {
+    if (solarNoonString) {
+      const [timeLoc, period] = solarNoonString.split(' ')
+      const [hours, minutes, seconds] = timeLoc.split(':').map(Number)
+      let hoursIn24HourFormat = hours
+
+      if (period === 'PM' && hours !== 12) {
+        hoursIn24HourFormat += 12
+      } else if (period === 'AM' && hours === 12) {
+        hoursIn24HourFormat = 0
+      }
+
+      return `${hoursIn24HourFormat < 10 ? '0' : ''}${hoursIn24HourFormat}:${
+        minutes < 10 ? '0' : ''
+      }${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+    }
+    return null
+  }
+
   const computePolysToColor = (SOLAR_TIME, MIN_TIME) => {
     const endOfDay = 24 * 60
     let numPolysToColor
@@ -231,7 +250,12 @@ export default function ClockSunset() {
     <Background>
       <View style={styles.container}>
         <View>
-          <Text ibm1>{time}</Text>
+          <Text ibm1 color={'textBase2'}>
+            {solarNoonStringToHHMM(solarNoon)}
+          </Text>
+          <Text ibm1 center>
+            {time}
+          </Text>
         </View>
         {isLoading ? (
           <Loading />
